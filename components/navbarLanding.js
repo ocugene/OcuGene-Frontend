@@ -4,18 +4,14 @@ import './navbarLanding.css';
 const navbarLanding = () => {
   return (
     <div className="navbar">
-      <div>
-        OcuGene
+      <div className="navbar-title">
+        <div className="navbar-title-txt">OcuGene</div>
       </div>
 
-      <div>
-        LOGIN
+      <div className="navbar-btn-container">
+        <button className="navbar-btn">HOME</button>
+        <button className="navbar-btn">LOGIN</button>
       </div>
-
-      <div>
-        HOME
-      </div>
-
     </div>
   )
 }
