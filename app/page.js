@@ -4,28 +4,41 @@ import './page.css';
 
 const LandingPage = () => {
   return (
-    <>
-      <div>
-        <NavbarLanding></NavbarLanding>
-        {/*white area */}
-        <div className="landing-page">
-          <div className="lp-basic">
-            <div className="lp-basic-title">Basic Information</div>
-            <div className="lp-basic-dis-container">
-              <div className="lp-basic-disease">Disease 1</div>
-              <div className="lp-basic-disease">Disease 2</div>
-              <div className="lp-basic-disease">Disease 3</div>
+    <div>
+      <NavbarLanding></NavbarLanding>
+      <div className="landing-page">
+        <div className="row-container">
+          <div className="col-container">
+            <label>Basic Information</label>
+            <div className="row-container">
+              <div className="col-container">
+                <button>Disease 1</button>
+              </div>
+              <div className="col-container">
+                <button>Disease 2</button>
+              </div>
+              <div className="col-container">
+                <button>Disease 3</button>
+              </div>
             </div>
           </div>
-
-          <div className="lp-fam">
-
+          <div className="col-container">
+          <label>Families</label>
+            <div className="row-container">
+              <div className="col-container">
+                <button>Donate Registry</button>
+              </div>
+              <div className="col-container">
+                <button>Support Group</button>
+              </div>
+              <div className="col-container">
+                <button>Financial Assistance</button>
+              </div>
+            </div>
           </div>
-
         </div>
       </div>
-      
-    </>
+    </div>
   )
 }
 

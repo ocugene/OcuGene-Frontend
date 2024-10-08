@@ -34,7 +34,7 @@
 .navbar-btn{
     /* padding: 5px; */
     background-color: #800000;
-    border-color: #800000;
+    border: none;
     color: white;
     text-align: center;
     flex: 1;
