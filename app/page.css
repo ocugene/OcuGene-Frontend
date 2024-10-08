@@ -2,8 +2,21 @@
 
 .landing-page{
     background-color:rgb(246, 246, 246);
+    display: flex;
+}
+
+.row-container{
+    display: flex;
+    width: 95%;
+    padding: 5px;
+}
+.col-container{
+    flex: 1;
+    margin-right: 10px;
+    align-items: center;
 }
 
 .lp-basic-title{
     background-color: #800000;
 }
+
