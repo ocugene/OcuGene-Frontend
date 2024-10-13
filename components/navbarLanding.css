@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .navbar{
     background-color: #800000;
-    /* overflow: hidden; */
-    height: 12vh;
     display: flex;
     padding: 10px;
     justify-content: space-between;
@@ -15,7 +18,7 @@
     text-align: middle;
     justify-content: center;
     /* background-color: violet; */
-    margin-left: 5vh;
+    margin-left: 50px;
 }
 
 .navbar-title-txt{
@@ -28,7 +31,7 @@
     display: flex;
     padding: 10px;
     /* background-color: blue; */
-    margin-right: 5vh;
+    margin-right: 5px;
 }
 
 .navbar-btn{
