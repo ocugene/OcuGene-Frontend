@@ -1,6 +1,7 @@
 .landing-page {
     padding: 20px;
     font-family: 'Karla', sans-serif;
+    /* border: 2px solid red; Example border color for landing-page */
 }
   
 .row-container {
@@ -8,7 +9,8 @@
     flex-direction: row;
     justify-content: space-around;
     margin: 10px 10px 20px 10px;
-    width: 100%; /* Ensure the row-container takes full width */
+    width: 100%;
+    /* border: 2px solid orange; Example border color for landing-page */
 }
 
 .category-col-container {
@@ -16,25 +18,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%; /* Ensure the col-container takes full width */
+    width: 100%;
+    /* border: 2px solid yellow; Example border color for landing-page */
 }
 
 .col-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%; /* Ensure the col-container takes full width */
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+    /* border: 2px solid green; Example border color for landing-page */
+
 }
   
 .category-header {
     background-color: maroon;
     color: white;
     border-radius: 10px;
-    padding: 10px 0px 10px 0px; /* Increase padding top and bottom */
+    padding: 10px 0px 10px 0px;
     margin-bottom: 20px;
     width: 100%;
-    text-align: center; /* Center the text inside the header */
-    font-size: 1.5em; /* Increase font size */
+    text-align: center; 
+    font-size: 1.5em; 
+    /* border: 2px solid blue; Example border color for landing-page */
 }
 
 .card-button {
@@ -46,6 +53,7 @@
     cursor: pointer;
     font-size: 1em;
     margin: 10px 0;
+    width: 100%;
 }
 
 .card-button:hover {
