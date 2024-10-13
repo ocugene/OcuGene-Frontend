@@ -40,7 +40,7 @@
     border-radius: 5px;
   }
   
-  button {
+  .login-btn {
     background-color: white;
     border: 2px solid darkgreen;
     color: darkgreen;
@@ -50,7 +50,7 @@
     font-size: 1em;
   }
   
-  button:hover {
+  .login-btn:hover {
     background-color: darkgreen;
     color: white;
   }
