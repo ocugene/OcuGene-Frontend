@@ -8,7 +8,6 @@ export default function LandingPageComp() {
     <div>
       <NavbarLanding></NavbarLanding>
       <LandingComp></LandingComp>
-      {/* check lang if mapull */}
     </div>
   )
 }
