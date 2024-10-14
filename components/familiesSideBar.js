@@ -1,10 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
-import './FamiliesSideBar.css';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import './familiesSideBar.css';
 
 const FamiliesSideBar = ({ onButtonClick }) => {
+  const searchParams = useSearchParams();
   const [activeButton, setActiveButton] = useState('');
+
+  useEffect(() => {
+    // Get the active button from the query parameters
+    const activeParam = searchParams.get('active');
+    if (activeParam) {
+      setActiveButton(activeParam);
+      onButtonClick(activeParam);
+    }
+  }, [searchParams, onButtonClick]);
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);

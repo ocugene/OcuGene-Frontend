@@ -1,14 +1,15 @@
 'use client';
 
-import React from 'react'
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import './landingPageComp.css';
 
-const landingPage = () => {
+const LandingPage = () => {
   const router = useRouter();
 
-  const navigateToFamilies = () => {
-    router.push('/families')
+  const navigateToFamilies = (activeButton) => {
+    // Navigate to /families with a query parameter
+    router.push(`/families?active=${activeButton}`);
   };
 
   return (
@@ -40,13 +41,13 @@ const landingPage = () => {
               </div>
               <div className="row-container">
                 <div className="col-container">
-                  <button className="card-button" onClick={navigateToFamilies}>Donate Registry</button>
+                  <button className="card-button" onClick={() => navigateToFamilies('donate')}>Donate Registry</button>
                 </div>
                 <div className="col-container">
-                  <button className="card-button" onClick={navigateToFamilies}>Support Group</button>
+                  <button className="card-button" onClick={() => navigateToFamilies('support')}>Support Group</button>
                 </div>
                 <div className="col-container">
-                  <button className="card-button" onClick={navigateToFamilies}>Financial Assistance</button>
+                  <button className="card-button" onClick={() => navigateToFamilies('financial')}>Financial Assistance</button>
                 </div>
               </div>
             </div>
@@ -54,7 +55,7 @@ const landingPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default landingPage
+export default LandingPage;
