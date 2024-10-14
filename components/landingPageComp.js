@@ -1,7 +1,16 @@
+'use client';
+
 import React from 'react'
+import { useRouter } from 'next/navigation';
 import './landingPageComp.css';
 
 const landingPage = () => {
+  const router = useRouter();
+
+  const navigateToFamilies = () => {
+    router.push('/families')
+  };
+
   return (
     <div>
       <div className="landing-page">
@@ -31,13 +40,13 @@ const landingPage = () => {
               </div>
               <div className="row-container">
                 <div className="col-container">
-                  <button className="card-button">Donate Registry</button>
+                  <button className="card-button" onClick={navigateToFamilies}>Donate Registry</button>
                 </div>
                 <div className="col-container">
-                  <button className="card-button">Support Group</button>
+                  <button className="card-button" onClick={navigateToFamilies}>Support Group</button>
                 </div>
                 <div className="col-container">
-                  <button className="card-button">Financial Assistance</button>
+                  <button className="card-button" onClick={navigateToFamilies}>Financial Assistance</button>
                 </div>
               </div>
             </div>
