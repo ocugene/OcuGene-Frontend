@@ -1,0 +1,41 @@
+.progress-tracker {
+    margin: 0px 10px 0px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-image: linear-gradient(maroon, darkgreen);
+    border-radius: 20px;
+    padding: 10px 10px 30px 10px;
+    height: 100%;
+  }
+  
+  .step-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .step {
+  
+    padding: 10px 20px;
+    border: 1px solid #fff;
+    border-radius: 25%;
+    border-width: 2px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 2px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    /* text-align: center; */
+    color: #fff;
+  }
+  
+  .step-container.active .step {
+    background-color: #fff;
+    color: maroon;
+  }
+  
+  .label {
+    color: #fff;
+  }
