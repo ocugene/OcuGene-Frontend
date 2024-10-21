@@ -18,6 +18,9 @@ const FamiliesPage = () => {
   return (
     <div>
       <NavbarLanding />
+      <div className="title-container">
+        <div className='title'>Home / Families</div>
+      </div>
       <div className="families-container">
         <SidebarFamilies onButtonClick={handleButtonClick} />
         <div className="content">
