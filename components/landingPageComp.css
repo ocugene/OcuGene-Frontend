@@ -1,9 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+
 .landing-page {
-    padding: 20px 10px 20px 10px;
+    padding: 20px 50px 20px 50px;
     font-family: 'Karla', sans-serif;
     /* border: 2px solid red; */
 }
-  
+
+.title{
+    font-family: 'Karla', sans-serif;
+    color: maroon;
+    font-size: 7vh;
+    font-weight: bolder;
+    padding: 0px 0px 0px 5px;
+    margin-bottom: 20px;
+}
+
 .row-container {
     display: flex;
     flex-direction: row;
@@ -28,7 +39,6 @@
     width: 100%;
     padding: 0px 10px 0px 10px;
     /* border: 2px solid green; */
-
 }
   
 .category-header {
@@ -36,15 +46,23 @@
     color: white;
     border-radius: 10px;
     padding: 20px 0px 20px 0px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     width: 100%;
     text-align: center; 
     font-size: 1.5em; 
     /* border: 2px solid blue; */
 }
 
+.card-btn-title{
+    font-family: 'Karla', sans-serif;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
 .card-button {
     background-color: #BBD8BB;
+    font-family: 'Karla', sans-serif;
+    height: 250px;
     color: black;
     border: none;
     border-radius: 10px;
@@ -52,10 +70,45 @@
     cursor: pointer;
     font-size: 1em;
     margin: 10px 0;
+    position: relative; /* Required for positioning the pseudo-element */
+    overflow: hidden; /* Hide the sliding text */
+    transition: all 0.4s ease; /* Smooth transition for shadow and background */
+}
+
+.card-button span{
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.card-button:hover span{
+    transform: translateY(-100%);
+    color: white;
+    transition: all 0.4s ease;
+}
+
+.card-button::after {
+    content: attr(data-info);
+    color: white;
+    position: absolute;
+    bottom: -100%; /* Start below the button */
+    left: 0;
     width: 100%;
+    text-align: center;
+    padding: 10px 5px;
+    /* background-color: darkgreen; */
+    background: linear-gradient(to top, rgba(13, 46, 6, 0.7), rgba(0, 0, 0, 0));
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+    transition: bottom 0.4s ease; /* Smooth transition for sliding text */
+}
+
+.card-button:hover::after {
+    bottom: 0; /* Slide up the text */
 }
 
 .card-button:hover {
     background-color: darkgreen;
     color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), /* Light shadow */
+                0 6px 12px rgba(0, 0, 0, 0.15), /* Medium shadow */
+                0 8px 16px rgba(0, 0, 0, 0.2); /* Darkest shadow at the bottom */
 }
