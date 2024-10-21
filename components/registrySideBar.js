@@ -50,21 +50,19 @@ const registrySideBar = () => {
         };
       }, []);
     
-    return (
-        <div>
-            <div className="progress-tracker">
-            {steps.map((step, index) => (
-                    <div
-                    key={index}
-                    className={`step-container ${currentStep === index ? 'active' : ''}`}
-                    onClick={() => goToStep(index)}
-                    >
-                    <div className="step">{step.number}</div>
-                    <div className="label">{step.label}</div>
-                    </div>
-            ))}
-            </div>
-        </div>
+    return ( 
+          <div className="progress-tracker">
+          {steps.map((step, index) => (
+                  <div
+                  key={index}
+                  className={`step-container ${currentStep === index ? 'active' : ''}`}
+                  onClick={() => goToStep(index)}
+                  >
+                  <div className="step">{step.number}</div>
+                  <div className="label">{step.label}</div>
+                  </div>
+          ))}
+          </div>    
   )
 }
 
