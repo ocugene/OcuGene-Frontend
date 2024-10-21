@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './registrySideBar.css';
 
 const steps = [
@@ -20,6 +20,35 @@ const registrySideBar = () => {
           targetElement.scrollIntoView({ behavior: 'smooth' });
         }
     };
+
+    useEffect(() => {
+        const targets = document.querySelectorAll('.target');
+        const options = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.2,
+        };
+    
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const targetId = entry.target.id;
+              const stepNumber = parseInt(targetId.replace('target', ''));
+              setCurrentStep(stepNumber - 1);
+            }
+          });
+        }, options);
+    
+        targets.forEach((target) => {
+          observer.observe(target);
+        });
+    
+        return () => {
+          targets.forEach((target) => {
+            observer.unobserve(target);
+          });
+        };
+      }, []);
     
     return (
         <div>
