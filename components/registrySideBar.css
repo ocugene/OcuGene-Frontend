@@ -1,12 +1,14 @@
 .progress-tracker {
-    margin: 0px 10px 0px 10px;
+    /* margin: 0px 10px 0px 10px; */
+    margin-right: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     background-image: linear-gradient(maroon, darkgreen);
     border-radius: 20px;
-    padding: 10px 10px 30px 10px;
+    padding: 10px 10px 10px 10px;
     height: 100%;
+    align-content: space-between;
     /* border: 2px solid red; */
   }
   
@@ -42,4 +44,5 @@
   
   .label {
     color: #fff;
+    margin-right: 10px;
   }

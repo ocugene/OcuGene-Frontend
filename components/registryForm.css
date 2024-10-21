@@ -57,10 +57,28 @@ h2{
   border-radius: 10px;
   box-sizing: border-box;
   font-size: 1em;
+  font-family: 'Karla', sans-serif;
 }
 
 .field-container textarea {
   resize: vertical;
+}
+
+.textArea{
+  width: 100%;
+}
+
+.target{
+  margin-bottom:40px;
+}
+
+.regSectionName{
+  margin-bottom: 10px;
+  /* margin-top: 50px; */
+  color: maroon;
+  font-family: 'Karla', sans-serif;
+  font-size: 2em;
+  font-weight:bolder;
 }
 
 .submit-button {
@@ -83,7 +101,6 @@ h2{
 .clinical-exam-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
 }
 
 .clinical-exam-table th,

@@ -7,39 +7,40 @@ const registryForm = () => {
       <div className='form-step'>
         <form>
           <div id="target1" className='target'>
-            <h2>Demographics</h2>
+            <label className="regSectionName">Demographics</label>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Last Name:</label>
+                <label>Last Name</label>
                 <input type='text'/>
               </div>    
               <div className='field-container'>
-                <label>First Name:</label>
+                <label>First Name</label>
                 <input type='text'/>
               </div>         
               <div className='field-container'>
-                <label>Middle Name:</label>
+                <label>Middle Name</label>
                 <input type='text'/>
               </div>     
             </div>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Birthday:</label>
+                <label>Birthday</label>
                 <input type='date'/>
               </div>    
               <div className='field-container'>
-                <label>Age:</label>
+                <label>Age</label>
                 <input type='text'disabled/>
               </div>         
               <div className='field-container'>
-                <label>Sex at birth:</label>
+                <label>Sex at birth</label>
                 <select>
+                  <option></option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </div>
               <div className='field-container'>
-                <label>Marital Status:</label>
+                <label>Marital Status</label>
                 <select>
                   <option value="Male">Single</option>
                   <option value="Female">Married</option>
@@ -50,48 +51,55 @@ const registryForm = () => {
             </div>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Address(Street, Baranggay):</label>
-                <input type='text'disabled/>
+                <label>Address(Street, Barangay)</label>
+                <textarea className="textArea"></textarea>
               </div>                
             </div>
             <div className='row-container'>
+            <div className='field-container'>
+                <label>Region</label>
+                  <select>
+                    <option value="Region1">Region I</option>
+                    <option value="Region1">Region II</option>
+                    <option value="Region1">Region III</option>
+                    <option value="Region1">Region IV-A</option>
+                    <option value="Region1">Region IV-B</option>
+                    <option value="Region1">Region V</option>
+                    <option value="Region1">Region VI</option>
+                    <option value="Region1">Region VII</option>
+                    <option value="Region1">Region VIII</option>
+                    <option value="Region1">Region IX</option>
+                    <option value="Region1">Region X</option>
+                    <option value="Region1">Region XI</option>
+                    <option value="Region1">Region XII</option>
+                    <option value="Region1">Region XIII</option>
+                    <option value="Region1">NCR</option>
+                    <option value="Region1">CAR</option>
+                    <option value="Region1">BARMM</option>
+                  </select>
+              </div>
               <div className='field-container'>
-                <label>City:</label>
+                <label>Province</label>
                 <select>
-                  <option value="Manila">Manila</option>
+                  <option value="Manila">Metro Manila</option>
                   <option value="Cavite">Cavite</option>
                 </select>
               </div>
               <div className='field-container'>
-              <label>Region:</label>
+                <label>City</label>
                 <select>
-                  <option value="Region1">Region I</option>
-                  <option value="Region1">Region II</option>
-                  <option value="Region1">Region III</option>
-                  <option value="Region1">Region IV-A</option>
-                  <option value="Region1">Region IV-B</option>
-                  <option value="Region1">Region V</option>
-                  <option value="Region1">Region VI</option>
-                  <option value="Region1">Region VII</option>
-                  <option value="Region1">Region VIII</option>
-                  <option value="Region1">Region IX</option>
-                  <option value="Region1">Region X</option>
-                  <option value="Region1">Region XI</option>
-                  <option value="Region1">Region XII</option>
-                  <option value="Region1">Region XIII</option>
-                  <option value="Region1">NCR</option>
-                  <option value="Region1">CAR</option>
-                  <option value="Region1">BARMM</option>
+                  <option value="Manila">Manila</option>
+                  <option value="Cavite">Bacoor</option>
                 </select>
               </div>
             </div>
           </div>
           <div id="target2" className='target'>
-            <h2>Clinical History</h2>
+          <label className="regSectionName">Clinical History</label>
             <div className='row-container'>
               <div className='field-container'>
                 <label>Chief Complaint</label>
-                <textarea></textarea>
+                <textarea className="textArea"></textarea>
               </div>
             </div>
             <div className='row-container'>
@@ -122,10 +130,10 @@ const registryForm = () => {
             </div>
           </div>
           <div id="target3" className='target'>
-            <h2>Family History</h2>
+          <label className="regSectionName">Family History</label>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Member/s of the Family with the same disease of history of blindness or blurring of vision:</label>
+                <label>Member/s of the Family with the same disease of history of blindness or blurring of vision</label>
                 <select>
                   <option>None</option>
                   <option>Grandfather</option>
@@ -147,14 +155,14 @@ const registryForm = () => {
             </div>
           </div>
           <div id="target4" className='target'>
-            <h2>Diagnostic</h2>
+            <label className="regSectionName">Diagnostic</label>
             <div className='row-container'>
               <div className='field-container'>
-                <label>ERG Date:</label>
+                <label>ERG Date</label>
                 <input type='date'></input>
               </div>
               <div className='field-container'>
-                <label>ERG Result:</label>
+                <label>ERG Result</label>
                 <select>
                   <option>Normal Result</option>
                   <option>Decreased a wave</option>
@@ -166,10 +174,10 @@ const registryForm = () => {
             </div>
           </div>
           <div id="target5" className='target'>
-            <h2>Diagnosis</h2>
+          <label className="regSectionName">Diagnosis</label>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Diagnosis:</label>
+                <label>Diagnosis</label>
                 <select>
                   <option>Retinitis Pigmentosa</option>
                   <option>Stargardt Disease</option>
@@ -177,7 +185,7 @@ const registryForm = () => {
                 </select>
               </div>
               <div className='field-container'>
-                <label>Variants:</label>
+                <label>Variants</label>
                 <select>
                   <option>RLBP1</option>
                   <option>RP1</option>
@@ -192,13 +200,13 @@ const registryForm = () => {
                 </select>
               </div>
               <div className='field-container'>
-                <label>Genetic Testing Date Performed:</label>
+                <label>Genetic Testing Date Performed</label>
                 <input type='date'></input>
               </div>
             </div>
           </div>
           <div id="target6" className='target'>
-            <h2>Clinical Examination</h2>
+            <label className="regSectionName">Clinical Examination</label>
             <div className='row-container'>
             <table className="clinical-exam-table">
               <thead>
