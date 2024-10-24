@@ -108,6 +108,28 @@ const RegistryForm = () => {
       console.error('Error:', error);
       // Handle errors here
     });
+
+    fetch('http://localhost:8080/clinicalexam/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(clinicalExamFormData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      // You can handle successful submission here
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle errors here
+    });
     
   };
 
