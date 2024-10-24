@@ -3,14 +3,36 @@ import './registryForm.css'
 
 const RegistryForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    birthday: '',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
     age: '',
+    sex: '',
+    birthday: '',
+    address: '',
+    region: '',
+    province:'Metro Manila',
+    city: '',
+    marital_status: '',
+    chief_complaint: '',
+    blur_duration: '',
+    laterality: '',
+    family_member: '',
+    sibling_count: 0,
+    erg_date: '',
+    erg_result: '',
     diagnosis: '',
     variant: '',
-    geneticTestingDate: '',
+    gen_test_date: '',
+  });
+
+  const [clinicalExamFormData, setClinicalExamFormData] = useState({
+    right_bcva: '',
+    left_bcva: '',
+    right_cornea: '',
+    left_cornea: '',
+    right_retina: '',
+    left_retina: ''
   });
 
   const [variantOptions, setVariantOptions] = useState([]);
@@ -47,12 +69,46 @@ const RegistryForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if(name === 'sibling_count'){
+      setFormData({ ...formData, [name]: Number(value) });
+    }
+    else{
+      setFormData({ ...formData, [name]: value });
+    }
+    
+  };
+
+  const handleClinicalExamChange = (e) => {
+    const { name, value } = e.target;
+    setClinicalExamFormData({ ...clinicalExamFormData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    
+    //Make a POST request to the server
+    fetch('http://localhost:8080/patient/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      // You can handle successful submission here
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle errors here
+    });
+    
   };
 
   return (
@@ -64,34 +120,34 @@ const RegistryForm = () => {
             <label className="regSectionName">Demographics</label>
             <div className='row-container'>
               <div className='field-container'>
-                <label htmlFor="lastName">Last Name</label>
+                <label htmlFor="last_name">Last Name</label>
                 <input
                   type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
+                  id="last_name"
+                  name="last_name"
+                  value={formData.last_name}
                   onChange={handleChange}
                   required
                 />
               </div>    
               <div className='field-container'>
-                <label htmlFor="firstName">First Name</label>
+                <label htmlFor="first_name">First Name</label>
                 <input
                   type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
+                  id="first_name"
+                  name="first_name"
+                  value={formData.first_name}
                   onChange={handleChange}
                   required
                 />
               </div>         
               <div className='field-container'>
-                <label htmlFor="middleName">Middle Name</label>
+                <label htmlFor="middle_name">Middle Name</label>
                 <input
                   type="text"
-                  id="middleName"
-                  name="middleName"
-                  value={formData.middleName}
+                  id="middle_name"
+                  name="middle_name"
+                  value={formData.middle_name}
                   onChange={handleChange}
                 />
               </div>     
@@ -119,16 +175,28 @@ const RegistryForm = () => {
                 />
               </div>         
               <div className='field-container'>
-                <label>Sex at birth</label>
-                <select required>
+                <label htmlFor="sex">Sex at birth</label>
+                <select 
+                  id='sex'
+                  name='sex'
+                  value={formData.sex}
+                  onChange={handleChange}
+                  required
+                  >
                   <option></option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </div>
               <div className='field-container'>
-                <label>Marital Status</label>
-                <select required>
+                <label htmlFor='marital_status'>Marital Status</label>
+                <select 
+                  id='marital_status'
+                  name='marital_status'
+                  value={formData.marital_status}
+                  onChange={handleChange}
+                  required
+                  >
                   <option value="Single">Single</option>
                   <option value="Married">Married</option>
                   <option value="Widowed">Widowed</option>
@@ -138,14 +206,25 @@ const RegistryForm = () => {
             </div>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Address(Street, Barangay)</label>
-                <textarea className="textArea" required></textarea>
+                <label htmlFor='address'>Address(Street, Barangay)</label>
+                <textarea className="textArea" 
+                                    id='address'
+                                    name='address'
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    required>
+                  </textarea>
               </div>                
             </div>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Region</label>
-                <select required>
+                <label htmlFor='region'>Region</label>
+                <select 
+                  id='region'
+                  name='region'
+                  value={formData.region}
+                  onChange={handleChange}
+                  required>
                   <option value="Region I">Region I</option>
                   <option value="Region II">Region II</option>
                   <option value="Region III">Region III</option>
@@ -166,16 +245,28 @@ const RegistryForm = () => {
                 </select>
               </div>
               <div className='field-container'>
-                <label>Province</label>
-                <select required>
+                <label htmlFor='province'>Province</label>
+                <select 
+                  id='province'
+                  name='province'
+                  value={formData.province}
+                  onChange={handleChange}
+                  required>
                   <option value="Metro Manila">Metro Manila</option>
                   <option value="Cavite">Cavite</option>
                 </select>
               </div>
               <div className='field-container'>
-                <label>City</label>
-                <select required>
+                <label htmlFor='city'>City</label>
+                <select 
+                  id='city'
+                  name='city'
+                  value={formData.city}
+                  onChange={handleChange}
+                  required>
                   <option value="Manila">Manila</option>
+                  <option value="Taguig">Taguig</option>
+                  <option value="Las Piñas">Las Piñas</option>
                   <option value="Bacoor">Bacoor</option>
                 </select>
               </div>
@@ -187,22 +278,39 @@ const RegistryForm = () => {
             <label className="regSectionName">Clinical History</label>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Chief Complaint</label>
-                <textarea className="textArea" required></textarea>
+                <label htmlFor='chief_complaint'>Chief Complaint</label>
+                <textarea className="textArea" 
+                          id='chief_complaint'
+                          name='chief_complaint'
+                          value={formData.chief_complaint}
+                          onChange={handleChange}
+                          required>
+                          </textarea>
               </div>
             </div>
             <div className='row-container'>
               <div className='field-container'>
-                <label>For which eye?</label>
-                <select required>
+                <label htmlFor='laterality'>For which eye?</label>
+                <select 
+                  id='laterality'
+                  name='laterality'
+                  value={formData.laterality}
+                  onChange={handleChange}
+                  required>
                   <option></option>
                   <option value="Right">Right</option>
                   <option value="Left">Left</option>
+                  <option value="Both">Both</option>
                 </select>
               </div>
               <div className='field-container'>
-                <label>For how long?</label>
-                <select required>
+                <label htmlFor='blur_duration'>For how long?</label>
+                <select 
+                  id='blur_duratio'
+                  name='blur_duration'
+                  value={formData.blur_duration}
+                  onChange={handleChange}
+                  required>
                   <option>less than 6 months</option>
                   <option>6-12 months</option>
                   <option>2 years</option>
@@ -225,8 +333,13 @@ const RegistryForm = () => {
             <label className="regSectionName">Family History</label>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Member/s of the Family with the same disease or history of blindness or blurring of vision</label>
-                <select required>
+                <label htmlFor='family_member'>Member/s of the Family with the same disease or history of blindness or blurring of vision</label>
+                <select 
+                  id='family_member'
+                  name='family_member'
+                  value={formData.family_member}
+                  onChange={handleChange}
+                  required>
                   <option>None</option>
                   <option>Grandfather</option>
                   <option>Grandmother</option>
@@ -241,8 +354,13 @@ const RegistryForm = () => {
             </div>
             <div className='row-container'>
               <div className='field-container'>
-                <label>How many siblings have the same disease or history of blindness or blurring of vision?</label>
-                <input type="number" min="0" required />
+                <label htmlFor='sibling_count'>How many siblings have the same disease or history of blindness or blurring of vision?</label>
+                <input type="number" min="0" 
+                  id='sibling_count'
+                  name='sibling_count'
+                  value={formData.sibling_count}
+                  onChange={handleChange}
+                  required />
               </div>
             </div>
           </div>
@@ -252,12 +370,22 @@ const RegistryForm = () => {
             <label className="regSectionName">Diagnostic</label>
             <div className='row-container'>
               <div className='field-container'>
-                <label>ERG Date</label>
-                <input type="date" name="ergDate" required />
+                <label htmlFor='erg_date'>ERG Date</label>
+                <input type="date" 
+                  id='erg_date'
+                  name='erg_date'
+                  value={formData.erg_date}
+                  onChange={handleChange}
+                  required />
               </div>
               <div className='field-container'>
-                <label>ERG Result</label>
-                <select required>
+                <label htmlFor='erg_result'>ERG Result</label>
+                <select 
+                  id='erg_result'
+                  name='erg_result'
+                  value={formData.erg_result}
+                  onChange={handleChange}
+                  required>
                   <option>Normal Result</option>
                   <option>Decreased a wave</option>
                   <option>Decreased b wave</option>
@@ -272,7 +400,7 @@ const RegistryForm = () => {
             <label className="regSectionName">Diagnosis</label>
             <div className='row-container'>
               <div className='field-container'>
-                <label>Diagnosis</label>
+                <label htmlFor='diagnosis'>Diagnosis</label>
                 <select name="diagnosis" value={formData.diagnosis} onChange={handleChange} required>
                   <option value="">Select Diagnosis</option>
                   <option value="Retinitis Pigmentosa">Retinitis Pigmentosa</option>
@@ -281,8 +409,8 @@ const RegistryForm = () => {
                 </select>
               </div>
               <div className='field-container'>
-                <label>Variants</label>
-                <select name="variant" value={formData.variant} onChange={handleChange} required>
+                <label htmlFor='variant'>Variants</label>
+                <select id='variant' name="variant" value={formData.variant} onChange={handleChange} required>
                   <option value="">Select Variant</option>
                   {variantOptions.map((variant, index) => (
                     <option key={index} value={variant}>{variant}</option>
@@ -290,8 +418,8 @@ const RegistryForm = () => {
                 </select>
               </div>
               <div className='field-container'>
-                <label>Genetic Testing Date Performed</label>
-                <input type="date" name="geneticTestingDate" value={formData.geneticTestingDate} onChange={handleChange} required />
+                <label htmlFor='gen_test_date'>Genetic Testing Date Performed</label>
+                <input type="date" name="gen_test_date" value={formData.gen_test_date} onChange={handleChange} required />
               </div>
             </div>
           </div>
@@ -312,7 +440,12 @@ const RegistryForm = () => {
                   <tr>
                     <td>Best Corrected Visual Acuity</td>
                     <td>
-                      <select required>
+                      <select 
+                        id='right_bcva'
+                        name='right_bcva'
+                        value={clinicalExamFormData.right_bcva}
+                        onChange={handleClinicalExamChange}
+                        required>
                         <option value="">Select</option>
                         <option value="20/20">20/20</option>
                         <option value="20/40">20/40</option>
@@ -322,7 +455,12 @@ const RegistryForm = () => {
                       </select>
                     </td>
                     <td>
-                      <select required>
+                      <select 
+                        id='left_bcva'
+                        name='left_bcva'
+                        value={clinicalExamFormData.left_bcva}
+                        onChange={handleClinicalExamChange}
+                        required>
                         <option value="">Select</option>
                         <option value="20/20">20/20</option>
                         <option value="20/40">20/40</option>
@@ -335,13 +473,23 @@ const RegistryForm = () => {
                   <tr>
                     <td>Cornea</td>
                     <td>
-                      <select required>
+                      <select 
+                        id='right_cornea'
+                        name='right_cornea'
+                        value={clinicalExamFormData.right_cornea}
+                        onChange={handleClinicalExamChange}
+                        required>
                         <option value="Normal">Normal</option>
                         <option value="Abnormal">Abnormal</option>
                       </select>
                     </td>
                     <td>
-                      <select required>
+                      <select 
+                        id='left_cornea'
+                        name='left_cornea'
+                        value={clinicalExamFormData.left_cornea}
+                        onChange={handleClinicalExamChange}
+                        required>
                         <option value="Normal">Normal</option>
                         <option value="Abnormal">Abnormal</option>
                       </select>
@@ -350,13 +498,23 @@ const RegistryForm = () => {
                   <tr>
                     <td>Retina</td>
                     <td>
-                      <select required>
+                      <select 
+                        id='right_retina'
+                        name='right_retina'
+                        value={clinicalExamFormData.right_retina}
+                        onChange={handleClinicalExamChange}
+                        required>
                         <option value="Normal">Normal</option>
                         <option value="Abnormal">Abnormal</option>
                       </select>
                     </td>
                     <td>
-                      <select required>
+                      <select 
+                        id='left_retina'
+                        name='left_retina'
+                        value={clinicalExamFormData.left_retina}
+                        onChange={handleClinicalExamChange}
+                        required>
                         <option value="Normal">Normal</option>
                         <option value="Abnormal">Abnormal</option>
                       </select>
