@@ -123,3 +123,22 @@ h2{
   box-sizing: border-box;
   font-size: 1em;
 }
+
+.registry-submit-button {
+  background-color: #BBD8BB;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 50px;
+  cursor: pointer;
+  font-size: 1em;
+  /* position: absolute; Position the button absolutely */
+  /* bottom: 20px; Position the button 20px from the bottom */
+  /* right: 20px; Position the button 20px from the right */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.registry-submit-button:hover {
+  background-color: darkgreen;
+  color: white;
+}
