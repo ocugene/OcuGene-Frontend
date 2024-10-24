@@ -49,6 +49,7 @@ h2{
 
 .field-container input[type="text"],
 .field-container input[type="date"],
+.field-container input[type="number"],
 .field-container select,
 .field-container textarea {
   width: 100%;
