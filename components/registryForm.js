@@ -13,7 +13,7 @@ const RegistryForm = () => {
     region: '',
     province:'Metro Manila',
     city: '',
-    marital_status: '',
+    marital_status: 'Single',
     chief_complaint: '',
     blur_duration: '',
     laterality: '',
@@ -24,9 +24,6 @@ const RegistryForm = () => {
     diagnosis: '',
     variant: '',
     gen_test_date: '',
-  });
-
-  const [clinicalExamFormData, setClinicalExamFormData] = useState({
     right_bcva: '',
     left_bcva: '',
     right_cornea: '',
@@ -36,6 +33,39 @@ const RegistryForm = () => {
   });
 
   const [variantOptions, setVariantOptions] = useState([]);
+
+  useEffect(() => {
+    // Make a GET request to the server
+    fetch('http://localhost:8080/patient/getLatestID', {
+      method: 'GET',
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+
+      let id = data;
+      let next_id = data + 1;
+
+      next_id = next_id.toString().padStart(4, '0')
+      const patientCode = `2024${next_id}`;
+  
+      // Update the form data to include the patient code
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        patient_code: patientCode,
+      }));
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle errors here
+    });
+  }, []);
+  
 
   useEffect(() => {
     if (formData.birthday) {
@@ -69,19 +99,15 @@ const RegistryForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if(name === 'sibling_count'){
-      setFormData({ ...formData, [name]: Number(value) });
+    if (name === 'sibling_count') {
+      setFormData(prevFormData => ({ ...prevFormData, [name]: Number(value) }));
+    } else {
+      setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
     }
-    else{
-      setFormData({ ...formData, [name]: value });
-    }
-    
-  };
 
-  const handleClinicalExamChange = (e) => {
-    const { name, value } = e.target;
-    setClinicalExamFormData({ ...clinicalExamFormData, [name]: value });
+    console.log(formData);
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -109,12 +135,20 @@ const RegistryForm = () => {
       // Handle errors here
     });
 
-    fetch('http://localhost:8080/clinicalexam/add', {
+    // Create the form data based on the conditions provided
+    const userData = {
+      username: formData.patient_code,
+      user_password: `${formData.first_name}${formData.last_name}`.toLowerCase().replace(/\s+/g, ''),
+      user_role: "PATIENT"
+    };
+
+    //Make a POST request to the server
+    fetch('http://localhost:8080/user/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(clinicalExamFormData)
+      body: JSON.stringify(userData)
     })
     .then(response => {
       if (!response.ok) {
@@ -465,8 +499,8 @@ const RegistryForm = () => {
                       <select 
                         id='right_bcva'
                         name='right_bcva'
-                        value={clinicalExamFormData.right_bcva}
-                        onChange={handleClinicalExamChange}
+                        value={formData.right_bcva}
+                        onChange={handleChange}
                         required>
                         <option value="">Select</option>
                         <option value="20/20">20/20</option>
@@ -480,8 +514,8 @@ const RegistryForm = () => {
                       <select 
                         id='left_bcva'
                         name='left_bcva'
-                        value={clinicalExamFormData.left_bcva}
-                        onChange={handleClinicalExamChange}
+                        value={formData.left_bcva}
+                        onChange={handleChange}
                         required>
                         <option value="">Select</option>
                         <option value="20/20">20/20</option>
@@ -498,8 +532,8 @@ const RegistryForm = () => {
                       <select 
                         id='right_cornea'
                         name='right_cornea'
-                        value={clinicalExamFormData.right_cornea}
-                        onChange={handleClinicalExamChange}
+                        value={formData.right_cornea}
+                        onChange={handleChange}
                         required>
                         <option value="Normal">Normal</option>
                         <option value="Abnormal">Abnormal</option>
@@ -509,8 +543,8 @@ const RegistryForm = () => {
                       <select 
                         id='left_cornea'
                         name='left_cornea'
-                        value={clinicalExamFormData.left_cornea}
-                        onChange={handleClinicalExamChange}
+                        value={formData.left_cornea}
+                        onChange={handleChange}
                         required>
                         <option value="Normal">Normal</option>
                         <option value="Abnormal">Abnormal</option>
@@ -523,8 +557,8 @@ const RegistryForm = () => {
                       <select 
                         id='right_retina'
                         name='right_retina'
-                        value={clinicalExamFormData.right_retina}
-                        onChange={handleClinicalExamChange}
+                        value={formData.right_retina}
+                        onChange={handleChange}
                         required>
                         <option value="Normal">Normal</option>
                         <option value="Abnormal">Abnormal</option>
@@ -534,8 +568,8 @@ const RegistryForm = () => {
                       <select 
                         id='left_retina'
                         name='left_retina'
-                        value={clinicalExamFormData.left_retina}
-                        onChange={handleClinicalExamChange}
+                        value={formData.left_retina}
+                        onChange={handleChange}
                         required>
                         <option value="Normal">Normal</option>
                         <option value="Abnormal">Abnormal</option>
