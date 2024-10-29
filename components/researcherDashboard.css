@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+
+/* researcherDashboard.module.css */
+
+.dashboard {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  font-family: 'Karla', sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: maroon;
+}
+
+.radioButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.radioLabel {
+  font-size: 1.2em;
+}
+
+.radioInput {
+  margin-right: 8px;
+}
+
+.variantsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.variantCard {
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1em;
+  color: #2c3e50;
+  text-align: center;
+}
