@@ -327,7 +327,7 @@ const RegistryForm = () => {
                 </select>
               </div>
             </div>
-          </div>
+          </div>  
 
           {/* Target 2: Clinical History */}
           <div id="target2" className='target'>
@@ -362,7 +362,7 @@ const RegistryForm = () => {
               <div className='field-container'>
                 <label htmlFor='blur_duration'>For how long?</label>
                 <select 
-                  id='blur_duratio'
+                  id='blur_duration'
                   name='blur_duration'
                   value={formData.blur_duration}
                   onChange={handleChange}
