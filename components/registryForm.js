@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import './registryForm.css'
+import './registryForm.css';
+import regionsData from './../philippine_provinces_cities_municipalities_and_barangays_2019v2.json';
 
 const RegistryForm = () => {
+
+  const regions = [
+    "CAR", "NCR", "Region I", "Region II", "Region III", "Region IV-A", "Region IV-B", 
+    "Region V", "Region VI", "Region VII", "Region VIII", "Region IX", 
+    "Region X", "Region XI", "Region XII", "Region XIII", "BARMM"
+  ];
+
+  const [provinces, setProvinces] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [barangays, setBarangays] = useState([]);
+
   const [formData, setFormData] = useState({
     first_name: '',
     middle_name: '',
@@ -11,9 +23,10 @@ const RegistryForm = () => {
     birthday: '',
     address: '',
     region: '',
-    province:'Metro Manila',
+    province:'',
     city: '',
-    marital_status: 'Single',
+    barangay: '',
+    marital_status: '',
     chief_complaint: '',
     blur_duration: '',
     laterality: '',
@@ -86,6 +99,33 @@ const RegistryForm = () => {
     setVariantOptions(options);
   }, [formData.diagnosis]);
 
+  useEffect(() => {
+    // Get the provinces for the selected region
+    if(formData.region !== ''){
+      const provinceList = regionsData[formData.region].province_list;
+      setProvinces(Object.keys(provinceList));
+    }
+    
+  }, [formData.region]);
+
+  useEffect(() => {
+    // Get the provinces for the selected region
+    if(formData.region !== '' && formData.province !== ''){
+      const cityList = regionsData[formData.region].province_list[(formData.province).toUpperCase()].municipality_list;
+      setCities(Object.keys(cityList));
+    }
+
+  }, [formData.province]);
+
+  useEffect(() => {
+    // Get the provinces for the selected region
+    if(formData.region !== '' && formData.province !== '' && formData.city!==''){
+      const barangayList = regionsData[formData.region].province_list[(formData.province).toUpperCase()].municipality_list[(formData.city).toUpperCase()].barangay_list;
+      setBarangays(barangayList);
+    }
+    
+  }, [formData.city]);
+
   const calculateAge = (birthday) => {
     const birthDate = new Date(birthday);
     const today = new Date();
@@ -105,7 +145,6 @@ const RegistryForm = () => {
       setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
     }
 
-    console.log(formData);
   };
   
 
@@ -251,8 +290,10 @@ const RegistryForm = () => {
                   name='marital_status'
                   value={formData.marital_status}
                   onChange={handleChange}
+                  aria-placeholder='Select'
                   required
                   >
+                  <option value="" disabled></option>
                   <option value="Single">Single</option>
                   <option value="Married">Married</option>
                   <option value="Widowed">Widowed</option>
@@ -262,7 +303,7 @@ const RegistryForm = () => {
             </div>
             <div className='row-container'>
               <div className='field-container'>
-                <label htmlFor='address'>Address(Street, Barangay)</label>
+                <label htmlFor='address'>Address (Lot Number, Street, Subdivision)</label>
                 <textarea className="textArea" 
                                     id='address'
                                     name='address'
@@ -281,23 +322,10 @@ const RegistryForm = () => {
                   value={formData.region}
                   onChange={handleChange}
                   required>
-                  <option value="Region I">Region I</option>
-                  <option value="Region II">Region II</option>
-                  <option value="Region III">Region III</option>
-                  <option value="Region IV-A">Region IV-A</option>
-                  <option value="Region IV-B">Region IV-B</option>
-                  <option value="Region V">Region V</option>
-                  <option value="Region VI">Region VI</option>
-                  <option value="Region VII">Region VII</option>
-                  <option value="Region VIII">Region VIII</option>
-                  <option value="Region IX">Region IX</option>
-                  <option value="Region X">Region X</option>
-                  <option value="Region XI">Region XI</option>
-                  <option value="Region XII">Region XII</option>
-                  <option value="Region XIII">Region XIII</option>
-                  <option value="NCR">NCR</option>
-                  <option value="CAR">CAR</option>
-                  <option value="BARMM">BARMM</option>
+                  <option value="" disabled></option>
+                  {regions.map((region, index) => (
+                    <option key={index} value={region}>{region}</option>
+                  ))}
                 </select>
               </div>
               <div className='field-container'>
@@ -308,8 +336,10 @@ const RegistryForm = () => {
                   value={formData.province}
                   onChange={handleChange}
                   required>
-                  <option value="Metro Manila">Metro Manila</option>
-                  <option value="Cavite">Cavite</option>
+                  <option value="" disabled></option>
+                  {provinces.map((province, index) => (
+                    <option key={index} value={province}>{province}</option>
+                  ))}
                 </select>
               </div>
               <div className='field-container'>
@@ -320,10 +350,24 @@ const RegistryForm = () => {
                   value={formData.city}
                   onChange={handleChange}
                   required>
-                  <option value="Manila">Manila</option>
-                  <option value="Taguig">Taguig</option>
-                  <option value="Las Piñas">Las Piñas</option>
-                  <option value="Bacoor">Bacoor</option>
+                  <option value="" disabled></option>
+                  {cities.map((city, index) => (
+                    <option key={index} value={city}>{city}</option>
+                  ))}
+                </select>
+              </div>
+              <div className='field-container'>
+                <label htmlFor='barangay'>Barangay</label>
+                <select 
+                  id='barangay'
+                  name='barangay'
+                  value={formData.barangay}
+                  onChange={handleChange}
+                  required>
+                  <option value="" disabled></option>
+                  {barangays.map((barangay, index) => (
+                    <option key={index} value={barangay}>{barangay}</option>
+                  ))}
                 </select>
               </div>
             </div>
