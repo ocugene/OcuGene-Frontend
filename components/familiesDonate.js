@@ -9,8 +9,35 @@ const FamiliesDonate = () => {
     e.preventDefault();
     if (window.confirm('Are you sure you want to submit this form?')) {
       // Handle form submission logic here
-      console.log('Email:', email);
-      console.log('Message:', message);
+      // console.log('Email:', email);
+      // console.log('Message:', message);
+
+      const formData = {
+        email: email,
+        message: message,
+      };
+
+      fetch('http://localhost:8080/query/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Success:', data);
+        // You can handle successful submission here
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle errors here
+      });
     }
   };
 
