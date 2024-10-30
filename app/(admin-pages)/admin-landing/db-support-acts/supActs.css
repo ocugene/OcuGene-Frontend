@@ -1,0 +1,42 @@
+.supActs-container {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+  
+.sidebar {
+    width: 250px;
+    margin-right: 20px;
+}
+  
+.content {
+    flex-grow: 1;
+    /* background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.title{
+    font-family: 'Karla', sans-serif;
+    color: maroon;
+    font-size: 7vh;
+    font-weight: bolder;
+    padding: 0px 0px 0px 5px;
+    margin-bottom: 20px;
+}
+
+/* .row-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.col-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+} */
