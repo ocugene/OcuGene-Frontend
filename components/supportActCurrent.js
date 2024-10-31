@@ -1,5 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import './supportActCurrent.css';
+import SupportActEdit from './supportActEdit';
 
 const supportActCurrent = () => {
   const [events, setEvents] = useState([
@@ -28,6 +29,8 @@ const supportActCurrent = () => {
       location: 'Health Center, Westside'
     }
   ]);
+
+  const [editingEvent, setEditingEvent] = useState(null);
 
   const transformEventData = (serverData) => {
     return serverData.map((event) => {
@@ -60,11 +63,22 @@ const supportActCurrent = () => {
 
   const handleEdit = (eventID) => {
     console.log(`Event to be edited has id ${eventID}`);
+    const eventToEdit = events.find(event => event.id === eventID);
+    setEditingEvent(eventToEdit);
   };
 
   const handleDelete = (eventID) => {
     console.log(`Event to be deleted has id ${eventID}`);
   }
+
+  const handleSave = (updatedEvent) => {
+    setEvents(events.map(event => (event.id === updatedEvent.id ? updatedEvent : event)));
+    setEditingEvent(null);
+  };
+
+  const handleClose = () => {
+    setEditingEvent(null);
+  };
 
   useEffect(() => {
 
@@ -106,6 +120,9 @@ const supportActCurrent = () => {
           </ul>
         </div>
       ))}
+      {editingEvent && (
+        <SupportActEdit event={editingEvent} onSave={handleSave} onClose={handleClose} />
+      )}
     </div>
   );
 };
