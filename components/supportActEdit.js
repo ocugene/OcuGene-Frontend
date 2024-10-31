@@ -2,14 +2,32 @@ import React, { useState } from 'react';
 import './supportActEdit.css';
 
 const SupportActEdit = ({ event, onSave, onClose }) => {
+
+  const convertTo24HourFormat = (time12h) => {
+    // Remove AM/PM and trim extra spaces
+    const [time, modifier] = time12h.match(/(\d{1,2}:\d{2})(AM|PM)/).slice(1);
+    
+    let [hours, minutes] = time.split(':').map(Number);
+  
+    if (modifier === 'PM' && hours !== 12) {
+      hours += 12; // Convert PM hours except for 12 PM
+    } else if (modifier === 'AM' && hours === 12) {
+      hours = 0; // Convert 12 AM to 00
+    }
+  
+    // Return in "HH:mm" 24-hour format
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+  };
+
   const [formData, setFormData] = useState({
     title: event.title,
     date: event.date,
     type: event.type,
-    startTime: event.time.split(' - ')[0],
-    endTime: event.time.split(' - ')[1],
+    start_time: convertTo24HourFormat(event.time.split(' - ')[0]),
+    end_time: convertTo24HourFormat(event.time.split(' - ')[1]),
     location: event.location,
   });
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,15 +36,15 @@ const SupportActEdit = ({ event, onSave, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedEvent = {
-      ...event,
-      title: formData.title,
-      date: formData.date,
-      type: formData.type,
-      time: `${formData.startTime} - ${formData.endTime}`,
-      location: formData.location,
-    };
-    onSave(updatedEvent);
+    // const updatedEvent = {
+    //   ...event,
+    //   title: formData.title,
+    //   date: formData.date,
+    //   type: formData.type,
+    //   time: `${formData.start_time} - ${formData.end_time}`,
+    //   location: formData.location,
+    // };
+    onSave(event.id, formData);
   };
 
   return (
@@ -76,22 +94,22 @@ const SupportActEdit = ({ event, onSave, onClose }) => {
           </div>
           <div className="row-container">
             <div className="field-container">
-              <label htmlFor="startTime">Time</label>
+              <label htmlFor="start_time">Time</label>
               <div className="time-container">
                 <input
                   type="time"
-                  id="startTime"
-                  name="startTime"
-                  value={formData.startTime}
+                  id="start_time"
+                  name="start_time"
+                  value={formData.start_time}
                   onChange={handleChange}
                   required
                 />
                 <span>to</span>
                 <input
                   type="time"
-                  id="endTime"
-                  name="endTime"
-                  value={formData.endTime}
+                  id="end_time"
+                  name="end_time"
+                  value={formData.end_time}
                   onChange={handleChange}
                   required
                 />
