@@ -4,6 +4,7 @@ import './supportActCurrent.css';
 const supportActCurrent = () => {
   const [events, setEvents] = useState([
     {
+      id: 1,
       title: 'Symposium on Genetic Disorders',
       type: 'Symposium',
       date: '2023-10-15',
@@ -11,6 +12,7 @@ const supportActCurrent = () => {
       location: 'Community Hall, City Center'
     },
     {
+      id: 2,
       title: 'Charity Concert for Rare Diseases',
       type: 'Concert',
       date: '2023-11-05',
@@ -18,6 +20,7 @@ const supportActCurrent = () => {
       location: 'Grand Auditorium, Downtown'
     },
     {
+      id: 3,
       title: 'Monthly Support Group Meeting',
       type: 'Support Group',
       date: '2023-12-01',
@@ -45,6 +48,7 @@ const supportActCurrent = () => {
       const endTime = formatTime(event.endTime);
   
       return {
+        id: event.activityID,
         title: event.title,
         type: event.activityType,
         date: formattedDate,
@@ -53,6 +57,14 @@ const supportActCurrent = () => {
       };
     });
   };
+
+  const handleEdit = (eventID) => {
+    console.log(`Event to be edited has id ${eventID}`);
+  };
+
+  const handleDelete = (eventID) => {
+    console.log(`Event to be deleted has id ${eventID}`);
+  }
 
   useEffect(() => {
 
@@ -82,8 +94,8 @@ const supportActCurrent = () => {
           <div className="event-card-header">
             <h2 className="event-title">{event.title}</h2>
             <div className="event-card-buttons">
-              <button className="edit-button">Edit</button>
-              <button className="delete-button">Delete</button>
+              <button className="edit-button" onClick={() => handleEdit(event.id)}>Edit</button>
+              <button className="delete-button" onClick={() => handleDelete(event.id)}>Delete</button>
             </div>
           </div>
           <ul className="event-details">
