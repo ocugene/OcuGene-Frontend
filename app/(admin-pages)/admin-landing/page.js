@@ -1,8 +1,15 @@
 import React from 'react'
+import NavbarLanding from '@/components/navbarLanding'
+import AdminPortal from '@/components/adminPortal'
+
+
 
 const AdminLandingPage = () => {
   return (
-    <div>AdminLandingPage</div>
+    <div>
+      <NavbarLanding />
+      <AdminPortal />
+    </div>
   )
 }
 
