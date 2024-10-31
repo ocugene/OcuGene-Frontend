@@ -4,30 +4,30 @@ import SupportActEdit from './supportActEdit';
 
 const supportActCurrent = () => {
   const [events, setEvents] = useState([
-    {
-      id: 1,
-      title: 'Symposium on Genetic Disorders',
-      type: 'Symposium',
-      date: '2023-10-15',
-      time: '10:00AM - 02:00PM',
-      location: 'Community Hall, City Center'
-    },
-    {
-      id: 2,
-      title: 'Charity Concert for Rare Diseases',
-      type: 'Concert',
-      date: '2023-11-05',
-      time: '06:00PM - 09:00PM',
-      location: 'Grand Auditorium, Downtown'
-    },
-    {
-      id: 3,
-      title: 'Monthly Support Group Meeting',
-      type: 'Support Group',
-      date: '2023-12-01',
-      time: '04:00PM - 06:00PM',
-      location: 'Health Center, Westside'
-    }
+    // {
+    //   id: 1,
+    //   title: 'Symposium on Genetic Disorders',
+    //   type: 'Symposium',
+    //   date: '2023-10-15',
+    //   time: '10:00AM - 02:00PM',
+    //   location: 'Community Hall, City Center'
+    // },
+    // {
+    //   id: 2,
+    //   title: 'Charity Concert for Rare Diseases',
+    //   type: 'Concert',
+    //   date: '2023-11-05',
+    //   time: '06:00PM - 09:00PM',
+    //   location: 'Grand Auditorium, Downtown'
+    // },
+    // {
+    //   id: 3,
+    //   title: 'Monthly Support Group Meeting',
+    //   type: 'Support Group',
+    //   date: '2023-12-01',
+    //   time: '04:00PM - 06:00PM',
+    //   location: 'Health Center, Westside'
+    // }
   ]);
 
   const [editingEvent, setEditingEvent] = useState(null);
@@ -71,9 +71,35 @@ const supportActCurrent = () => {
     console.log(`Event to be deleted has id ${eventID}`);
   }
 
-  const handleSave = (updatedEvent) => {
-    setEvents(events.map(event => (event.id === updatedEvent.id ? updatedEvent : event)));
+  const handleSave = (eventID, updatedEvent) => {
+
+    if(window.confirm(`Are you sure you want to edit event: ${updatedEvent.title}?`)){
+
+    }
+
+    fetch(`http://localhost:8080/activity/edit?activityID=${eventID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedEvent)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      // You can handle successful submission here
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle errors here
+    });
     setEditingEvent(null);
+    window.location.reload();
   };
 
   const handleClose = () => {
@@ -101,6 +127,20 @@ const supportActCurrent = () => {
 
   }, [])
 
+  const transformDate = (dateString) => {
+    // Create a Date object from the string
+    const date = new Date(dateString);
+  
+    // Use Intl.DateTimeFormat to format the date
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+      month: 'long', // Full month name
+      day: 'numeric', // Day of the month
+      year: 'numeric' // Full year
+    }).format(date);
+  
+    return formattedDate;
+  };
+
   return (
     <div>
       {events.map((event, index) => (
@@ -114,7 +154,7 @@ const supportActCurrent = () => {
           </div>
           <ul className="event-details">
             <li>{event.type}</li>
-            <li>{event.date}</li>
+            <li>{transformDate(event.date)}</li>
             <li>{event.time}</li>
             <li>{event.location}</li>
           </ul>
