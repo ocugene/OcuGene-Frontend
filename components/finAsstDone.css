@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+
+.inquiry-container {
+  display: flex;
+  flex-direction: column; /* Stack cards vertically */
+  align-items: center;
+  padding: 20px;
+  font-family: 'Karla', sans-serif;
+  /* border: 2px solid red; Debugging border */
+}
+
+.inquiry-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 2px solid blue; Debugging border */
+}
+
+.inquiry-content {
+  flex-grow: 1;
+  /* border: 2px solid green; Debugging border */
+}
+
+.responded-button {
+  background-color: white;
+  color: maroon;
+  border: 1px solid maroon;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* border: 2px solid orange; Debugging border */
+}
+
+.responded-button:hover {
+  background-color: maroon;
+  color: white;
+}
