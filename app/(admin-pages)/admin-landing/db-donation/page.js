@@ -9,7 +9,7 @@ import './donations.css'
 
 
 
-const SupportActivitiesPage = () => {
+const DonationsPage = () => {
   const [activeComponent, setActiveComponent] = useState('new');
 
   const handleButtonClick = (componentName) => {
@@ -33,4 +33,4 @@ const SupportActivitiesPage = () => {
   )
 }
 
-export default SupportActivitiesPage
+export default DonationsPage
