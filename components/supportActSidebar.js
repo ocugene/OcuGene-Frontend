@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import './supportActSidebar.css';
 
 const supportActSidebar = ({ onButtonClick }) => {
-    const [activeButton, setActiveButton] = useState('');
+    const [activeButton, setActiveButton] = useState('current');
 
     const handleButtonClick = (buttonName) => {
       setActiveButton(buttonName);

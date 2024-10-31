@@ -10,7 +10,7 @@ import './supActs.css'
 
 
 const SupportActivitiesPage = () => {
-  const [activeComponent, setActiveComponent] = useState('');
+  const [activeComponent, setActiveComponent] = useState('current');
 
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
