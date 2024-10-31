@@ -6,8 +6,8 @@ const SupportActNew = () => {
     title: '',
     date: '',
     type: '',
-    startTime: '',
-    endTime: '',
+    start_time: '',
+    end_time: '',
     location: '',
   });
 
@@ -18,7 +18,28 @@ const SupportActNew = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    fetch('http://localhost:8080/activity/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      // You can handle successful submission here
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle errors here
+    });
   };
 
   return (
@@ -68,22 +89,22 @@ const SupportActNew = () => {
         </div>
         <div className="row-container">
           <div className="field-container">
-            <label htmlFor="startTime">Time</label>
+            <label htmlFor="start_time">Time</label>
             <div className="time-container">
               <input
                 type="time"
-                id="startTime"
-                name="startTime"
-                value={formData.startTime}
+                id="start_time"
+                name="start_time"
+                value={formData.start_time}
                 onChange={handleChange}
                 required
               />
               <span>to</span>
               <input
                 type="time"
-                id="endTime"
-                name="endTime"
-                value={formData.endTime}
+                id="end_time"
+                name="end_time"
+                value={formData.end_time}
                 onChange={handleChange}
                 required
               />

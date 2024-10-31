@@ -1,8 +1,8 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import './supportActCurrent.css';
 
 const supportActCurrent = () => {
-  const events = [
+  const [events, setEvents] = useState([
     {
       title: 'Symposium on Genetic Disorders',
       type: 'Symposium',
@@ -24,7 +24,56 @@ const supportActCurrent = () => {
       time: '04:00PM - 06:00PM',
       location: 'Health Center, Westside'
     }
-  ];
+  ]);
+
+  const transformEventData = (serverData) => {
+    return serverData.map((event) => {
+      // Parse the date to 'YYYY-MM-DD'
+      const eventDate = new Date(event.date);
+      const formattedDate = eventDate.toISOString().slice(0, 10);
+  
+      // Convert start and end times to 12-hour format
+      const formatTime = (time) => {
+        let [hour, minute] = time.split(':');
+        const isPM = hour >= 12;
+        hour = hour % 12 || 12;
+        const suffix = isPM ? 'PM' : 'AM';
+        return `${String(hour).padStart(2, '0')}:${minute}${suffix}`;
+      };
+  
+      const startTime = formatTime(event.startTime);
+      const endTime = formatTime(event.endTime);
+  
+      return {
+        title: event.title,
+        type: event.activityType,
+        date: formattedDate,
+        time: `${startTime} - ${endTime}`,
+        location: event.location,
+      };
+    });
+  };
+
+  useEffect(() => {
+
+    fetch('http://localhost:8080/activity/get-all', {
+      method: 'GET',
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      setEvents(transformEventData(data));
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle errors here
+    });
+
+  }, [])
 
   return (
     <div>
