@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Import Next.js router for navigation
 import './loginPageComp.css'; // Assuming you have a CSS file for styling
 import { resolve } from 'styled-jsx/css';
 
 const LoginPageComp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter(); // Initialize the router
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,6 +38,10 @@ const LoginPageComp = () => {
     }
   };
 
+  const handleSignupRedirect = () => {
+    router.push('/login/signup'); // Navigate to /login/signup
+  };
+
   return (
     <div className="login-container">
       <div className="login-card">
@@ -63,6 +69,9 @@ const LoginPageComp = () => {
           </div>
           <button type="submit" className="login-btn">Log In</button>
         </form>
+        <button onClick={handleSignupRedirect} className="signup-btn">
+          No Account? Request Here
+        </button>
       </div>
     </div>
   );
