@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import './donationsNew.css';
+import './inquiriesDone.css';
 
-const DonationsNew = ({donations, setDonations}) => {
-  // const [donations, setDonations] = useState([
+const DonationsDone = ({inquiries}) => {
+  // const [inquiries, setInquiries] = useState([
   //   { id: 1, email: 'john.doe@example.com', message: 'I would like to donate to the registry.' },
   //   { id: 2, email: 'jane.smith@example.com', message: 'How can I support the group?' },
   //   { id: 3, email: 'alice.jones@example.com', message: 'I need more information about financial assistance.' },
   // ]);
 
-  const handleResponded = (id, email) => {
+  const handleMarkAsUnread = (id, email) => {
     // console.log(`Responded to donation with id: ${id}`);
     // You can add logic to mark the donation as responded
-    if(window.confirm(`Are you sure you have already responded to this inquiry by ${email}?`)){
+    if(window.confirm(`Are you sure you want to mark this inquiry by ${email} as unread?`)){
 
-      fetch(`http://localhost:8080/query/respond?queryID=${id}`, {
+      fetch(`http://localhost:8080/query/mark-as-unread?queryID=${id}`, {
         method: 'PUT',
       })
       .then(response => {
@@ -33,22 +33,22 @@ const DonationsNew = ({donations, setDonations}) => {
 
     }
     window.location.reload();
-
   };
 
   return (
     <div className="inquiry-container">
-      {donations.map((donation) => (
-        <div key={donation.queryID} className="inquiry-card">
+      {inquiries.map((inquiry) => (
+        <div key={inquiry.queryID} className="inquiry-card">
           <div className="inquiry-content">
-            <p><strong>Email:</strong> {donation.email}</p>
-            <p><strong>Message:</strong> {donation.message}</p>
+            <p><strong>Email:</strong> {inquiry.email}</p>
+            <p><strong>Subject:</strong> {inquiry.type}</p>
+            <p><strong>Message:</strong> {inquiry.message}</p>
           </div>
-          <button className="responded-button" onClick={() => handleResponded(donation.queryID, donation.email)}>Mark as Done</button>
+          <button className="responded-button" onClick={() => handleMarkAsUnread(inquiry.queryID, inquiry.email)}>Mark as Unread</button>
         </div>
       ))}
     </div>
   );
 };
 
-export default DonationsNew;
+export default DonationsDone;
