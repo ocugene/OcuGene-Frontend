@@ -67,39 +67,59 @@ const supportActCurrent = () => {
     setEditingEvent(eventToEdit);
   };
 
-  const handleDelete = (eventID) => {
-    console.log(`Event to be deleted has id ${eventID}`);
+  const handleDelete = (eventID, eventTitle) => {
+    if(window.confirm(`Are you sure you want to delete activity : ${eventTitle}`)){
+      fetch(`http://localhost:8080/activity/delete?activityID=${eventID}`, {
+        method: 'DELETE',
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Success:', data);
+        // You can handle successful submission here
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle errors here
+      });
+      window.location.reload();
+    }
   }
 
   const handleSave = (eventID, updatedEvent) => {
 
-    if(window.confirm(`Are you sure you want to edit event: ${updatedEvent.title}?`)){
+    if(window.confirm(`Are you sure you want to edit activity: ${updatedEvent.title}?`)){
+
+      fetch(`http://localhost:8080/activity/edit?activityID=${eventID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedEvent)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Success:', data);
+        // You can handle successful submission here
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle errors here
+      });
+      setEditingEvent(null);
+      window.location.reload();
 
     }
 
-    fetch(`http://localhost:8080/activity/edit?activityID=${eventID}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updatedEvent)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Success:', data);
-      // You can handle successful submission here
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Handle errors here
-    });
-    setEditingEvent(null);
-    window.location.reload();
   };
 
   const handleClose = () => {
@@ -149,7 +169,7 @@ const supportActCurrent = () => {
             <h2 className="event-title">{event.title}</h2>
             <div className="event-card-buttons">
               <button className="edit-button" onClick={() => handleEdit(event.id)}>Edit</button>
-              <button className="delete-button" onClick={() => handleDelete(event.id)}>Delete</button>
+              <button className="delete-button" onClick={() => handleDelete(event.id, event.title)}>Delete</button>
             </div>
           </div>
           <ul className="event-details">
