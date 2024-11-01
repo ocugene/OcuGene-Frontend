@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import NavbarLanding from '@/components/navbarLanding';
 import SidebarDonations from '@/components/donationsSidebar';
-import New from '@/components/donationsNew';
-import Done from '@/components/donationsDone';
+import New from '@/components/inquiriesNew';
+import Done from '@/components/inquiriesDone';
 import './donations.css'
 
 
@@ -12,7 +12,9 @@ import './donations.css'
 const DonationsPage = () => {
   const [activeComponent, setActiveComponent] = useState('new');
 
-  const [donations, setDonations] = useState([
+  const [selectedType, setSelectedType] = useState('all');
+
+  const [inquiries, setInquiries] = useState([
     // { 
     //   queryID: 1, 
     //   email: 'john.doe@example.com', 
@@ -33,14 +35,24 @@ const DonationsPage = () => {
     // },
   ]);
 
+  const [displayedInquiries, setDisplayedInquiries] = useState([]);
+
+  const handleTypeChange = (e) => {
+
+    const newType = e.target.value;
+    setSelectedType(newType);
+
+    setDisplayedInquiries(
+      newType === 'all'
+        ? inquiries // Show all inquiries
+        : inquiries.filter(inquiry => inquiry.type === newType)
+    );
+  };
+
   useEffect(() => {
 
     fetch(`http://localhost:8080/query/get-all`, {
       method: 'GET',
-      // headers: {
-      //   'Content-Type': 'application/json'
-      // },
-      // body: JSON.stringify(updatedEvent)
     })
     .then(response => {
       if (!response.ok) {
@@ -51,7 +63,8 @@ const DonationsPage = () => {
     .then(data => {
       // console.log('Success:', data);
       // You can handle successful submission here
-      setDonations(data);
+      setInquiries(data);
+      setDisplayedInquiries(data);
     })
     .catch(error => {
       console.error('Error:', error);
@@ -73,8 +86,21 @@ const DonationsPage = () => {
       <div className="donations-container">
         <SidebarDonations onButtonClick={handleButtonClick} />
         <div className="content">
-          {activeComponent === 'new' && <New donations={donations.filter(donation => donation.respondedFlag === false)} setDonations={setDonations}/>}
-          {activeComponent === 'done' && <Done donations={donations.filter(donation => donation.respondedFlag === true)} setDonations={setDonations}/>}
+          <div>
+            Filter inquiries by type: 
+            <select 
+              id='type'
+              name='type'
+              value={selectedType}
+              onChange={handleTypeChange}>
+
+              <option value='all'>All</option>
+              <option value='DONATION'>Donation</option>
+              <option value='FINANCIAL ASSISTANCE'>Financial Assistance</option>
+            </select>
+          </div>
+          {activeComponent === 'new' && <New inquiries={displayedInquiries.filter(displayedInquiry => displayedInquiry.respondedFlag === false)} />}
+          {activeComponent === 'done' && <Done inquiries={displayedInquiries.filter(displayedInquiry => displayedInquiry.respondedFlag === true)} />}
         </div>
       </div>
     </div>

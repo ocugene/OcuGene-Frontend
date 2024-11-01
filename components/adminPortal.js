@@ -6,19 +6,19 @@ import './landingPageComp.css';
 
 const adminPortal = () => {
 
-    const router = useRouter();
+  const router = useRouter();
 
-    const navigateToDonation = () => {
-      router.push('/admin-landing/db-donation');
-    };
+  const navigateToDonation = () => {
+    router.push('/admin-landing/db-donation');
+  };
 
-    const navigateToFinance = () => {
-        router.push('/admin-landing/db-fin-asst');
-      };
+  const navigateToFinance = () => {
+    router.push('/admin-landing/db-fin-asst');
+  };
 
-    const navigateToSupport = () => {
+  const navigateToSupport = () => {
     router.push('/admin-landing/db-support-acts');
-    };
+  };
 
   return (
     <div className="landing-page">
