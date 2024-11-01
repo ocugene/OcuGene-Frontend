@@ -2,15 +2,38 @@
 
 import React, { useState } from 'react';
 import './loginPageComp.css'; // Assuming you have a CSS file for styling
+import { resolve } from 'styled-jsx/css';
 
 const LoginPageComp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle login logic here (e.g., call an API)
     console.log('Logging in with', { username, password });
+    const tempUser = {
+      username : username,
+      userPassword : password
+    }
+    const response = await fetch('http://localhost:8080/user/getUser', {
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify(tempUser)
+    });
+
+    // Parse the response as JSON
+    const data = await response.json();
+    console.log(data);
+
+    // Use `data.success` instead of `data.status == 200`
+    if (data.success) {  // Assuming the backend sends `success: true` for successful login
+        console.log("Login successful:", data.user);
+        // Redirect or store user data here
+    } else {  
+        console.log("Login failed:", data.message || "Invalid credentials.");
+        // Display the error message to the user
+    }
   };
 
   return (
