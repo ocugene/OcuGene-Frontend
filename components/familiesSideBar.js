@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import './FamiliesSideBar.css';
 
 const FamiliesSideBar = ({ onButtonClick }) => {
-  const [activeButton, setActiveButton] = useState('');
+  const [activeButton, setActiveButton] = useState('inquire');
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -14,22 +14,16 @@ const FamiliesSideBar = ({ onButtonClick }) => {
   return (
     <div className="sidebar">
       <button
-        className={`sidebar-button ${activeButton === 'donate' ? 'active' : ''}`}
-        onClick={() => handleButtonClick('donate')}
+        className={`sidebar-button ${activeButton === 'inquire' ? 'active' : ''}`}
+        onClick={() => handleButtonClick('inquire')}
       >
-        Donate to Registry
+        Inquire
       </button>
       <button
-        className={`sidebar-button ${activeButton === 'support' ? 'active' : ''}`}
-        onClick={() => handleButtonClick('support')}
+        className={`sidebar-button ${activeButton === 'activities' ? 'active' : ''}`}
+        onClick={() => handleButtonClick('activities')}
       >
-        Support Groups
-      </button>
-      <button
-        className={`sidebar-button ${activeButton === 'financial' ? 'active' : ''}`}
-        onClick={() => handleButtonClick('financial')}
-      >
-        Financial Assistance
+        Activities
       </button>
     </div>
   );

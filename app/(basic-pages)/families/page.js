@@ -3,13 +3,12 @@
 import React, { useState } from 'react';
 import NavbarLanding from '@/components/navbarLanding';
 import SidebarFamilies from '@/components/familiesSideBar';
-import Donate from '@/components/familiesDonate';
-import Support from '@/components/familiesSupGrp';
-import Financial from '@/components/familiesFinAsst';
+import Inquire from '@/components/familiesInquire';
+import Activities from '@/components/familiesActivities';
 import './families.css';
 
 const FamiliesPage = () => {
-  const [activeComponent, setActiveComponent] = useState('');
+  const [activeComponent, setActiveComponent] = useState('inquire');
 
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
@@ -24,9 +23,8 @@ const FamiliesPage = () => {
       <div className="families-container">
         <SidebarFamilies onButtonClick={handleButtonClick} />
         <div className="content">
-          {activeComponent === 'donate' && <Donate />}
-          {activeComponent === 'support' && <Support />}
-          {activeComponent === 'financial' && <Financial />}
+          {activeComponent === 'inquire' && <Inquire />}
+          {activeComponent === 'activities' && <Activities />}
         </div>
       </div>
     </div>

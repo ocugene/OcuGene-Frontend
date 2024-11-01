@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
-import './familiesDonate.css';
+import './familiesInquire.css';
 
 const FamiliesDonate = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+
+  const [formData, setFormData] = useState(
+    {
+      email: '',
+      message: '',
+      type: ''
+    }
+  );
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData(prevFormData => ({...prevFormData, [name]:value}));
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (window.confirm('Are you sure you want to submit this form?')) {
-      // Handle form submission logic here
-      // console.log('Email:', email);
-      // console.log('Message:', message);
-
-      const formData = {
-        email: email,
-        message: message,
-      };
 
       fetch('http://localhost:8080/query/submit', {
         method: 'POST',
@@ -49,17 +52,30 @@ const FamiliesDonate = () => {
           <input
             type="text"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleChange}
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="type">Email Subject</label>
+          <select
+            id="type"
+            value={formData.type}
+            onChange={handleChange}
+            required
+          >
+            <option value='' disabled> Select Subject</option>
+            <option value='DONATION'> Donate to Registry</option>
+            <option value='FINANCIAL ASSISTANCE'> Financial Assistance</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="message">Message/Query</label>
           <textarea
             id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={formData.message}
+            onChange={handleChange}
             required
           />
         </div>
