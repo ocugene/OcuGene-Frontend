@@ -7,14 +7,9 @@ const SignUpComp = () => {
     password: '',
     reEnterPassword: '',
     userType: '',
-    clinicianEmail: '',
-    licenseNumber: '',
-    idOrPrcLicense: '',
-    clinicianMessage: '',
-    researcherEmail: '',
-    idOrCertificate: '',
+    supportingDocuments: '',
     institution: '',
-    researcherMessage: '',
+    message: '',
   });
 
   const handleChange = (e) => {
@@ -22,10 +17,27 @@ const SignUpComp = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle sign-up logic here
-    console.log('Sign up with', formData);
+    if(formData.password == formData.reEnterPassword){
+      console.log('Sign up with', formData);
+      //Add other actions here
+
+      const response = await fetch('http://localhost:8080/request/addRequest', {
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify(formData)
+      });
+  
+      // Parse the response as JSON
+      const data = await response.json();
+      console.log(data);
+    }else {
+      console.log("Passwords do not match");
+      //Add other actions here
+    }
+    
   };
 
   return (
@@ -98,40 +110,32 @@ const SignUpComp = () => {
               {formData.userType === 'clinician' && (
                 <>
                   <div className="field-container">
-                    <label>Email Address</label>
-                    <input 
-                      type="email" 
-                      name="clinicianEmail" 
-                      value={formData.clinicianEmail}
-                      onChange={handleChange} 
-                      required
-                    />
-                  </div>
-                  <div className="field-container">
-                    <label>License Number</label>
+                    <label>Institution</label>
                     <input 
                       type="text" 
-                      name="licenseNumber" 
-                      value={formData.licenseNumber}
+                      name="institution" 
+                      value={formData.institution}
                       onChange={handleChange} 
                       required
                     />
                   </div>
                   <div className="field-container">
-                    <label>ID or PRC License</label>
+                    <label>Supporting Documents</label>
                     <input 
                       type="url" 
-                      name="idOrPrcLicense" 
-                      value={formData.idOrPrcLicense}
+                      name="supportingDocuments" 
+                      value={formData.supportingDocuments}
                       onChange={handleChange} 
                       required
                     />
+                    <sub>* Gdrive link to all supporting documents i.e. picture of your ID and License/Certificate of Excellence</sub>
+                    <sub>* Please make sure to set the access to public</sub>
                   </div>
                   <div className="field-container">
                     <label>Message/Query</label>
                     <textarea 
-                      name="clinicianMessage" 
-                      value={formData.clinicianMessage}
+                      name="message" 
+                      value={formData.message}
                       onChange={handleChange} 
                     />
                   </div>
@@ -139,26 +143,6 @@ const SignUpComp = () => {
               )}
               {formData.userType === 'researcher' && (
                 <>
-                  <div className="field-container">
-                    <label>Email Address</label>
-                    <input 
-                      type="email" 
-                      name="researcherEmail" 
-                      value={formData.researcherEmail}
-                      onChange={handleChange} 
-                      required
-                    />
-                  </div>
-                  <div className="field-container">
-                    <label>ID or Certificate of Excellence</label>
-                    <input 
-                      type="url" 
-                      name="idOrCertificate" 
-                      value={formData.idOrCertificate}
-                      onChange={handleChange} 
-                      required
-                    />
-                  </div>
                   <div className="field-container">
                     <label>Institution</label>
                     <input 
@@ -170,10 +154,22 @@ const SignUpComp = () => {
                     />
                   </div>
                   <div className="field-container">
+                    <label>Supporting Documents</label>
+                    <input 
+                      type="url" 
+                      name="supportingDocuments" 
+                      value={formData.supportingDocuments}
+                      onChange={handleChange} 
+                      required
+                    />
+                    <sub>* Gdrive link to all supporting documents i.e. picture of your ID and License/Certificate of Excellence</sub>
+                    <sub>* Please make sure to set the access to public</sub>
+                  </div>
+                  <div className="field-container">
                     <label>Message/Query</label>
                     <textarea 
-                      name="researcherMessage" 
-                      value={formData.researcherMessage}
+                      name="message" 
+                      value={formData.message}
                       onChange={handleChange} 
                     />
                   </div>
@@ -182,6 +178,9 @@ const SignUpComp = () => {
             </div>
           </div>
           <button type="submit" className="signup-btn">Sign Up</button>
+          <sub>* All requests are subject to assessment by the administrators. An email confirmation will be sent out 
+              upon approval. 
+          </sub>
         </form>
       </div>
     </div>
