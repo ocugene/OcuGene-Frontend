@@ -18,10 +18,17 @@
 }
 
 .radioButtons {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+  gap: 5px;
   margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  background-color: #f9f9f9; /* Optional: light background */
 }
+
+
 
 .radioLabel {
   font-size: 1.2em;
@@ -47,3 +54,62 @@
   color: #2c3e50;
   text-align: center;
 }
+
+.diseaseDetails{
+  margin-top:3em;
+}
+
+.diseaseName{
+  background-color: "#BBD8BB";
+  font-size: 2em;
+  font-weight: bolder;
+  background-color: #BBD8BB;
+  padding: 5px 5px 5px 10px;
+  border-radius: 8px;
+  height:10%;
+}
+
+.diseaseSpecContainer {
+  display: grid;
+  grid-template-columns: 30% 70%; /* Two columns */
+  grid-template-rows: auto auto; /* Two rows */
+  /* gap: 5px; */
+  width: 100%;
+}
+
+.diseaseSpecContainer .left-column {
+  grid-row: span 2; /* Make the left column span both rows */
+  font-size: 3em;
+  font-weight: bolder;
+  display: flex;
+  align-items: left; /* Center vertically */
+  justify-content: left; /* Center horizontally */
+  
+}
+
+
+.diseaseSpecContainer .right-top {
+  grid-column: 2;
+  text-align: left;
+  background-color: red;
+  font-size: 1.5em;
+}
+
+.diseaseSpecContainer .right-bottom {
+  grid-column: 2;
+  text-align: left;
+  background-color: yellow;
+  font-size: 1.5em;
+
+  
+}
+
+
+/* .diseaseHeader{ */
+  /* background-color: "black"; */
+  /* background-color: #BBD8BB;
+  padding: 1px 1px 1px 10px;
+  border-radius: 8px;
+  height:10%; */
+  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+/* } */
