@@ -1,44 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './accountRequests.css';
 
 const AccountRequests = () => {
-  const [requests, setRequests] = useState([
-    {
-      id: 1,
-      accountType: 'Researcher',
-      institution: 'University of Science',
-      supportingDocuments: 'https://drive.google.com/file/d/1',
-      message: 'I would like to join the research team.',
-    },
-    {
-      id: 2,
-      accountType: 'Clinician',
-      institution: 'City Hospital',
-      supportingDocuments: 'https://drive.google.com/file/d/2',
-      message: 'I am interested in collaborating on clinical trials.',
-    },
-    {
-      id: 3,
-      accountType: 'Researcher',
-      institution: 'Tech Institute',
-      supportingDocuments: 'https://drive.google.com/file/d/3',
-      message: 'Looking forward to contributing to the research.',
-    },
-  ]);
+  const [requests, setRequests] = useState([]);
 
+  useEffect(()=> {
+    fetchRequestsData();
+  }, []);
+
+  const fetchRequestsData = async () => {
+    const response = await fetch("http://localhost:8080/request/getAllRequests");
+    const responseData = await response.json();
+    console.log(responseData);
+    setRequests(responseData);
+  };
+  const updateRequestStatus = async (requestId, newStatus) => {
+    try {
+      const response = await fetch(`http://localhost:8080/request/updateStatus/${requestId}/${newStatus}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (response.ok) {
+        // Update the local state after a successful update
+        setRequests((prevRequests) =>
+          prevRequests.map((request) =>
+            request.requestId === requestId ? { ...request, status: newStatus } : request
+          )
+        );
+      } else {
+        console.error("Failed to update status");
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
+  const handleAccept = (request) => {
+    console.log('Accept:', request)
+    updateRequestStatus(request.requestId, "accepted");
+  }
+
+  const handleReject = (request) => {
+    console.log('Reject:', request)
+    updateRequestStatus(request.requestId, "rejected");
+  }
   return (
     <div className="requests-container">
-      {requests.map((request) => (
-        <div key={request.id} className="request-card">
+      {requests.filter(request => (request.status == "pending")).map((request) => (
+        <div key={request.requestId} className="request-card">
           <div className="request-content">
-            <p><strong>Account Type:</strong> {request.accountType}</p>
+            <p><strong>Email:</strong> {request.email}</p>
+            <p><strong>Account Type:</strong> {request.userType}</p>
             <p><strong>Institution:</strong> {request.institution}</p>
             <p><strong>Supporting Documents:</strong> <a href={request.supportingDocuments} target="_blank" rel="noopener noreferrer">View Documents</a></p>
             <p><strong>Message/Query:</strong> {request.message}</p>
           </div>
           <div className="event-card-buttons">
-            <button className="accept-button" onClick={() => handleEdit(event.id)}>Accept</button>
-            <button className="reject-button" onClick={() => handleDelete(event.id, event.title)}>Reject</button>
+            <button className="accept-button" onClick={() => handleAccept(request)}>Accept</button>
+            <button className="reject-button" onClick={() => handleReject(request)}>Reject</button>
           </div>
         </div>
       ))}
