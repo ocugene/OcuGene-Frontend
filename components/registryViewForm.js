@@ -69,10 +69,22 @@ const mockData = [
 const RegistryViewForm = () => {
   const [selectedPatientID, setSelectedPatientID] = useState('');
   const [formData, setFormData] = useState({});
+  const [patientsData, setPatientsData] = useState([]);
 
+  useEffect(()=> {
+    fetchPatientsData();
+  }, []);
+
+  const fetchPatientsData = async () => {
+    const response = await fetch("http://localhost:8080/patient/get-all");
+    const responseData = await response.json();
+    console.log(responseData);
+    setPatientsData(responseData);
+  };
+  
   useEffect(() => {
     if (selectedPatientID) {
-      const patientData = mockData.find(patient => patient.patientID === parseInt(selectedPatientID));
+      const patientData = patientsData.find(patient => patient.patientID === parseInt(selectedPatientID));
       setFormData(patientData || {});
     }
   }, [selectedPatientID]);
@@ -88,7 +100,7 @@ const RegistryViewForm = () => {
           <label>Select Patient ID:</label>
           <select onChange={handlePatientIDChange} value={selectedPatientID}>
             <option value="">Select a patient</option>
-            {mockData.map((patient) => (
+            {patientsData.map((patient) => (
               <option key={patient.patientID} value={patient.patientID}>
                 {patient.patientID}
               </option>
@@ -104,21 +116,21 @@ const RegistryViewForm = () => {
               <div className="row-container">
                 <div className="field-container">
                   <label>Last Name</label>
-                  <input type="text" value={formData.last_name || ''} readOnly />
+                  <input type="text" value={formData.lastName || ''} readOnly />
                 </div>
                 <div className="field-container">
                   <label>First Name</label>
-                  <input type="text" value={formData.first_name || ''} readOnly />
+                  <input type="text" value={formData.firstName || ''} readOnly />
                 </div>
                 <div className="field-container">
                   <label>Middle Name</label>
-                  <input type="text" value={formData.middle_name || ''} readOnly />
+                  <input type="text" value={formData.middleName || ''} readOnly />
                 </div>
               </div>
               <div className="row-container">
                 <div className="field-container">
                   <label>Birthday</label>
-                  <input type="date" value={formData.birthday || ''} readOnly />
+                  <input type="text" value={formData.birthday || ''} readOnly />
                 </div>
                 <div className="field-container">
                   <label>Age</label>
@@ -130,7 +142,7 @@ const RegistryViewForm = () => {
                 </div>
                 <div className="field-container">
                   <label>Marital Status</label>
-                  <input type="text" value={formData.marital_status || ''} readOnly />
+                  <input type="text" value={formData.maritalStatus || ''} readOnly />
                 </div>
               </div>
               <div className="row-container">
@@ -165,7 +177,7 @@ const RegistryViewForm = () => {
               <div className="row-container">
                 <div className="field-container">
                   <label>Chief Complaint</label>
-                  <textarea value={formData.chief_complaint || ''} readOnly />
+                  <textarea value={formData.chiefComplaint || ''} readOnly />
                 </div>
               </div>
               <div className="row-container">
@@ -175,7 +187,7 @@ const RegistryViewForm = () => {
                 </div>
                 <div className="field-container">
                   <label>For how long?</label>
-                  <input type="text" value={formData.blur_duration || ''} readOnly />
+                  <input type="text" value={formData.blurDuration || ''} readOnly />
                 </div>
               </div>
             </div>
@@ -186,13 +198,13 @@ const RegistryViewForm = () => {
               <div className="row-container">
                 <div className="field-container">
                   <label>Family Member</label>
-                  <input type="text" value={formData.family_member || ''} readOnly />
+                  <input type="text" value={formData.familyMember || ''} readOnly />
                 </div>
               </div>
               <div className="row-container">
                 <div className="field-container">
                   <label>Siblings with same disease</label>
-                  <input type="number" value={formData.sibling_count || 0} readOnly />
+                  <input type="number" value={formData.siblingCount || 0} readOnly />
                 </div>
               </div>
             </div>
@@ -203,11 +215,11 @@ const RegistryViewForm = () => {
               <div className="row-container">
                 <div className="field-container">
                   <label>ERG Date</label>
-                  <input type="date" value={formData.erg_date || ''} readOnly />
+                  <input type="text" value={formData.ergDate || ''} readOnly />
                 </div>
                 <div className="field-container">
                   <label>ERG Result</label>
-                  <input type="text" value={formData.erg_result || ''} readOnly />
+                  <input type="text" value={formData.ergResult || ''} readOnly />
                 </div>
               </div>
             </div>
@@ -226,7 +238,7 @@ const RegistryViewForm = () => {
                 </div>
                 <div className="field-container">
                   <label>Genetic Testing Date</label>
-                  <input type="date" value={formData.gen_test_date || ''} readOnly />
+                  <input type="text" value={formData.genTestDate || ''} readOnly />
                 </div>
               </div>
             </div>
@@ -237,31 +249,31 @@ const RegistryViewForm = () => {
               <div className="row-container">
                 <div className="field-container">
                   <label>Right Eye BCVA</label>
-                  <input type="text" value={formData.right_bcva || ''} readOnly />
+                  <input type="text" value={formData.rightBCVA || ''} readOnly />
                 </div>
                 <div className="field-container">
                   <label>Left Eye BCVA</label>
-                  <input type="text" value={formData.left_bcva || ''} readOnly />
+                  <input type="text" value={formData.leftBCVA || ''} readOnly />
                 </div>
               </div>
               <div className="row-container">
                 <div className="field-container">
                   <label>Right Eye Cornea</label>
-                  <input type="text" value={formData.right_cornea || ''} readOnly />
+                  <input type="text" value={formData.rightCornea || ''} readOnly />
                 </div>
                 <div className="field-container">
                   <label>Left Eye Cornea</label>
-                  <input type="text" value={formData.left_cornea || ''} readOnly />
+                  <input type="text" value={formData.leftCornea || ''} readOnly />
                 </div>
               </div>
               <div className="row-container">
                 <div className="field-container">
                   <label>Right Eye Retina</label>
-                  <input type="text" value={formData.right_retina || ''} readOnly />
+                  <input type="text" value={formData.rightRetina || ''} readOnly />
                 </div>
                 <div className="field-container">
                   <label>Left Eye Retina</label>
-                  <input type="text" value={formData.left_retina || ''} readOnly />
+                  <input type="text" value={formData.leftRetina || ''} readOnly />
                 </div>
               </div>
             </div>
