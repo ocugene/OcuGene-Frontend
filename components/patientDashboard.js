@@ -1,9 +1,23 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './patientDashboard.css';
 
 const PatientDashboard = () => {
+
+  const [patientsData, setPatientsData] = useState([]);
+
+  useEffect(()=> {
+    fetchPatientsData();
+  }, []);
+
+  const fetchPatientsData = async () => {
+    const response = await fetch("http://localhost:8080/patient/get-all");
+    const responseData = await response.json();
+    console.log(responseData);
+    setPatientsData(responseData);
+  };
+
   return (
     <div className="p-dashboard">
       <div className="p-info">
@@ -16,7 +30,7 @@ const PatientDashboard = () => {
           <h2>Dataset Summary</h2>
           {/* Add necessary details if applicable */}
           <p>Number of Columns:</p>
-          <p>Number of Rows:</p>
+          <p>Number of Rows:{patientsData.length}</p>
           <p>Frequency of Data Types:</p>
           <h2>Download the Dataset</h2>
           <p className = "dl-link">Link of the database (downloadable)</p>
@@ -26,22 +40,29 @@ const PatientDashboard = () => {
           <table>
             <thead>
               <tr>
-                <th>Column 1</th>
-                <th>Column 2</th>
-                <th>Column 3</th>
+                <th>Patient Code</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Chief Complaint</th>
+                <th>Diagnosis</th>
+                <th>Variant</th>
+                <th>Genetic Testing Date</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Data 1</td>
-                <td>Data 2</td>
-                <td>Data 3</td>
-              </tr>
-              <tr>
-                <td>Data 4</td>
-                <td>Data 5</td>
-                <td>Data 6</td>
-              </tr>
+            {patientsData.map((patient) => (
+                <tr key={patient.patientID}>
+                  <td>{patient.patientCode}</td>
+                  <td>{patient.firstName}</td>
+                  <td>{patient.middleName}</td>
+                  <td>{patient.lastName}</td>
+                  <td>{patient.chiefComplaint}</td>
+                  <td>{patient.diagnosis}</td>
+                  <td>{patient.variant}</td>
+                  <td>{patient.genTestDate}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
