@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+
+.requests-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Karla', sans-serif;
+}
+
+.request-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.request-content {
+  flex-grow: 1;
+}
+
+.request-content p {
+  margin: 10px 0;
+}
+
+.request-content a {
+  color: maroon;
+  text-decoration: none;
+}
+
+.request-content a:hover {
+  text-decoration: underline;
+}

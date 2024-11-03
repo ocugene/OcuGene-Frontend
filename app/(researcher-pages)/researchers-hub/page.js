@@ -1,9 +1,16 @@
 import React from 'react'
+import NavbarLanding from '@/components/navbarLanding'
+import ResearcherHub from '@/components/portals/researcherHub'
 
-const ResearchersHubPage = () => {
+
+
+const AdminLandingPage = () => {
   return (
-    <div>ResearchersHubPage</div>
+    <div>
+      <NavbarLanding />
+      <ResearcherHub />
+    </div>
   )
 }
 
-export default ResearchersHubPage
+export default AdminLandingPage

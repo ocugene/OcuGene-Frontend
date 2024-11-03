@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './registryForm.css';
+import './registryNewForm.css';
 import regionsData from './../philippine_provinces_cities_municipalities_and_barangays_2019v2.json';
 
 const RegistryForm = () => {

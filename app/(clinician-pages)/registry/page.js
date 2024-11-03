@@ -1,16 +1,16 @@
 import React from 'react'
 import NavbarLanding from '@/components/navbarLanding'
-import AdminPortal from '@/components/portals/adminPortal'
+import RegistryPortal from '@/components/portals/registry'
 
 
 
-const AdminLandingPage = () => {
+const Registry = () => {
   return (
     <div>
       <NavbarLanding />
-      <AdminPortal />
+      <RegistryPortal />
     </div>
   )
 }
 
-export default AdminLandingPage
+export default Registry

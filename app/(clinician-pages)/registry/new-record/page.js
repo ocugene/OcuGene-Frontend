@@ -3,8 +3,8 @@
 import React from 'react'
 import Navbar from '@/components/navbarLanding'
 import Sidebar from '@/components/registrySideBar'
-import Form from '@/components/registryForm'
-import './registry.css'
+import Form from '@/components/registryNewForm'
+import './new-record.css'
 
 
 const RegistryPage = () => {
@@ -12,7 +12,7 @@ const RegistryPage = () => {
     <div>
       <Navbar></Navbar>
       <div className="regContent">
-        <div className='title'>Registry</div>
+        <div className='title'>New Record</div>
         <div  className="form-container">
           <div className='sidebar'>
             <Sidebar></Sidebar>

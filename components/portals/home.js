@@ -2,27 +2,19 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import './landingPageComp.css';
+import './home.css';
 
-const adminPortal = () => {
-
+const landingPage = () => {
   const router = useRouter();
 
-  const navigateToDonation = () => {
-    router.push('/admin-landing/db-donation');
-  };
-
-  const navigateToFinance = () => {
-    router.push('/admin-landing/db-fin-asst');
-  };
-
-  const navigateToSupport = () => {
-    router.push('/admin-landing/db-support-acts');
+  const navigateToFamilies = () => {
+    router.push('/families');
   };
 
   return (
-    <div className="landing-page">
-        <div className='title'>Admin Portal</div>
+    <div>
+      <div className="landing-page">
+        <div className='title'>Welcome!</div>
         <div className="row-container">
           <div className="col-container">
             <div className="category-col-container">
@@ -55,18 +47,18 @@ const adminPortal = () => {
               </div>
               <div className="row-container">
                 <div className="col-container">
-                  <button className="card-button" onClick={navigateToDonation} data-info="Manage Donation Registry">
-                    <div className="card-btn-title"><span>Donate Registry</span></div>
+                  <button className="card-button" onClick={navigateToFamilies} data-info="Inquire on how to donate to the registry.">
+                    <div className="card-btn-title"><span>Donate to Registry</span></div>
                   </button>
                 </div>
                 <div className="col-container">
-                  <button className="card-button" onClick={navigateToFinance} data-info="Manage Financial Assistance Inquiries">
-                    <div className="card-btn-title"><span>Financial Assistance</span></div>
-                  </button>
-                </div>
-                <div className="col-container">
-                  <button className="card-button" onClick={navigateToSupport} data-info="Mange Support Activities and Events">
+                  <button className="card-button" onClick={navigateToFamilies} data-info="Learn more about the activities.">
                     <div className="card-btn-title"><span>Support Activities</span></div>
+                  </button>
+                </div>
+                <div className="col-container">
+                  <button className="card-button" onClick={navigateToFamilies} data-info="Inquire on how to seek financial assistance.">
+                    <div className="card-btn-title"><span>Financial Assistance</span></div>
                   </button>
                 </div>
               </div>
@@ -74,7 +66,8 @@ const adminPortal = () => {
           </div>
         </div>
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default adminPortal
+export default landingPage;

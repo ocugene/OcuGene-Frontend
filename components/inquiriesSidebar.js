@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import './donationsSidebar.css';
+import './inquiriesSidebar.css';
 
 const donationsSidebar = ({ onButtonClick }) => {
     const [activeButton, setActiveButton] = useState('new');

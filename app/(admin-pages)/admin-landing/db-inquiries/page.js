@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import NavbarLanding from '@/components/navbarLanding';
-import SidebarDonations from '@/components/donationsSidebar';
+import SidebarDonations from '@/components/inquiriesSidebar';
 import New from '@/components/inquiriesNew';
 import Done from '@/components/inquiriesDone';
-import './donations.css'
+import './inquiries.css'
 
 
 
