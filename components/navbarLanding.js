@@ -28,7 +28,7 @@ const NavbarLanding = () => {
   }
 
   const handleProfileClick = () => {
-    router.push('/Profile');
+    router.push('/profile');
   }
 
   const handleRecordClick = () => {

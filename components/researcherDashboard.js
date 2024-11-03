@@ -138,6 +138,7 @@ const ResearcherDashboard = () => {
       diseasesData.find((disease) => disease.name === diseaseName)
     );
   };
+  
 
   return (
     <div className="dashboard">
@@ -176,9 +177,9 @@ const ResearcherDashboard = () => {
           {selectedDisease.variants.map((variant, index) => (
             <div key={index} className="variant">
               <h3>{variant.variant}</h3>
-              <p>Patients: {variant.patients}</p>
-              <p>Duration: {variant.duration}</p>
-              <p>Age: {variant.age}</p>
+              <p>Patients: <b>{variant.patients}</b></p>
+              <p>Duration: <b>{variant.duration}</b></p>
+              <p>Age: <b>{variant.age}</b></p>
             </div>
           ))}
           </div>
@@ -186,7 +187,7 @@ const ResearcherDashboard = () => {
 
           {/* Horizontal Bar Chart for regions */}
           <div className="chartContainer">
-            <h3>Regions in the Philippines</h3>
+            <h2>Regions in the Philippines</h2>
             <Bar
               data={{
                 labels: Object.keys(selectedDisease.regions)
@@ -212,9 +213,24 @@ const ResearcherDashboard = () => {
             />
           </div>
 
+
+          <div className = "clinicOutcomes">
+            <h2>Clinical Outcomes</h2>
+            <div className='clinicalContainer'>
+            {selectedDisease.variants.map((variant, index) => (
+              <div key={index} className="variant">
+                <h3>{variant.variant}</h3>
+                <p>Vision: <b>{variant.vision}</b></p>
+                <p>Opacity: <b>{variant.duration}</b></p>
+                <p>Retina: <b>{variant.age}</b></p>
+              </div>
+            ))}
+            </div>
+          </div>
+
           {/* Doughnut Chart for Summary */}
-          {/* <div className="chartContainer">
-            <h3>Summary of Findings</h3>
+          <div className="chartContainer">
+            <h2>Summary of Findings</h2>
             <Doughnut
               data={{
                 labels: ['Vision', 'Opacity', 'Retina'],
@@ -235,7 +251,7 @@ const ResearcherDashboard = () => {
                 maintainAspectRatio: false,
               }}
             />
-          </div> */}
+          </div>
         </div>
       )}
     </div>

@@ -1,0 +1,92 @@
+.title{
+    font-family: 'Karla', sans-serif;
+    color: maroon;
+    font-size: 7vh;
+    font-weight: bolder;
+    padding: 0px 0px 0px 5px;
+    margin-bottom: 20px;
+}
+
+.profile-page {
+    padding: 20px 50px 20px 50px;
+    font-family: 'Karla', sans-serif;
+    /* border: 2px solid red; */
+}
+
+h2{
+    font-size: 2em;
+    font-weight:bold;
+    margin-bottom:2px;
+    margin-top: 50px;
+}
+
+.namesColumn {
+    display: grid;
+    grid-template-columns: 30% 70%; /* Left column 20%, Right column 80% */
+    grid-template-rows: auto auto;  /* Two rows */
+    gap: 10px; /* Spacing between items */
+    width: 100%; /* Adjust as needed */
+}
+
+
+.contactColumn {
+    display: grid;
+    grid-template-columns: 30% 70%; /* Left column 20%, Right column 80% */
+    grid-template-rows: auto auto;  /* Two rows */
+    gap: 10px; /* Optional spacing between items */
+    width: 100%; /* Adjust as needed */
+}
+
+.personal-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    grid-template-rows: auto auto;  /* Optional for specific row heights */
+    gap: 10px; /* General gap between both columns and rows */
+    column-gap: 20px; /* Specific gap between columns */
+    row-gap: 10px; /* Specific gap between rows (optional) */
+    width: 100%; /* Adjust as needed */
+}
+
+
+.info-title{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.info-personal{
+    font-size: 1.3em;
+    background-color: #E6E6E6;
+    padding: 3px;
+    border-radius: 10px;
+    padding-left: 15px;
+}
+
+.save-btn{
+    background-color:#BBD8BB;
+    font-family: 'Karla', sans-serif;
+    font-size: 1.25em;
+}
+
+.save-btn:hover{
+    background-color:#006400;
+    color: white;
+    font-family: 'Karla', sans-serif;
+    font-size: 1.25em;
+}
+
+.change-pw{
+    background-color:#BBD8BB;
+    font-family: 'Karla', sans-serif;
+    font-size: 1.25em;
+}
+
+.change-pw:hover{
+    background-color:#006400;
+    color: white;
+    font-family: 'Karla', sans-serif;
+    font-size: 1.25em;
+}
+
+.pw{
+    padding-bottom: 15px;
+}
