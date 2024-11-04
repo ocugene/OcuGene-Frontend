@@ -1,14 +1,25 @@
 'use client';
 
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import './navbarLanding.css';
 
 const NavbarLanding = () => {
   const router = useRouter();
 
+  const [role, setRole] = useState(localStorage.getItem('role') || '');
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('is_logged_in') === 'true');
+
   const handleLoginClick = () => {
     router.push('/login');
+  };
+
+  const handleLogoutClick = () => {
+    localStorage.setItem('role', '');
+    localStorage.setItem('is_logged_in', 'false');
+    setRole('');
+    setIsLoggedIn(false);
+    router.push('/');
   };
 
   const handleRHubClick = () => {
@@ -42,12 +53,36 @@ const NavbarLanding = () => {
       </div>
       <div className="navbar-btn-container">
         <button className="navbar-btn" onClick={handleHomeClick}>HOME</button>
-        <button className="navbar-btn" onClick={handleRHubClick}>RESEARCHER'S HUB</button>
-        <button className="navbar-btn" onClick={handleRegistryClick}>REGISTRY</button>
-        <button className="navbar-btn" onClick={handleAdminClick}>ADMIN PORTAL</button>
-        <button className="navbar-btn" onClick={handleProfileClick}>PROFILE</button>
-        <button className="navbar-btn" onClick={handleRecordClick}>MEDICAL RECORD</button>
-        <button className="navbar-btn" onClick={handleLoginClick}>LOGIN</button>
+
+        {
+          role === 'researcher' && 
+          (<button className="navbar-btn" onClick={handleRHubClick}>RESEARCHER'S HUB</button>)
+        }
+        
+        {
+          (role === 'clinician' || role === 'admin') &&
+          (
+            <>
+              <button className="navbar-btn" onClick={handleRegistryClick}>REGISTRY</button>
+              <button className="navbar-btn" onClick={handleAdminClick}>ADMIN PORTAL</button>
+            </>
+          )
+        }
+
+        {
+          !isLoggedIn &&
+          <button className="navbar-btn" onClick={handleLoginClick}>LOGIN</button>
+        }
+
+        {
+          isLoggedIn &&
+          <>
+            <button className="navbar-btn" onClick={handleProfileClick}>PROFILE</button>
+            <button className="navbar-btn" onClick={handleRecordClick}>MEDICAL RECORD</button>
+            <button className="navbar-btn" onClick={handleLogoutClick}>LOG OUT</button>
+          </>
+        }
+        
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const LoginPageComp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle login logic here (e.g., call an API)
-    console.log('Logging in with', { username, password });
+    // console.log('Logging in with', { username, password });
     const tempUser = {
       username : username,
       userPassword : password
@@ -26,12 +26,16 @@ const LoginPageComp = () => {
 
     // Parse the response as JSON
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
     // Use `data.success` instead of `data.status == 200`
     if (data.success) {  // Assuming the backend sends `success: true` for successful login
         console.log("Login successful:", data.user);
         // Redirect or store user data here
+        localStorage.setItem('role', data.user.userRole.toLowerCase());
+        localStorage.setItem('is_logged_in', 'true');
+        localStorage.setItem('username', data.user.username);
+        router.push('/');
     } else {  
         console.log("Login failed:", data.message || "Invalid credentials.");
         // Display the error message to the user
