@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import './signUpComp.css';
 
 const SignUpComp = () => {
@@ -9,8 +10,10 @@ const SignUpComp = () => {
     userType: '',
     supportingDocuments: '',
     institution: '',
-    message: '',
+    message: ''
   });
+
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +36,9 @@ const SignUpComp = () => {
       // Parse the response as JSON
       const data = await response.json();
       console.log(data);
+
+      router.push('/');
+      
     }else {
       console.log("Passwords do not match");
       //Add other actions here
@@ -107,39 +113,38 @@ const SignUpComp = () => {
                   </label>
                 </div>
               </div>
-              {formData.userType === 'clinician' && (
-                <>
-                  <div className="field-container">
-                    <label>Institution</label>
-                    <input 
-                      type="text" 
-                      name="institution" 
-                      value={formData.institution}
-                      onChange={handleChange} 
-                      required
-                    />
-                  </div>
-                  <div className="field-container">
-                    <label>Supporting Documents</label>
-                    <input 
-                      type="url" 
-                      name="supportingDocuments" 
-                      value={formData.supportingDocuments}
-                      onChange={handleChange} 
-                      required
-                    />
-                    <sub>* Gdrive link to all supporting documents i.e. picture of your ID and License/Certificate of Excellence</sub>
-                    <sub>* Please make sure to set the access to public</sub>
-                  </div>
-                  <div className="field-container">
-                    <label>Message/Query</label>
-                    <textarea 
-                      name="message" 
-                      value={formData.message}
-                      onChange={handleChange} 
-                    />
-                  </div>
-                </>
+              <div className="field-container">
+                <label>Institution</label>
+                <input 
+                  type="text" 
+                  name="institution" 
+                  value={formData.institution}
+                  onChange={handleChange} 
+                  required
+                />
+              </div>
+              <div className="field-container">
+                <label>Supporting Documents</label>
+                <input 
+                  type="url" 
+                  name="supportingDocuments" 
+                  value={formData.supportingDocuments}
+                  onChange={handleChange} 
+                  required
+                />
+                <sub>* Gdrive link to all supporting documents i.e. picture of your ID and License/Certificate of Excellence</sub>
+                <sub>* Please make sure to set the access to public</sub>
+              </div>
+              <div className="field-container">
+                <label>Message/Query</label>
+                <textarea 
+                  name="message" 
+                  value={formData.message}
+                  onChange={handleChange} 
+                />
+              </div>
+              {/* {formData.userType === 'clinician' && (
+
               )}
               {formData.userType === 'researcher' && (
                 <>
@@ -174,7 +179,7 @@ const SignUpComp = () => {
                     />
                   </div>
                 </>
-              )}
+              )} */}
             </div>
           </div>
           <button type="submit" className="signup-btn">Sign Up</button>
