@@ -53,21 +53,23 @@ const NavbarLanding = () => {
       </div>
       <div className="navbar-btn-container">
         <button className="navbar-btn" onClick={handleHomeClick}>HOME</button>
-
-        {
-          role === 'researcher' && 
-          (<button className="navbar-btn" onClick={handleRHubClick}>RESEARCHER'S HUB</button>)
-        }
         
         {
-          (role === 'clinician' || role === 'admin') &&
+          (role === 'clinician' || role === 'admin' || role === 'researcher') &&
           (
             <>
+              <button className="navbar-btn" onClick={handleRHubClick}>RESEARCHER'S HUB</button>
               <button className="navbar-btn" onClick={handleRegistryClick}>REGISTRY</button>
-              <button className="navbar-btn" onClick={handleAdminClick}>ADMIN PORTAL</button>
             </>
           )
         }
+
+        {
+          (role === 'clinician' || role === 'admin') &&
+
+          <button className="navbar-btn" onClick={handleAdminClick}>ADMIN PORTAL</button>
+        }
+
 
         {
           !isLoggedIn &&
