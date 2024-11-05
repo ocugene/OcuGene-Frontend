@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import './accountsSidebar.css';
 
 const accountsSidebar = ({ onButtonClick }) => {
-    const [activeButton, setActiveButton] = useState('current');
+    const [activeButton, setActiveButton] = useState('newRequests');
 
     const handleButtonClick = (buttonName) => {
       setActiveButton(buttonName);

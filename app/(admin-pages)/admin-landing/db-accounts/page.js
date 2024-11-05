@@ -11,7 +11,7 @@ import './accounts.css'
 
 
 const AccountRequests = () => {
-  const [activeComponent, setActiveComponent] = useState('current');
+  const [activeComponent, setActiveComponent] = useState('newRequests');
 
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
