@@ -11,6 +11,30 @@ const PatientDashboard = () => {
     fetchPatientsData();
   }, []);
 
+  function downloadCSV() {
+    // Step 1: Remove specified fields from each patient object
+    const modifiedData = patientsData.map(({ patientID, firstName, middleName, lastName, address, patientCode, ...rest }) =>({patientCode, ...rest}) );
+  
+    // Step 2: Convert JSON data to CSV format
+    const csvContent = generateCSV(modifiedData);
+  
+    // Step 3: Create a blob and initiate download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'patient_data.csv';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function generateCSV(data) {
+    const headers = Object.keys(data[0]).join(',');
+    const rows = data.map(row => Object.values(row).join(',')).join('\n');
+    return `${headers}\n${rows}`;
+  }
+
   const fetchPatientsData = async () => {
     const response = await fetch("http://localhost:8080/patient/get-all");
     const responseData = await response.json();
@@ -29,11 +53,11 @@ const PatientDashboard = () => {
         <div className="p-summary">
           <h2>Dataset Summary</h2>
           {/* Add necessary details if applicable */}
-          <p>Number of Columns:</p>
-          <p>Number of Rows:{patientsData.length}</p>
+          <p>Number of Columns: 25</p>
+          <p>Number of Rows: {patientsData.length}</p>
           <p>Frequency of Data Types:</p>
           <h2>Download the Dataset</h2>
-          <p className = "dl-link">Link of the database (downloadable)</p>
+          <p className = "dl-link" onClick={downloadCSV}>Link of the database (downloadable)</p>
         </div>
         <div className="p-table">
           <h2>Preview of the Dataset</h2>
@@ -41,9 +65,8 @@ const PatientDashboard = () => {
             <thead>
               <tr>
                 <th>Patient Code</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
+                <th>Sex</th>
+                <th>Age</th>
                 <th>Chief Complaint</th>
                 <th>Diagnosis</th>
                 <th>Variant</th>
@@ -54,13 +77,12 @@ const PatientDashboard = () => {
             {patientsData.map((patient) => (
                 <tr key={patient.patientID}>
                   <td>{patient.patientCode}</td>
-                  <td>{patient.firstName}</td>
-                  <td>{patient.middleName}</td>
-                  <td>{patient.lastName}</td>
+                  <td>{patient.sex}</td>
+                  <td>{patient.age}</td>
                   <td>{patient.chiefComplaint}</td>
                   <td>{patient.diagnosis}</td>
                   <td>{patient.variant}</td>
-                  <td>{patient.genTestDate}</td>
+                  <td>{patient.genTestDate.split("T")[0]}</td>
                 </tr>
               ))}
             </tbody>

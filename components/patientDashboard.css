@@ -20,6 +20,10 @@ h2{
     color: blue;
 }
 
+.dl-link:hover {
+    cursor: pointer;
+}
+
 .title {
     text-align: left;
     font-size: 2em;
