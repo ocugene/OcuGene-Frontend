@@ -44,8 +44,6 @@ const SignUpComp = () => {
     
         // Parse the response as JSON
         const data = await response.json();
-        console.log(data);
-  
         router.push('/');
         
       } catch (error) {

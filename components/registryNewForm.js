@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import './registryNewForm.css';
 import regionsData from './../philippine_provinces_cities_municipalities_and_barangays_2019v2.json';
 
-const RegistryForm = () => {
+const RegistryForm = ({formData, setFormData, handleSubmit}) => {
 
   const regions = [
     "CAR", "NCR", "Region I", "Region II", "Region III", "Region IV-A", "Region IV-B", 
@@ -10,76 +11,46 @@ const RegistryForm = () => {
     "Region X", "Region XI", "Region XII", "Region XIII", "BARMM"
   ];
 
+  const router = useRouter();
+
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
   const [barangays, setBarangays] = useState([]);
 
-  const [formData, setFormData] = useState({
-    first_name: '',
-    middle_name: '',
-    last_name: '',
-    age: '',
-    sex: '',
-    birthday: '',
-    address: '',
-    region: '',
-    province:'',
-    city: '',
-    barangay: '',
-    marital_status: '',
-    chief_complaint: '',
-    blur_duration: '',
-    laterality: '',
-    family_member: '',
-    sibling_count: 0,
-    erg_date: '',
-    erg_result: '',
-    diagnosis: '',
-    variant: '',
-    gen_test_date: '',
-    right_bcva: '',
-    left_bcva: '',
-    right_cornea: '',
-    left_cornea: '',
-    right_retina: '',
-    left_retina: ''
-  });
+  // const [formData, setFormData] = useState({
+  //   first_name: '',
+  //   middle_name: '',
+  //   last_name: '',
+  //   age: '',
+  //   sex: '',
+  //   birthday: '',
+  //   address: '',
+  //   region: '',
+  //   province:'',
+  //   city: '',
+  //   barangay: '',
+  //   contact_number: '',
+  //   marital_status: '',
+  //   chief_complaint: '',
+  //   blur_duration: '',
+  //   laterality: '',
+  //   family_member: '',
+  //   sibling_count: 0,
+  //   erg_date: '',
+  //   erg_result: '',
+  //   diagnosis: '',
+  //   variant: '',
+  //   gen_test_date: '',
+  //   right_bcva: '',
+  //   left_bcva: '',
+  //   right_cornea: '',
+  //   left_cornea: '',
+  //   right_retina: '',
+  //   left_retina: ''
+  // });
 
   const [variantOptions, setVariantOptions] = useState([]);
-
-  useEffect(() => {
-    // Make a GET request to the server
-    fetch('http://localhost:8080/patient/getLatestID', {
-      method: 'GET',
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Success:', data);
-
-      let id = data;
-      let next_id = data + 1;
-
-      next_id = next_id.toString().padStart(4, '0')
-      const patientCode = `2024${next_id}`;
   
-      // Update the form data to include the patient code
-      setFormData(prevFormData => ({
-        ...prevFormData,
-        patient_code: patientCode,
-      }));
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Handle errors here
-    });
-  }, []);
-  
-
   useEffect(() => {
     if (formData.birthday) {
       const age = calculateAge(formData.birthday);
@@ -148,63 +119,26 @@ const RegistryForm = () => {
   };
   
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    //Make a POST request to the server
-    fetch('http://localhost:8080/patient/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Success:', data);
-      // You can handle successful submission here
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Handle errors here
-    });
+  // const handleSubmit = async (e) => {
 
-    // Create the form data based on the conditions provided
-    const userData = {
-      username: formData.patient_code,
-      user_password: `${formData.first_name}${formData.last_name}`.toLowerCase().replace(/\s+/g, ''),
-      user_role: "PATIENT"
-    };
+  //   e.preventDefault();
 
-    //Make a POST request to the server
-    fetch('http://localhost:8080/user/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Success:', data);
-      // You can handle successful submission here
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Handle errors here
-    });
+  //   // try {
+  //   //   const response = await fetch('http://localhost:8080/patient/register', {
+  //   //     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+  //   //     method: 'POST',
+  //   //     body: JSON.stringify(formData)
+  //   //   });
+  
+  //   //   const data = await response.json();
+  //   //   router.push("/");
+  //   // } catch (error) {
+  //   //   console.log("Error in patient registration: ", error);
+  //   // }
+
+  //   setIsConsentFormShown(true);
     
-  };
+  // };
 
   return (
     <div>
@@ -299,7 +233,18 @@ const RegistryForm = () => {
                   <option value="Widowed">Widowed</option>
                   <option value="Divorced">Divorced</option>
                 </select>
-              </div>    
+              </div>  
+              <div className='field-container'>
+                <label htmlFor='contact_number'>Contact Number</label>
+                <input
+                  type="text"
+                  id="contact_number"
+                  name="contact_number"
+                  value={formData.contact_number}
+                  onChange={handleChange}
+                  required
+                />
+              </div>  
             </div>
             <div className='row-container'>
               <div className='field-container'>
@@ -310,7 +255,7 @@ const RegistryForm = () => {
                                     value={formData.address}
                                     onChange={handleChange}
                                     required>
-                  </textarea>
+                </textarea>
               </div>                
             </div>
             <div className='row-container'>
@@ -501,7 +446,7 @@ const RegistryForm = () => {
             <div className='row-container'>
               <div className='field-container'>
                 <label htmlFor='diagnosis'>Diagnosis</label>
-                <select name="diagnosis" value={formData.diagnosis} onChange={handleChange} required>
+                <select id='diagnosis' name="diagnosis" value={formData.diagnosis} onChange={handleChange} required>
                   <option value="">Select Diagnosis</option>
                   <option value="Retinitis Pigmentosa">Retinitis Pigmentosa</option>
                   <option value="Stargardt Disease">Stargardt Disease</option>
@@ -519,7 +464,7 @@ const RegistryForm = () => {
               </div>
               <div className='field-container'>
                 <label htmlFor='gen_test_date'>Genetic Testing Date Performed</label>
-                <input type="date" name="gen_test_date" value={formData.gen_test_date} onChange={handleChange} required />
+                <input id='gen_test_date' type="date" name="gen_test_date" value={formData.gen_test_date} onChange={handleChange} required />
               </div>
             </div>
           </div>
@@ -625,7 +570,7 @@ const RegistryForm = () => {
             </div>
           </div>
           
-          <button type="submit" className="registry-submit-button">Submit</button>
+          <button type='submit' className="registry-submit-button">Submit</button>
         </form>
       </div>
     </div>
