@@ -7,6 +7,9 @@ const SignUpComp = () => {
     email: '',
     password: '',
     reEnterPassword: '',
+    firstName: '',
+    lastName: '',
+    contactNumber: '',
     userType: '',
     supportingDocuments: '',
     institution: '',
@@ -14,6 +17,10 @@ const SignUpComp = () => {
   });
 
   const router = useRouter();
+
+  const handleLoginRedirect = () => {
+    router.push('/login'); // Navigate to /login/signup
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,17 +34,24 @@ const SignUpComp = () => {
       console.log('Sign up with', formData);
       //Add other actions here
 
-      const response = await fetch('http://localhost:8080/request/addRequest', {
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        method: 'POST',
-        body: JSON.stringify(formData)
-      });
-  
-      // Parse the response as JSON
-      const data = await response.json();
-      console.log(data);
+      try {
 
-      router.push('/');
+        const response = await fetch('http://localhost:8080/request/addRequest', {
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          method: 'POST',
+          body: JSON.stringify(formData)
+        });
+    
+        // Parse the response as JSON
+        const data = await response.json();
+        console.log(data);
+  
+        router.push('/');
+        
+      } catch (error) {
+        
+        console.log("Error in signing up: ", error);
+      }
       
     }else {
       console.log("Passwords do not match");
@@ -83,35 +97,64 @@ const SignUpComp = () => {
                   required
                 />
               </div>
+              
+              <div className="field-container">
+                <label>First Name</label>
+                <input 
+                  type="text" 
+                  name="firstName" 
+                  value={formData.firstName}
+                  onChange={handleChange} 
+                  required
+                />
+              </div>
+              <div className="field-container">
+                <label>Last Name</label>
+                <input 
+                  type="text" 
+                  name="lastName" 
+                  value={formData.lastName}
+                  onChange={handleChange} 
+                  required
+                />
+              </div>
             </div>
             <div className="vertical-line"></div>
             <div className="right-column">
+            <div className="user-type-container">
+                <label>User Type: </label>
+                <label>
+                  <input 
+                    type="radio" 
+                    name="userType" 
+                    value="clinician" 
+                    checked={formData.userType === 'clinician'}
+                    onChange={handleChange} 
+                    required
+                  />
+                  Clinician
+                </label>
+                <label>
+                  <input 
+                    type="radio" 
+                    name="userType" 
+                    value="researcher" 
+                    checked={formData.userType === 'researcher'}
+                    onChange={handleChange} 
+                    required
+                  />
+                  Researcher
+                </label>
+              </div>
               <div className="field-container">
-                <label>User Type</label>
-                <div className="radio-container">
-                  <label>
-                    <input 
-                      type="radio" 
-                      name="userType" 
-                      value="clinician" 
-                      checked={formData.userType === 'clinician'}
-                      onChange={handleChange} 
-                      required
-                    />
-                    Clinician
-                  </label>
-                  <label>
-                    <input 
-                      type="radio" 
-                      name="userType" 
-                      value="researcher" 
-                      checked={formData.userType === 'researcher'}
-                      onChange={handleChange} 
-                      required
-                    />
-                    Researcher
-                  </label>
-                </div>
+                <label>Contact Number</label>
+                <input 
+                  type="text" 
+                  name="contactNumber" 
+                  value={formData.contactNumber}
+                  onChange={handleChange} 
+                  required
+                />
               </div>
               <div className="field-container">
                 <label>Institution</label>
@@ -183,10 +226,11 @@ const SignUpComp = () => {
             </div>
           </div>
           <button type="submit" className="signup-btn">Sign Up</button>
-          <sub>* All requests are subject to assessment by the administrators. An email confirmation will be sent out 
+          <sub className='submit-sub'> All requests are subject to assessment by the administrators. An email confirmation will be sent out 
               upon approval. 
           </sub>
         </form>
+        <p className="login-link" onClick={handleLoginRedirect}> Already have an account? Log in </p>
       </div>
     </div>
   );
