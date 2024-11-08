@@ -9,10 +9,17 @@ const AccountRequests = () => {
   }, []);
 
   const fetchRequestsData = async () => {
-    const response = await fetch("http://localhost:8080/request/getAllRequests");
-    const responseData = await response.json();
-    console.log(responseData);
-    setRequests(responseData);
+
+    try {
+
+      const response = await fetch("http://localhost:8080/request/getAllRequests");
+      const responseData = await response.json();
+      setRequests(responseData);
+
+    } catch (error) {
+      console.log("Error fetch account creation requests: ", error);
+    }
+    
   };
   const updateRequestStatus = async (requestId, newStatus) => {
     try {
@@ -52,6 +59,7 @@ const AccountRequests = () => {
       {requests.filter(request => (request.status == "pending")).map((request) => (
         <div key={request.requestId} className="request-card">
           <div className="request-content">
+            <p><strong>Name:</strong> {request.firstName} {request.lastName}</p>
             <p><strong>Email:</strong> {request.email}</p>
             <p><strong>Account Type:</strong> {request.userType}</p>
             <p><strong>Institution:</strong> {request.institution}</p>

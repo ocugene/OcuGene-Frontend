@@ -6,9 +6,16 @@ import './navbarLanding.css';
 
 const NavbarLanding = () => {
   const router = useRouter();
+  const [role, setRole] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [role, setRole] = useState(localStorage.getItem('role') || '');
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('is_logged_in') === 'true');
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Safe to use localStorage in the browser
+      setRole(localStorage.getItem('role') || '');
+      setIsLoggedIn(localStorage.getItem('is_logged_in') === 'true');
+    }
+  }, []);
 
   const handleLoginClick = () => {
     router.push('/login');
