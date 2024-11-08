@@ -115,7 +115,7 @@ const profile = () => {
               <p className="info-personal">*insert email*</p>
               <p className="info-title">Password</p>
               <div className="pw">
-                <p className="info-personal">{"*".repeat(userData.firstName.length + userData.lastName.length)}</p>
+                <p className="info-personal">{"*".repeat(userData.userPassword.length)}</p>
                 <button className="change-pw">Change Password</button>
               </div>
               <p className="info-title">Account Type</p>
