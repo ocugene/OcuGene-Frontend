@@ -11,7 +11,7 @@ const MedicalRecord = () => {
     <div>
       <Navbar></Navbar>
       <div className="regContent">
-        <div className='title'>Medical Record (Sariling Record lang dapat kita)</div>
+        <div className='title'>Medical Record</div>
         <div  className="form-container">
           <div className='sidebar'>
             <Sidebar></Sidebar>

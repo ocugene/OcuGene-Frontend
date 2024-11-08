@@ -32,7 +32,7 @@ h2{
 .contactColumn {
     display: grid;
     grid-template-columns: 30% 70%; /* Left column 20%, Right column 80% */
-    grid-template-rows: auto auto;  /* Two rows */
+    grid-template-rows: 50% 50%;  /* Two rows */
     gap: 10px; /* Optional spacing between items */
     width: 100%; /* Adjust as needed */
 }

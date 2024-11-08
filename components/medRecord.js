@@ -68,7 +68,7 @@ const mockData = [
 
 const RegistryViewForm = () => {
   
-  const [selectedPatientID, setSelectedPatientID] = useState('');
+  const [patientCode, setPatientCode] = useState('');
   const [formData, setFormData] = useState(
     {
       patientID: 1,
@@ -110,66 +110,65 @@ const RegistryViewForm = () => {
   //   }
   // }, [selectedPatientID]);
 
-  useEffect(() => {
-
-    const patientCode = localStorage.getItem('username');
-
-    fetch(`http://localhost:8080/patient/get-by-patient-code?patientCode=${patientCode}`, {
-      method: 'GET',
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Success:', data);
-      setFormData(
-        {
-          patientID: data.patientID,
-          first_name: data.firstName,
-          middle_name: data.middleName,
-          last_name: data.lastName,
-          age: data.age,
-          sex: data.sex,
-          region: data.region,
-          province: data.province,
-          city: data.city,
-          barangay: data.barangay,
-          diagnosis: data.diagnosis,
-          variant: data.variant,
-          birthday: data.birthday.split('T')[0], // Extract date part only
-          marital_status: data.maritalStatus,
-          address: data.address,
-          chief_complaint: data.chiefComplaint,
-          laterality: data.laterality,
-          blur_duration: data.blurDuration,
-          family_member: data.familyMember,
-          sibling_count: data.siblingCount,
-          erg_date: data.ergDate.split('T')[0], // Extract date part only
-          erg_result: data.ergResult,
-          gen_test_date: data.genTestDate.split('T')[0], // Extract date part only
-          patient_code: data.patientCode,
-          right_bcva: data.rightBCVA,
-          left_bcva: data.leftBCVA,
-          right_cornea: data.rightCornea,
-          left_cornea: data.leftCornea,
-          right_retina: data.rightRetina,
-          left_retina: data.leftRetina
-        }
-      );
-
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Handle errors here
-    });
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      // Safe to use localStorage in the browser
+      setPatientCode(localStorage.getItem('username'));
+    }
   }, []);
 
-  const handlePatientIDChange = (e) => {
-    setSelectedPatientID(e.target.value);
-  };
+  useEffect(() => {
+
+    const fetchPatientMedicalRecord = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/patient/get-by-patient-code?patientCode=${patientCode}`);
+        const data = await response.json();
+        setFormData(
+          {
+            patientID: data.patientID,
+            first_name: data.firstName,
+            middle_name: data.middleName,
+            last_name: data.lastName,
+            age: data.age,
+            sex: data.sex,
+            region: data.region,
+            province: data.province,
+            city: data.city,
+            barangay: data.barangay,
+            diagnosis: data.diagnosis,
+            variant: data.variant,
+            birthday: data.birthday.split('T')[0], // Extract date part only
+            marital_status: data.maritalStatus,
+            address: data.address,
+            chief_complaint: data.chiefComplaint,
+            laterality: data.laterality,
+            blur_duration: data.blurDuration,
+            family_member: data.familyMember,
+            sibling_count: data.siblingCount,
+            erg_date: data.ergDate.split('T')[0], // Extract date part only
+            erg_result: data.ergResult,
+            gen_test_date: data.genTestDate.split('T')[0], // Extract date part only
+            patient_code: data.patientCode,
+            right_bcva: data.rightBCVA,
+            left_bcva: data.leftBCVA,
+            right_cornea: data.rightCornea,
+            left_cornea: data.leftCornea,
+            right_retina: data.rightRetina,
+            left_retina: data.leftRetina
+          }
+        )
+      } catch (error) {
+        console.log("Error fetching patient medical record: ", error);
+      }
+
+    }
+
+    if(patientCode){
+      fetchPatientMedicalRecord();
+    }
+
+  }, [patientCode]);
+
 
   return (
     <div>
