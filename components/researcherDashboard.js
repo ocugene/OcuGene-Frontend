@@ -112,7 +112,13 @@ const ResearcherDashboard = () => {
           regions: regionCounts[name].regions,
         }));
 
-        setSelectedDisease(diseasesData.find(disease => disease.name === "Cone Rod Dystrophy"));
+        const foundDisease = diseasesData.find(disease => disease.name === "Cone Rod Dystrophy");
+        setSelectedDisease(foundDisease || {
+          name: '',
+          totalPatients: 0,
+          variants: [],
+          regions: {},
+        }); 
 
         // Step 4: Add "All Diseases" entry
         const allPatients = diseasesData.reduce((total, disease) => total + disease.totalPatients, 0);
