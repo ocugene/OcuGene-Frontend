@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {useRouter} from 'next/navigation'
 import './registryViewForm.css';
 
 const mockData = [
@@ -69,34 +70,211 @@ const mockData = [
 const RegistryViewForm = () => {
   const [selectedPatientID, setSelectedPatientID] = useState('');
   const [formData, setFormData] = useState({});
-  const [patientsData, setPatientsData] = useState([]);
+  // const [patientsData, setPatientsData] = useState([]);
+  const [viewPatientCode, setViewPatientCode] = useState('');
 
-  useEffect(()=> {
-    fetchPatientsData();
+  const router = useRouter();
+
+  useState(()=> {
+    if(typeof window !== null){
+      setViewPatientCode(localStorage.getItem('view_patientCode'));
+    }
   }, []);
 
-  const fetchPatientsData = async () => {
-    const response = await fetch("http://localhost:8080/patient/get-all");
-    const responseData = await response.json();
-    console.log(responseData);
-    setPatientsData(responseData);
-  };
-  
-  useEffect(() => {
-    if (selectedPatientID) {
-      const patientData = patientsData.find(patient => patient.patientID === parseInt(selectedPatientID));
-      setFormData(patientData || {});
-    }
-  }, [selectedPatientID]);
+  useEffect(()=>{
 
-  const handlePatientIDChange = (e) => {
-    setSelectedPatientID(e.target.value);
-  };
+    const fetchPatientData = async () => {
+    
+      try {
+        const response = await fetch(`http://localhost:8080/patient/get-by-patient-code?patientCode=${viewPatientCode}`);
+        const data = await response.json();
+        setFormData(data);
+      } catch (error) {
+        console.log("Error fetching patient data: ", error);
+      }
+
+    }
+    
+    if(viewPatientCode !== ''){
+      fetchPatientData();   
+    }
+    
+  }, []);
 
   return (
     <div>
       <div className="form-step">
-        <div className='field-container'>
+      <form>
+        {/* Target 1: Demographics */}
+        <div id="target1" className="target">
+          <label className="regSectionName">Demographics</label>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Last Name</label>
+              <input type="text" value={formData.lastName || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>First Name</label>
+              <input type="text" value={formData.firstName || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Middle Name</label>
+              <input type="text" value={formData.middleName || ''} readOnly />
+            </div>
+          </div>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Birthday</label>
+              <input type="text" value={formData.birthday?.split('T')[0] || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Age</label>
+              <input type="text" value={formData.age || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Sex at Birth</label>
+              <input type="text" value={formData.sex || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Marital Status</label>
+              <input type="text" value={formData.maritalStatus || ''} readOnly />
+            </div>
+          </div>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Address</label>
+              <textarea value={formData.address || ''} readOnly />
+            </div>
+          </div>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Region</label>
+              <input type="text" value={formData.region || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Province</label>
+              <input type="text" value={formData.province || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>City</label>
+              <input type="text" value={formData.city || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Barangay</label>
+              <input type="text" value={formData.barangay || ''} readOnly />
+            </div>
+          </div>
+        </div>
+
+        {/* Target 2: Clinical History */}
+        <div id="target2" className="target">
+          <label className="regSectionName">Clinical History</label>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Chief Complaint</label>
+              <textarea value={formData.chiefComplaint || ''} readOnly />
+            </div>
+          </div>
+          <div className="row-container">
+            <div className="field-container">
+              <label>For which eye?</label>
+              <input type="text" value={formData.laterality || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>For how long?</label>
+              <input type="text" value={formData.blurDuration || ''} readOnly />
+            </div>
+          </div>
+        </div>
+
+        {/* Target 3: Family History */}
+        <div id="target3" className="target">
+          <label className="regSectionName">Family History</label>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Family Member</label>
+              <input type="text" value={formData.familyMember || ''} readOnly />
+            </div>
+          </div>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Siblings with same disease</label>
+              <input type="number" value={formData.siblingCount || 0} readOnly />
+            </div>
+          </div>
+        </div>
+
+        {/* Target 4: Diagnostic */}
+        <div id="target4" className="target">
+          <label className="regSectionName">Diagnostic</label>
+          <div className="row-container">
+            <div className="field-container">
+              <label>ERG Date</label>
+              <input type="text" value={formData.ergDate?.split('T')[0] || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>ERG Result</label>
+              <input type="text" value={formData.ergResult || ''} readOnly />
+            </div>
+          </div>
+        </div>
+
+        {/* Target 5: Diagnosis */}
+        <div id="target5" className="target">
+          <label className="regSectionName">Diagnosis</label>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Diagnosis</label>
+              <input type="text" value={formData.diagnosis || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Variant</label>
+              <input type="text" value={formData.variant || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Genetic Testing Date</label>
+              <input type="text" value={formData.genTestDate?.split('T')[0] || ''} readOnly />
+            </div>
+          </div>
+        </div>
+
+        {/* Target 6: Clinical Examination */}
+        <div id="target6" className="target">
+          <label className="regSectionName">Clinical Examination</label>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Right Eye BCVA</label>
+              <input type="text" value={formData.rightBcva || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Left Eye BCVA</label>
+              <input type="text" value={formData.leftBcva || ''} readOnly />
+            </div>
+          </div>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Right Eye Cornea</label>
+              <input type="text" value={formData.rightCornea || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Left Eye Cornea</label>
+              <input type="text" value={formData.leftCornea || ''} readOnly />
+            </div>
+          </div>
+          <div className="row-container">
+            <div className="field-container">
+              <label>Right Eye Retina</label>
+              <input type="text" value={formData.rightRetina || ''} readOnly />
+            </div>
+            <div className="field-container">
+              <label>Left Eye Retina</label>
+              <input type="text" value={formData.leftRetina || ''} readOnly />
+            </div>
+          </div>
+        </div>
+      </form>
+
+        {/* <div className='field-container'>
           <label>Select Patient ID:</label>
           <select onChange={handlePatientIDChange} value={selectedPatientID}>
             <option value="">Select a patient</option>
@@ -106,179 +284,11 @@ const RegistryViewForm = () => {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
 
-        {selectedPatientID && (
-          <form>
-            {/* Target 1: Demographics */}
-            <div id="target1" className="target">
-              <label className="regSectionName">Demographics</label>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Last Name</label>
-                  <input type="text" value={formData.lastName || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>First Name</label>
-                  <input type="text" value={formData.firstName || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Middle Name</label>
-                  <input type="text" value={formData.middleName || ''} readOnly />
-                </div>
-              </div>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Birthday</label>
-                  <input type="text" value={formData.birthday || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Age</label>
-                  <input type="text" value={formData.age || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Sex at Birth</label>
-                  <input type="text" value={formData.sex || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Marital Status</label>
-                  <input type="text" value={formData.maritalStatus || ''} readOnly />
-                </div>
-              </div>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Address</label>
-                  <textarea value={formData.address || ''} readOnly />
-                </div>
-              </div>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Region</label>
-                  <input type="text" value={formData.region || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Province</label>
-                  <input type="text" value={formData.province || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>City</label>
-                  <input type="text" value={formData.city || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Barangay</label>
-                  <input type="text" value={formData.barangay || ''} readOnly />
-                </div>
-              </div>
-            </div>
+        {/* {selectedPatientID && (
 
-            {/* Target 2: Clinical History */}
-            <div id="target2" className="target">
-              <label className="regSectionName">Clinical History</label>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Chief Complaint</label>
-                  <textarea value={formData.chiefComplaint || ''} readOnly />
-                </div>
-              </div>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>For which eye?</label>
-                  <input type="text" value={formData.laterality || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>For how long?</label>
-                  <input type="text" value={formData.blurDuration || ''} readOnly />
-                </div>
-              </div>
-            </div>
-
-            {/* Target 3: Family History */}
-            <div id="target3" className="target">
-              <label className="regSectionName">Family History</label>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Family Member</label>
-                  <input type="text" value={formData.familyMember || ''} readOnly />
-                </div>
-              </div>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Siblings with same disease</label>
-                  <input type="number" value={formData.siblingCount || 0} readOnly />
-                </div>
-              </div>
-            </div>
-
-            {/* Target 4: Diagnostic */}
-            <div id="target4" className="target">
-              <label className="regSectionName">Diagnostic</label>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>ERG Date</label>
-                  <input type="text" value={formData.ergDate || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>ERG Result</label>
-                  <input type="text" value={formData.ergResult || ''} readOnly />
-                </div>
-              </div>
-            </div>
-
-            {/* Target 5: Diagnosis */}
-            <div id="target5" className="target">
-              <label className="regSectionName">Diagnosis</label>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Diagnosis</label>
-                  <input type="text" value={formData.diagnosis || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Variant</label>
-                  <input type="text" value={formData.variant || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Genetic Testing Date</label>
-                  <input type="text" value={formData.genTestDate || ''} readOnly />
-                </div>
-              </div>
-            </div>
-
-            {/* Target 6: Clinical Examination */}
-            <div id="target6" className="target">
-              <label className="regSectionName">Clinical Examination</label>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Right Eye BCVA</label>
-                  <input type="text" value={formData.rightBCVA || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Left Eye BCVA</label>
-                  <input type="text" value={formData.leftBCVA || ''} readOnly />
-                </div>
-              </div>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Right Eye Cornea</label>
-                  <input type="text" value={formData.rightCornea || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Left Eye Cornea</label>
-                  <input type="text" value={formData.leftCornea || ''} readOnly />
-                </div>
-              </div>
-              <div className="row-container">
-                <div className="field-container">
-                  <label>Right Eye Retina</label>
-                  <input type="text" value={formData.rightRetina || ''} readOnly />
-                </div>
-                <div className="field-container">
-                  <label>Left Eye Retina</label>
-                  <input type="text" value={formData.leftRetina || ''} readOnly />
-                </div>
-              </div>
-            </div>
-          </form>
-        )}
+        )} */}
       </div>
     </div>
   );

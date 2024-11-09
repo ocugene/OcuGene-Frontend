@@ -56,7 +56,7 @@ const NavbarLanding = () => {
   return (
     <div className="navbar">
       <div className="navbar-title">
-        <div className="navbar-title-txt">Temporary Navbar</div>
+        <div className="navbar-title-txt">Ocular Registry of the Philippines</div>
       </div>
       <div className="navbar-btn-container">
         <button className="navbar-btn" onClick={handleHomeClick}>HOME</button>
@@ -87,7 +87,12 @@ const NavbarLanding = () => {
           isLoggedIn &&
           <>
             <button className="navbar-btn" onClick={handleProfileClick}>PROFILE</button>
-            <button className="navbar-btn" onClick={handleRecordClick}>MEDICAL RECORD</button>
+
+            {
+              role === 'patient' &&
+                <button className="navbar-btn" onClick={handleRecordClick}>MEDICAL RECORD</button>
+            }
+            
             <button className="navbar-btn" onClick={handleLogoutClick}>LOG OUT</button>
           </>
         }
