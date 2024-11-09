@@ -1,11 +1,32 @@
 'use client';
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import './home.css';
 
 const landingPage = () => {
+
+  const [showMessage, setShowMessage] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
   const router = useRouter();
+
+  useEffect(() => {
+
+    if(typeof window !== null){
+      // Show the message and start the fade-in animation
+      setShowMessage(localStorage.getItem('signup_success') === 'true');
+
+      // Hide the message after 4 seconds, start fade-out animation
+      const fadeOutTimer = setTimeout(() => {
+        setIsVisible(false);
+        localStorage.setItem('signup_success', 'false'); // After fade-out, remove the component from DOM
+      }, 4000); // Keep the message for 4 seconds before fading out
+
+      return () => clearTimeout(fadeOutTimer); // Cleanup the timer when component unmounts
+    }
+    
+  }, []);
 
   const navigateToFamilies = () => {
     router.push('/families');
@@ -13,6 +34,11 @@ const landingPage = () => {
 
   return (
     <div>
+      {isVisible && showMessage && (
+        <div className='success-indicator'>
+          Sign up success! An email will be sent to you once the admin has approved your account.
+        </div>
+      )}
       <div className="landing-page">
         <div className='title'>Welcome!</div>
         <div className="row-container">
