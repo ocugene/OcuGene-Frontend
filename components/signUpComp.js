@@ -16,6 +16,9 @@ const SignUpComp = () => {
     message: ''
   });
 
+  const [passwordsDoNotMatch, setPasswordsDoNotMatch] = useState(false);
+const [shakeEffect, setShakeEffect] = useState(false);  
+
   const router = useRouter();
 
   const handleLoginRedirect = () => {
@@ -31,6 +34,7 @@ const SignUpComp = () => {
     e.preventDefault();
     // Handle sign-up logic here
     if(formData.password == formData.reEnterPassword){
+      setPasswordsDoNotMatch(false); // Reset if passwords match
       console.log('Sign up with', formData);
       //Add other actions here
 
@@ -44,6 +48,7 @@ const SignUpComp = () => {
     
         // Parse the response as JSON
         const data = await response.json();
+        localStorage.setItem('signup_success', 'true');
         router.push('/');
         
       } catch (error) {
@@ -52,8 +57,24 @@ const SignUpComp = () => {
       }
       
     }else {
-      console.log("Passwords do not match");
+      // console.log("Passwords do not match");
       //Add other actions here
+      setPasswordsDoNotMatch(true);
+      setShakeEffect(true);
+      setTimeout(() => setShakeEffect(false), 300);
+
+      const fadeOutTimer = setTimeout(() => {
+        setShakeEffect(false);
+      }, 4000); // Keep the shake for 3 seconds
+    
+      return () => clearTimeout(fadeOutTimer); // Cleanup on unmount
+
+      // Trigger shake and persistent error color
+      // setPasswordsDoNotMatch(true);
+      // setShakeEffect(true);
+      
+      // // Remove shake effect after 0.3s (duration of shake animation)
+      // setTimeout(() => setShakeEffect(false), 300);
     }
     
   };
@@ -83,7 +104,14 @@ const SignUpComp = () => {
                   value={formData.password}
                   onChange={handleChange} 
                   required
+                  className={`${passwordsDoNotMatch ? 'error-input' : ''} ${shakeEffect ? 'shake' : ''}`}
                 />
+                {
+                  passwordsDoNotMatch &&
+
+                  <sub className={`${passwordsDoNotMatch ? 'error-input-sub' : ''} ${shakeEffect ? 'shake' : ''}`}>Passwords do not match</sub>
+                }
+                
               </div>
               <div className="field-container">
                 <label>Re-enter Password</label>
@@ -93,7 +121,13 @@ const SignUpComp = () => {
                   value={formData.reEnterPassword}
                   onChange={handleChange} 
                   required
+                  className={`${passwordsDoNotMatch ? 'error-input' : ''} ${shakeEffect ? 'shake' : ''}`}
                 />
+                {
+                  passwordsDoNotMatch &&
+
+                  <sub className={`${passwordsDoNotMatch ? 'error-input-sub' : ''} ${shakeEffect ? 'shake' : ''}`}>Passwords do not match</sub>
+                }
               </div>
               
               <div className="field-container">

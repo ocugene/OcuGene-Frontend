@@ -6,6 +6,36 @@
     /* border: 2px solid red; */
 }
 
+.success-indicator{
+    height: 20px;
+    padding: 20px 50px;
+    font-family: 'Karla', sans-serif;
+    background-color: lightgreen;
+    color: darkgreen;
+
+    opacity: 0;
+    animation: fadeIn 1s forwards, fadeOut 3s 4s forwards;
+    /* Starts fadeIn immediately and fadeOut after 4 seconds */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+  
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .title{
     font-family: 'Karla', sans-serif;
     color: maroon;
