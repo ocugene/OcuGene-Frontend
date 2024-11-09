@@ -63,6 +63,12 @@ const ResearcherDashboard = () => {
     "Region X", "Region XI", "Region XII", "Region XIII", "BARMM"
   ];
 
+  const [selectedDisease, setSelectedDisease] = useState({
+      name: '',
+      totalPatients: 0,
+      variants: [],
+      regions: {},
+  });
 
   const [diseasesData, setDiseasesData] = useState(initialData);
 
@@ -106,6 +112,8 @@ const ResearcherDashboard = () => {
           regions: regionCounts[name].regions,
         }));
 
+        setSelectedDisease(diseasesData.find(disease => disease.name === "Cone Rod Dystrophy"));
+
         // Step 4: Add "All Diseases" entry
         const allPatients = diseasesData.reduce((total, disease) => total + disease.totalPatients, 0);
         const allRegions = {};
@@ -124,13 +132,13 @@ const ResearcherDashboard = () => {
 
         // Step 5: Update diseasesData state
         setDiseasesData(diseasesData);
+
+        // setSelectedDisease(variantsCounts['Cone Rod Dystrophy']);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }, []);
-
-  const [selectedDisease, setSelectedDisease] = useState(null);
 
   const handleDiseaseChange = (e) => {
     const diseaseName = e.target.value;
@@ -154,6 +162,7 @@ const ResearcherDashboard = () => {
               value={disease.name}
               onChange={handleDiseaseChange}
               className="radioInput"
+              checked={disease.name === selectedDisease.name}
             />
             {disease.name}
           </label>

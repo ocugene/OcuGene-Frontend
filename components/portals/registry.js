@@ -13,7 +13,7 @@ const Registry = () => {
   };
 
   const navigateToView = () => {
-    router.push('/registry/view-record');
+    router.push('/registry/patient-list');
   };
 
   return (

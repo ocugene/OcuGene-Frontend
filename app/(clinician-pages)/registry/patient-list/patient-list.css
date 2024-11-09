@@ -1,42 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 
-.p-dashboard{
+.title{
     font-family: 'Karla', sans-serif;
-    padding: 20px;
-    max-width: 90%;
-    margin: auto;
-}
-
-.p-info{
-    border-radius: 20px;
-
-}
-
-h2{
-    margin-bottom: -1px;
-}
-
-.dl-link{
-    color: blue;
-}
-
-.dl-link:hover {
-    cursor: pointer;
-}
-
-.title {
-    text-align: left;
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 20px;
     color: maroon;
-  }
+    font-size: 7vh;
+    font-weight: bolder;
+    padding: 30px 0px 0px 60px;
+}
 
 .p-table{
+    font-family: 'Karla', sans-serif;
     max-width: 100%; /* Set table width to take full space */
     overflow-x: auto; /* Enables horizontal scrolling if table overflows */
     /* margin-top: 10px; */
     margin-bottom: 20px;
+    padding: 10px 0px 0px 60px;
 }
 
   /* Style for the entire table */
@@ -55,7 +33,6 @@ h2{
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd; /* Header cell border */
-    width: 20px;
 }
 
 /* Table cell styling */
@@ -73,16 +50,3 @@ h2{
 .p-table tr:hover {
     background-color: #ddd; /* Row color on hover */
 }
-
-/* Adjusting specific column widths */
-/* .p-table th:nth-child(1), .p-table td:nth-child(1) {
-    width: 30%; 
-} */
-
-/* .p-table th:nth-child(2), .p-table td:nth-child(2) {
-    width: 40%; 
-} */
-
-/* .p-table th:nth-child(3), .p-table td:nth-child(3) {
-    width: 30%; 
-} */
