@@ -42,8 +42,18 @@ const RegistryPage = () => {
     right_retina: '',
     left_retina: ''
   });
+  const router = useRouter();
+  const [storedRole, setStoredRole] = useState('');
 
   useEffect(() => {
+     // Retrieve user information from localStorage
+     setStoredRole(localStorage.getItem('role'))
+     console.log(localStorage.getItem('role'))
+ 
+     if (!localStorage.getItem('role') || (JSON.parse(localStorage.getItem('role')) !== 'admin' && JSON.parse(localStorage.getItem('role')) !== 'clinician')) {
+       router.push('/login');
+     }
+
     // Make a GET request to the server
     fetch('http://localhost:8080/patient/getLatestID', {
       method: 'GET',
@@ -77,8 +87,6 @@ const RegistryPage = () => {
 
   const [isConsentFormShown, setIsConsentFormShown] = useState(false);
 
-  const router = useRouter();
-
   const handleSubmit = async (e) => {
 
     e.preventDefault();
@@ -108,9 +116,12 @@ const RegistryPage = () => {
     setIsConsentFormShown(false);
   }
 
-
+  // Determine if the stored role is 'admin' or 'clinician'
+  const isAdminOrClinician = storedRole && (JSON.parse(storedRole) === 'admin' || JSON.parse(storedRole) === 'clinician');
   return (
-    <div>
+    <>
+    {isAdminOrClinician &&
+      <div>
       <Navbar></Navbar>
       <div className="regContent">
         <div className='title'>New Record</div>
@@ -127,7 +138,9 @@ const RegistryPage = () => {
         isConsentFormShown &&
         <ConsentForm onClose={handleClose} formData={formData} handleSubmit={handleSubmit}></ConsentForm>
       }
-    </div>
+    </div>}
+    </>
+    
   )
 }
 
