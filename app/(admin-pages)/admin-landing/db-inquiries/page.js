@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import  {useRouter}  from 'next/navigation'; 
 import NavbarLanding from '@/components/navbarLanding';
 import SidebarDonations from '@/components/inquiriesSidebar';
 import New from '@/components/inquiriesNew';
@@ -11,9 +12,9 @@ import './inquiries.css'
 
 const DonationsPage = () => {
   const [activeComponent, setActiveComponent] = useState('new');
-
+  const router = useRouter();
+  const [storedRole, setStoredRole] = useState('');
   const [selectedType, setSelectedType] = useState('all');
-
   const [inquiries, setInquiries] = useState([
     // { 
     //   queryID: 1, 
@@ -35,6 +36,7 @@ const DonationsPage = () => {
     // },
   ]);
 
+
   const [displayedInquiries, setDisplayedInquiries] = useState([]);
 
   const handleTypeChange = (e) => {
@@ -50,6 +52,13 @@ const DonationsPage = () => {
   };
 
   useEffect(() => {
+    // Retrieve user information from localStorage
+    setStoredRole(localStorage.getItem('role'))
+    console.log(localStorage.getItem('role'))
+
+    if (!localStorage.getItem('role') || JSON.parse(localStorage.getItem('role')) !== 'admin') {
+      router.push('/login');
+    }
 
     fetch(`http://localhost:8080/query/get-all`, {
       method: 'GET',
@@ -73,11 +82,15 @@ const DonationsPage = () => {
 
   }, []);
 
+  // Determine if the stored role is 'admin'
+  const isAdmin = storedRole && (JSON.parse(storedRole) === 'admin');
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
   };
 
   return (
+    <>
+    {isAdmin &&
     <div>
       <NavbarLanding/>
       <div className="title-container">
@@ -95,15 +108,17 @@ const DonationsPage = () => {
               onChange={handleTypeChange}>
 
               <option value='all'>All</option>
-              <option value='DONATION'>Donation</option>
-              <option value='FINANCIAL ASSISTANCE'>Financial Assistance</option>
+              <option value='donation'>Donation</option>
+              <option value='financial assistance'>Financial Assistance</option>
             </select>
           </div>
           {activeComponent === 'new' && <New inquiries={displayedInquiries.filter(displayedInquiry => displayedInquiry.respondedFlag === false)} />}
           {activeComponent === 'done' && <Done inquiries={displayedInquiries.filter(displayedInquiry => displayedInquiry.respondedFlag === true)} />}
         </div>
       </div>
-    </div>
+    </div>}
+    </>
+    
   )
 }
 

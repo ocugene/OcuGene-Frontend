@@ -10,6 +10,12 @@ const LoginPageComp = () => {
   const [password, setPassword] = useState('');
   const router = useRouter(); // Initialize the router
 
+  useEffect(() => {
+    localStorage.setItem('role', "");
+    localStorage.setItem('is_logged_in', "false");
+    localStorage.setItem('username', "");
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
