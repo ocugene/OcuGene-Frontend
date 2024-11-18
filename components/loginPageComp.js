@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // Import Next.js router for navigation
 import './loginPageComp.css'; // Assuming you have a CSS file for styling
 import { resolve } from 'styled-jsx/css';
@@ -14,6 +14,9 @@ const LoginPageComp = () => {
     localStorage.setItem('role', "");
     localStorage.setItem('is_logged_in', "false");
     localStorage.setItem('username', "");
+    localStorage.setItem('view_patientCode', "");
+    localStorage.setItem('signup_success', "false");
+
   }, []);
 
   const handleSubmit = async (e) => {
