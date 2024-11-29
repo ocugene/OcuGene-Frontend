@@ -25,3 +25,24 @@ body {
     text-wrap: balance;
   }
 } */
+
+
+body {
+  background-image: url('/pictures/opt.jpg'); /* Correct path for public folder */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative; /* Ensure child pseudo-elements like ::before can align correctly */
+  z-index: 0; /* Set z-index for stacking context */
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5); /* Adjust transparency here */
+  z-index: -1; /* Ensure this stays behind the content but above the background image */
+}

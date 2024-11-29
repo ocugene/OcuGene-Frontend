@@ -33,7 +33,7 @@ const landingPage = () => {
   };
 
   return (
-    <div>
+    <div className="land">
       {isVisible && showMessage && (
         <div className='success-indicator'>
           Sign up success! An email will be sent to you once the admin has approved your account.
@@ -49,17 +49,23 @@ const landingPage = () => {
               </div>
               <div className="row-container">
                 <div className="col-container">
-                  <button className="card-button" data-info="A group of rare, genetic disorders that involve a breakdown and loss of cells in the retina.">
+                  <button className="card-button" 
+                  data-info="A group of rare, genetic disorders that involve a breakdown and loss of cells in the retina. \n(Click to know more)"
+                  onClick={() => window.location.href = 'https://www.aao.org/eye-health/diseases/what-is-retinitis-pigmentosa?fbclid=IwZXh0bgNhZW0CMTEAAR2tr2VyykYqHeLeRvaevsiG6HZosHw6HwFlmQsyVUxbV_RLqQwXFvCkklc_aem_vwycSXvPYevCsIJbEwwQnQ'}>
                     <div className="card-btn-title"><span>Retinitis Pigmentosa</span></div>
                   </button>
                 </div>
                 <div className="col-container">
-                  <button className="card-button" data-info="An inherited disorder of the retina, causing progressive vision loss.">
+                  <button className="card-button" 
+                  data-info="An inherited disorder of the retina, causing progressive vision loss. (Click to know more)"
+                  onClick={() => window.location.href = 'https://www.aao.org/eye-health/diseases/what-is-stargardt-disease?fbclid=IwZXh0bgNhZW0CMTEAAR3s8oRKiuT2kiuj-FeVbytxSJIpk9iP9ZRXrpf0HcF86CYmu_80mlcgwc0_aem_m-_-BKHUdnytx8b8OV1LOg'}>
                     <div className="card-btn-title"><span>Stargardts' Disease</span></div>
                   </button>
                 </div>
                 <div className="col-container">
-                  <button className="card-button" data-info="A rare disorder that affects the cones and rods in the retina, leading to vision loss over time.">
+                  <button className="card-button" 
+                  data-info="A rare disorder that affects the cones and rods in the retina, leading to vision loss over time. (Click to know more)"
+                  onClick={() => window.location.href = 'https://my.clevelandclinic.org/health/diseases/cone-rod-dystrophy'}>
                     <div className="card-btn-title"><span>Cone-Rod Dystrophy</span></div>
                   </button>
                 </div>

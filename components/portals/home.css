@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
-
+.land {
+    height: 75vh;
+    display: flex; /* Optional, if .land contains other elements */
+    flex-direction: column; /* Optional, to stack children vertically */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+    /* text-align: center; Optional, center text */
+}
 .landing-page {
     padding: 20px 50px 20px 50px;
     font-family: 'Karla', sans-serif;
@@ -36,6 +43,22 @@
     }
 }
 
+body {
+
+}
+
+body, html {
+    overflow: hidden; /* Disables scrolling */
+    height: 100%; /* Ensures content doesn't expand beyond the viewport */
+    margin: 0; /* Prevents unexpected margins */
+    background-image: url('/pictures/opt.jpg'); /* Path to your JPEG */
+    background-size: cover; /* Makes sure the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Keeps the image fixed during scrolling (optional) */
+}
+
+
 .title{
     font-family: 'Karla', sans-serif;
     color: maroon;
@@ -45,12 +68,15 @@
     margin-bottom: 20px;
 }
 
+
 .row-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
-    /* border: 2px solid orange; */
+    align-items: center; /* Centers vertically */
+    margin: 0; /* Removes default margins */
+
 }
 
 .category-col-container {
@@ -117,6 +143,7 @@
 }
 
 .card-button::after {
+    white-space: pre-wrap;
     content: attr(data-info);
     color: white;
     position: absolute;
