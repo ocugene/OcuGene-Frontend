@@ -5,7 +5,7 @@ import Navbar from '@/components/navbarLanding'
 import { useRouter } from 'next/navigation';
 import './patient-list.css'
 
-function page() {
+function Page() {
 
     const [patientsData, setPatientsData] = useState([]);
     const router = useRouter();
@@ -87,4 +87,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

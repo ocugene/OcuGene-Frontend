@@ -2,7 +2,7 @@ import {React, useState, useEffect} from 'react';
 import './supportActCurrent.css';
 import SupportActEdit from './supportActEdit';
 
-const supportActCurrent = () => {
+const SupportActCurrent = () => {
   const [events, setEvents] = useState([
     // {
     //   id: 1,
@@ -187,4 +187,4 @@ const supportActCurrent = () => {
   );
 };
 
-export default supportActCurrent;
+export default SupportActCurrent;

@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from 'react'
 import './profile.css';
-const profile = () => {
+const Profile = () => {
 
   const [accountType, setAccountType] = useState('');
   const [username, setUsername] = useState('');
@@ -133,4 +133,4 @@ const profile = () => {
   )
 }
 
-export default profile
+export default Profile

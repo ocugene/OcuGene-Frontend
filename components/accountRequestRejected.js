@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './accountRequestRejected.css';
 
-const accountRequestRejected = () => {
+const AccountRequestRejected = () => {
   const [requests, setRequests] = useState([]);
   useEffect(()=> {
     fetchRequestsData();
@@ -37,4 +37,4 @@ const accountRequestRejected = () => {
   );
 };
 
-export default accountRequestRejected;
+export default AccountRequestRejected;

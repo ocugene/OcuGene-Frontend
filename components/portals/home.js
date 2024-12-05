@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import './home.css';
 
-const landingPage = () => {
+const LandingPage = () => {
 
   const [showMessage, setShowMessage] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -59,7 +59,7 @@ const landingPage = () => {
                   <button className="card-button" 
                   data-info="An inherited disorder of the retina, causing progressive vision loss. (Click to know more)"
                   onClick={() => window.location.href = 'https://www.aao.org/eye-health/diseases/what-is-stargardt-disease?fbclid=IwZXh0bgNhZW0CMTEAAR3s8oRKiuT2kiuj-FeVbytxSJIpk9iP9ZRXrpf0HcF86CYmu_80mlcgwc0_aem_m-_-BKHUdnytx8b8OV1LOg'}>
-                    <div className="card-btn-title"><span>Stargardts' Disease</span></div>
+                    <div className="card-btn-title"><span>Stargardts&apos; Disease</span></div>
                   </button>
                 </div>
                 <div className="col-container">
@@ -102,4 +102,4 @@ const landingPage = () => {
   );
 };
 
-export default landingPage;
+export default LandingPage;
