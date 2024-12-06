@@ -40,7 +40,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
 
       try {
 
-        const response = await fetch('http://localhost:8080/request/addRequest', {
+        const response = await fetch('https://ocugene-backend-production.up.railway.app/request/addRequest', {
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
           method: 'POST',
           body: JSON.stringify(formData)

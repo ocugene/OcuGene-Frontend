@@ -28,7 +28,7 @@ const Profile = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/user/getByUsername?username=${username}`);
+        const response = await fetch(`https://ocugene-backend-production.up.railway.app/user/getByUsername?username=${username}`);
         const data = await response.json();
         setUserData(data);
       } catch (error) {

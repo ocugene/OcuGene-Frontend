@@ -13,7 +13,7 @@ const DonationsNew = ({inquiries}) => {
     // You can add logic to mark the donation as responded
     if(window.confirm(`Are you sure you have already responded to this inquiry by ${email}?`)){
 
-      fetch(`http://localhost:8080/query/respond?queryID=${id}`, {
+      fetch(`https://ocugene-backend-production.up.railway.app/query/respond?queryID=${id}`, {
         method: 'PUT',
       })
       .then(response => {

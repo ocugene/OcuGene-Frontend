@@ -60,7 +60,7 @@ const DonationsPage = () => {
       router.push('/login');
     }
 
-    fetch(`http://localhost:8080/query/get-all`, {
+    fetch(`https://ocugene-backend-production.up.railway.app/query/get-all`, {
       method: 'GET',
     })
     .then(response => {
