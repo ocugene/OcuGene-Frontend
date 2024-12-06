@@ -14,7 +14,7 @@ const AccountProfile = () => {
     setStoredFlag(localStorage.getItem('is_logged_in'))
     console.log(localStorage.getItem('is_logged_in'))
 
-    if (!localStorage.getItem('is_logged_in') || JSON.parse(localStorage.getItem('is_logged_in')) !== 'true') {
+    if (JSON.parse(localStorage.getItem('is_logged_in')) !== 'true') {
       router.push('/login');
     }
   }, []);
