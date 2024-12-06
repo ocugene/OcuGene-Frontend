@@ -15,6 +15,7 @@ const AccountProfile = () => {
     console.log(localStorage.getItem('is_logged_in'))
 
     if (JSON.parse(localStorage.getItem('is_logged_in')) !== 'true') {
+      console.log("test")
       router.push('/login');
     }
   }, []);
