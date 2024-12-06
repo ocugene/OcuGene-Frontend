@@ -56,7 +56,7 @@ const DonationsPage = () => {
     setStoredRole(localStorage.getItem('role'))
     console.log(localStorage.getItem('role'))
 
-    if (!localStorage.getItem('role') || JSON.parse(localStorage.getItem('role')) !== 'admin') {
+    if (!localStorage.getItem('role') || localStorage.getItem('role') !== 'admin') {
       router.push('/login');
     }
 
@@ -83,7 +83,7 @@ const DonationsPage = () => {
   }, []);
 
   // Determine if the stored role is 'admin'
-  const isAdmin = storedRole && (JSON.parse(storedRole) === 'admin');
+  const isAdmin = storedRole && storedRole === 'admin';
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
   };

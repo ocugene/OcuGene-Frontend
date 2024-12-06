@@ -16,13 +16,13 @@ const MedicalRecord = () => {
     setStoredRole(localStorage.getItem('role'))
     console.log(localStorage.getItem('role'))
 
-    if (!localStorage.getItem('role') || (JSON.parse(localStorage.getItem('role')) !== 'admin' && JSON.parse(localStorage.getItem('role')) !== 'patient')) {
+    if (!localStorage.getItem('role') || (localStorage.getItem('role') !== 'admin' && localStorage.getItem('role') !== 'patient')) {
     router.push('/login');
     }
    
   }, []);
   // Determine if the stored role is 'admin' or 'patient'
-  const isAdminOrPatient = storedRole && (JSON.parse(storedRole) === 'admin' || JSON.parse(storedRole) === 'patient');
+  const isAdminOrPatient = storedRole && (storedRole === 'admin' || storedRole === 'patient');
   return (
     <>
     {isAdminOrPatient &&

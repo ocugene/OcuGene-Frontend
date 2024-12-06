@@ -16,7 +16,7 @@ function Page() {
         setStoredRole(localStorage.getItem('role'))
         console.log(localStorage.getItem('role'))
     
-        if (!localStorage.getItem('role') || (JSON.parse(localStorage.getItem('role')) !== 'admin' && JSON.parse(localStorage.getItem('role')) !== 'clinician')) {
+        if (!localStorage.getItem('role') || (localStorage.getItem('role') !== 'admin' && localStorage.getItem('role') !== 'clinician')) {
         router.push('/login');
         }
 
@@ -40,7 +40,7 @@ function Page() {
         router.push("/registry/view-record");
     }
     // Determine if the stored role is 'admin' or 'clinician'
-     const isAdminOrClinician = storedRole && (JSON.parse(storedRole) === 'admin' || JSON.parse(storedRole) === 'clinician');
+     const isAdminOrClinician = storedRole && (storedRole === 'admin' || storedRole === 'clinician');
     return (
         <>
         {isAdminOrClinician &&
