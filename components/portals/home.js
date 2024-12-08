@@ -40,7 +40,7 @@ const LandingPage = () => {
         </div>
       )}
       <div className="landing-page">
-        <div className='title'>Welcome!</div>
+        <div className='title'>Welcome, First Last!</div>
         <div className="row-container">
           <div className="col-container">
             <div className="category-col-container">

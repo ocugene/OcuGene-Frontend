@@ -53,6 +53,14 @@
     /* border: 2px solid blue; */
 }
 
+.category-header label {
+    font-size: 24px; /* Adjust font size */
+    font-weight: bold; /* Make the text bold */
+    display: block; /* Ensure it takes full width */
+    text-align: center; /* Center the text */
+    font-family: 'Karla', sans-serif; /* Use your preferred font */
+  }
+
 .card-btn-title{
     font-family: 'Karla', sans-serif;
     font-weight: bold;
