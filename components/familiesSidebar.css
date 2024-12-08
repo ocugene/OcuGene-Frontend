@@ -5,16 +5,18 @@
   padding: 20px;
   border-radius: 10px;
   font-family: 'Karla', sans-serif;
+  font-size: 5em;
 }
 
 .sidebar-button {
   background-color: white;
+  font-family: 'Karla', sans-serif;
+  font-size: 5em;
   color: black;
   border: none;
   border-radius: 10px;
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 1em;
   margin: 10px 0;
   width: 100%;
   text-align: left;
@@ -23,6 +25,7 @@
 
 .sidebar-button:hover {
   background-color: #BBD8BB;
+  cursor: pointer;
 }
 
 .sidebar-button.active {

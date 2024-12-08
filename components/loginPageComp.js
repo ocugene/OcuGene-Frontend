@@ -66,7 +66,7 @@ const LoginPageComp = () => {
         <div className="login-card-header">Log In</div>
         <form onSubmit={handleSubmit}>
           <div className="field-container">
-            <label>Username</label>
+            <label><b>Username</b></label>
             <input 
               type="text" 
               name="username" 
@@ -76,7 +76,7 @@ const LoginPageComp = () => {
             />
           </div>
           <div className="field-container">
-            <label>Password</label>
+            <label><b>Password</b></label>
             <input 
               type="password" 
               name="password" 
