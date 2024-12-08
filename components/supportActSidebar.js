@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import './supportActSidebar.css';
 
-const supportActSidebar = ({ onButtonClick }) => {
+const SupportActSidebar = ({ onButtonClick }) => {
     const [activeButton, setActiveButton] = useState('current');
 
     const handleButtonClick = (buttonName) => {
@@ -29,4 +29,4 @@ const supportActSidebar = ({ onButtonClick }) => {
   )
 }
 
-export default supportActSidebar
+export default SupportActSidebar

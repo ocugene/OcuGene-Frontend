@@ -10,7 +10,7 @@ const PatientDashboard = () => {
   useEffect(()=> {
 
     const fetchPatientsData = async () => {
-      const response = await fetch("http://localhost:8080/patient/get-all-projections");
+      const response = await fetch("https://ocugene-backend-production.up.railway.app/patient/get-all-projections");
       const responseData = await response.json();
       setPatientsData(responseData);
     };

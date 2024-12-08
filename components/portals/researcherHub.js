@@ -18,7 +18,7 @@ const ResearcherHub = () => {
 
   return (
     <div className="landing-page">
-        <div className='title'>Researcher's Hub</div>
+        <div className='title'>Researcher&apos;s Hub</div>
         <div className="row-container">
           <div className="col-container">
             <div className="category-col-container">

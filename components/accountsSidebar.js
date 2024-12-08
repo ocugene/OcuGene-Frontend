@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import './accountsSidebar.css';
 
-const accountsSidebar = ({ onButtonClick }) => {
+const AccountsSidebar = ({ onButtonClick }) => {
     const [activeButton, setActiveButton] = useState('newRequests');
 
     const handleButtonClick = (buttonName) => {
@@ -35,4 +35,4 @@ const accountsSidebar = ({ onButtonClick }) => {
   )
 }
 
-export default accountsSidebar
+export default AccountsSidebar

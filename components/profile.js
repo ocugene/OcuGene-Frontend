@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from 'react'
 import './profile.css';
-const profile = () => {
+const Profile = () => {
 
   const [accountType, setAccountType] = useState('');
   const [username, setUsername] = useState('');
@@ -28,7 +28,7 @@ const profile = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/user/getByUsername?username=${username}`);
+        const response = await fetch(`https://ocugene-backend-production.up.railway.app/user/getByUsername?username=${username}`);
         const data = await response.json();
         setUserData(data);
       } catch (error) {
@@ -133,4 +133,4 @@ const profile = () => {
   )
 }
 
-export default profile
+export default Profile

@@ -1,7 +1,7 @@
 import {React, useState} from 'react';
 import './consentFormModal.css'
 
-function consentFormModal({onClose, formData, handleSubmit}) {
+function ConsentFormModal({onClose, formData, handleSubmit}) {
 
     const [signature, setSignature] = useState('');
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
@@ -39,4 +39,4 @@ function consentFormModal({onClose, formData, handleSubmit}) {
     )
 }
 
-export default consentFormModal
+export default ConsentFormModal

@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import './adminPortal.css';
 
-const adminPortal = () => {
+const AdminPortal = () => {
 
   const router = useRouter();
 
@@ -53,4 +53,4 @@ const adminPortal = () => {
   )
 }
 
-export default adminPortal
+export default AdminPortal

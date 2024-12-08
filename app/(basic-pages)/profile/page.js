@@ -13,13 +13,18 @@ const AccountProfile = () => {
     // Retrieve user information from localStorage
     setStoredFlag(localStorage.getItem('is_logged_in'))
     console.log(localStorage.getItem('is_logged_in'))
-
-    if (!localStorage.getItem('is_logged_in') || JSON.parse(localStorage.getItem('is_logged_in')) !== 'true') {
-      router.push('/login');
+    if (typeof window !== 'undefined') {
+      if (localStorage.getItem('is_logged_in') !== 'true') {
+        router.push('/login');
+      }
     }
   }, []);
+  
   // Determine if user is logged in
-  const isLoggedIn = storedFlag && (JSON.parse(storedFlag) === 'true');
+  const isLoggedIn = storedFlag && storedFlag === 'true';
+  console.log(storedFlag)
+  console.log(isLoggedIn)
+
   return (
     <>
     {isLoggedIn &&

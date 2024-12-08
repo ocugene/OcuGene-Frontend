@@ -12,7 +12,7 @@ const AccountRequestAccepted = () => {
   const fetchRequestsData = async () => {
 
     try {
-      const response = await fetch("http://localhost:8080/request/getAllRequests");
+      const response = await fetch("https://ocugene-backend-production.up.railway.app/request/getAllRequests");
       const responseData = await response.json();
       setRequests(responseData);
     } catch (error) {
