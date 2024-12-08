@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import './FamiliesSideBar.css';
+import './familiesSideBar.css';
 
 const FamiliesSideBar = ({ onButtonClick }) => {
   const [activeButton, setActiveButton] = useState('inquire');

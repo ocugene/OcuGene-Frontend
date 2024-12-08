@@ -50,7 +50,7 @@ const landingPage = () => {
               <div className="row-container">
                 <div className="col-container">
                   <button className="card-button" 
-                  data-info="A group of rare, genetic disorders that involve a breakdown and loss of cells in the retina. \n(Click to know more)"
+                  data-info="A group of rare, genetic disorders that involve a breakdown and loss of cells in the retina. (Click to know more)"
                   onClick={() => window.location.href = 'https://www.aao.org/eye-health/diseases/what-is-retinitis-pigmentosa?fbclid=IwZXh0bgNhZW0CMTEAAR2tr2VyykYqHeLeRvaevsiG6HZosHw6HwFlmQsyVUxbV_RLqQwXFvCkklc_aem_vwycSXvPYevCsIJbEwwQnQ'}>
                     <div className="card-btn-title"><span>Retinitis Pigmentosa</span></div>
                   </button>

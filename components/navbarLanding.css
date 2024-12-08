@@ -15,11 +15,18 @@ body {
     height: 80px;
 }
 
-.navbar-title{
+.navbar-title {
     text-align: middle;
     justify-content: center;
-    /* background-color: violet; */
+    display: flex;
+    align-items: center; /* Align the icon and text vertically */
     margin-left: 50px;
+}
+
+.navbar-title img {
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    margin-right: 10px; /* Add spacing between icon and title text */
 }
 
 .navbar-title-txt{
@@ -52,4 +59,6 @@ body {
 
 .navbar-btn:hover{
     color: #FFB9B9;
+    cursor: pointer;
 }
+

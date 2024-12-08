@@ -87,7 +87,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
           <div className="form-row">
             <div className="left-column">
               <div className="field-container">
-                <label>Email</label>
+                <label><b>Email</b></label>
                 <input 
                   type="email" 
                   name="email" 
@@ -97,7 +97,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
                 />
               </div>
               <div className="field-container">
-                <label>Password</label>
+                <label><b>Password</b></label>
                 <input 
                   type="password" 
                   name="password" 
@@ -114,7 +114,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
                 
               </div>
               <div className="field-container">
-                <label>Re-enter Password</label>
+                <label><b>Re-enter Password</b></label>
                 <input 
                   type="password" 
                   name="reEnterPassword" 
@@ -131,7 +131,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
               </div>
               
               <div className="field-container">
-                <label>First Name</label>
+                <label><b>First Name</b></label>
                 <input 
                   type="text" 
                   name="firstName" 
@@ -141,7 +141,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
                 />
               </div>
               <div className="field-container">
-                <label>Last Name</label>
+                <label><b>Last Name</b></label>
                 <input 
                   type="text" 
                   name="lastName" 
@@ -154,7 +154,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
             <div className="vertical-line"></div>
             <div className="right-column">
             <div className="user-type-container">
-                <label>User Type: </label>
+                <label><b>User Type: </b></label>
                 <label>
                   <input 
                     type="radio" 
@@ -179,7 +179,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
                 </label>
               </div>
               <div className="field-container">
-                <label>Contact Number</label>
+                <label><b>Contact Number</b></label>
                 <input 
                   type="text" 
                   name="contactNumber" 
@@ -189,7 +189,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
                 />
               </div>
               <div className="field-container">
-                <label>Institution</label>
+                <label><b>Institution</b></label>
                 <input 
                   type="text" 
                   name="institution" 
@@ -199,7 +199,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
                 />
               </div>
               <div className="field-container">
-                <label>Supporting Documents</label>
+                <label><b>Supporting Documents</b></label>
                 <input 
                   type="url" 
                   name="supportingDocuments" 
@@ -207,11 +207,11 @@ const [shakeEffect, setShakeEffect] = useState(false);
                   onChange={handleChange} 
                   required
                 />
-                <sub>* Gdrive link to all supporting documents i.e. picture of your ID and License/Certificate of Excellence</sub>
+                <sub>* Google Drive link to all supporting documents i.e. picture of your ID and License/Certificate of Excellence</sub>
                 <sub>* Please make sure to set the access to public</sub>
               </div>
               <div className="field-container">
-                <label>Message/Query</label>
+                <label><b>Message/Query</b></label>
                 <textarea 
                   name="message" 
                   value={formData.message}
@@ -257,7 +257,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
               )} */}
             </div>
           </div>
-          <button type="submit" className="signup-btn">Sign Up</button>
+          <button type="submit" className="signup-btn"><b>Sign Up</b></button>
           <sub className='submit-sub'> All requests are subject to assessment by the administrators. An email confirmation will be sent out 
               upon approval. 
           </sub>

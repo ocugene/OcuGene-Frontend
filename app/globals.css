@@ -28,12 +28,21 @@ body {
 
 
 body {
-  background-image: url('/pictures/opt.jpg'); /* Correct path for public folder */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative; /* Ensure child pseudo-elements like ::before can align correctly */
-  z-index: 0; /* Set z-index for stacking context */
+  margin: 0; /* Remove default margin for fullscreen display */
+  padding: 0; /* Remove default padding */
+  height: 100vh; /* Set height to viewport height */
+  width: 100vw; /* Set width to viewport width */
+  background-image: url('/pictures/opt.jpg'); /* Correct path for image */
+  background-size: cover; /* Ensure the image covers the entire screen */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent image tiling */
+  background-attachment: fixed; /* Keep the background fixed during scrolling */
+}
+
+@media (max-width: 768px) {
+  body {
+    background-size: contain; /* Adapt for smaller devices if necessary */
+  }
 }
 
 body::before {

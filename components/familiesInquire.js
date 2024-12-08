@@ -48,7 +48,7 @@ const FamiliesDonate = () => {
     <div>
       <form onSubmit={handleSubmit} className="donate-form">
         <div className="form-group">
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="email"><b>Email Address</b></label>
           <input
             type="text"
             id="email"
@@ -58,7 +58,7 @@ const FamiliesDonate = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="type">Email Subject</label>
+          <label htmlFor="type"><b>Email Subject</b></label>
           <select
             id="type"
             value={formData.type}
@@ -71,7 +71,7 @@ const FamiliesDonate = () => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="message">Message/Query</label>
+          <label htmlFor="message"><b>Message/Query</b></label>
           <textarea
             id="message"
             value={formData.message}

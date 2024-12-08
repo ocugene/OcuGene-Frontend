@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
 
+h2{
+  font-size: 1.85em;
+  color:#800000;
+}
+
 .signup-container {
   display: flex;
   justify-content: center;
@@ -63,6 +68,7 @@
 
 .signup-btn {
   background-color: #BBD8BB;
+  font-family: 'Karla', sans-serif;
   color: black;
   border: none;
   border-radius: 10px;
