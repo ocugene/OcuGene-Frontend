@@ -75,11 +75,11 @@ const ResearcherDashboard = () => {
   useEffect(() => {
     // Fetch both datasets in parallel
     Promise.all([
-      fetch('http://localhost:8080/patient/count-per-region').then(response => {
+      fetch('https://ocugene-backend-production.up.railway.app/patient/count-per-region').then(response => {
         if (!response.ok) throw new Error('Failed to fetch regions data');
         return response.json();
       }),
-      fetch('http://localhost:8080/patient/count-per-variant').then(response => {
+      fetch('https://ocugene-backend-production.up.railway.app/patient/count-per-variant').then(response => {
         if (!response.ok) throw new Error('Failed to fetch variants data');
         return response.json();
       })

@@ -66,7 +66,7 @@ const NavbarLanding = () => {
         {
           ( role === 'admin' || role === 'researcher') &&
           (
-            <button className="navbar-btn" onClick={handleRHubClick}>RESEARCHER'S HUB</button>
+            <button className="navbar-btn" onClick={handleRHubClick}>RESEARCHER&apos;S HUB</button>
           )
         }
 

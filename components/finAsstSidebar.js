@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import './finAsstSidebar.css';
 
-const finAsstSidebar = ({ onButtonClick }) => {
+const FinAsstSidebar = ({ onButtonClick }) => {
     const [activeButton, setActiveButton] = useState('new');
 
     const handleButtonClick = (buttonName) => {
@@ -29,4 +29,4 @@ const finAsstSidebar = ({ onButtonClick }) => {
   )
 }
 
-export default finAsstSidebar
+export default FinAsstSidebar

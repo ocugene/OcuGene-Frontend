@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import './adminPortal.css';
 
-const adminPortal = () => {
+const AdminPortal = () => {
 
   const router = useRouter();
 
@@ -27,7 +27,7 @@ const adminPortal = () => {
           <div className="col-container">
             <div className="category-col-container">
               <div className="category-header">
-                <label>Administrative Tasks</label>
+                <label>ADMINISTRATIVE TASKS</label>
               </div>
               <div className="row-container">
                 <div className="col-container">
@@ -53,4 +53,4 @@ const adminPortal = () => {
   )
 }
 
-export default adminPortal
+export default AdminPortal

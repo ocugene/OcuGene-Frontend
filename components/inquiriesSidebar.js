@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import './inquiriesSidebar.css';
 
-const donationsSidebar = ({ onButtonClick }) => {
+const DonationsSidebar = ({ onButtonClick }) => {
     const [activeButton, setActiveButton] = useState('new');
 
     const handleButtonClick = (buttonName) => {
@@ -29,4 +29,4 @@ const donationsSidebar = ({ onButtonClick }) => {
   )
 }
 
-export default donationsSidebar
+export default DonationsSidebar

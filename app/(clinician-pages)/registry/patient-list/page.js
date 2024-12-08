@@ -5,7 +5,7 @@ import Navbar from '@/components/navbarLanding'
 import { useRouter } from 'next/navigation';
 import './patient-list.css'
 
-function page() {
+function Page() {
 
     const [patientsData, setPatientsData] = useState([]);
     const router = useRouter();
@@ -16,14 +16,14 @@ function page() {
         setStoredRole(localStorage.getItem('role'))
         console.log(localStorage.getItem('role'))
     
-        if (!localStorage.getItem('role') || (JSON.parse(localStorage.getItem('role')) !== 'admin' && JSON.parse(localStorage.getItem('role')) !== 'clinician')) {
+        if (!localStorage.getItem('role') || (localStorage.getItem('role') !== 'admin' && localStorage.getItem('role') !== 'clinician')) {
         router.push('/login');
         }
 
         const fetchPatientsData = async () => {
     
           try {
-            const response = await fetch("http://localhost:8080/patient/get-all");
+            const response = await fetch("https://ocugene-backend-production.up.railway.app/patient/get-all");
             const responseData = await response.json();
             setPatientsData(responseData);
           } catch (error) {
@@ -40,7 +40,7 @@ function page() {
         router.push("/registry/view-record");
     }
     // Determine if the stored role is 'admin' or 'clinician'
-     const isAdminOrClinician = storedRole && (JSON.parse(storedRole) === 'admin' || JSON.parse(storedRole) === 'clinician');
+     const isAdminOrClinician = storedRole && (storedRole === 'admin' || storedRole === 'clinician');
     return (
         <>
         {isAdminOrClinician &&
@@ -87,4 +87,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

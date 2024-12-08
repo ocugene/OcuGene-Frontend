@@ -2,7 +2,7 @@ import {React, useState, useEffect} from 'react';
 import './supportActCurrent.css';
 import SupportActEdit from './supportActEdit';
 
-const supportActCurrent = () => {
+const SupportActCurrent = () => {
   const [events, setEvents] = useState([
     // {
     //   id: 1,
@@ -69,7 +69,7 @@ const supportActCurrent = () => {
 
   const handleDelete = (eventID, eventTitle) => {
     if(window.confirm(`Are you sure you want to delete activity : ${eventTitle}`)){
-      fetch(`http://localhost:8080/activity/delete?activityID=${eventID}`, {
+      fetch(`https://ocugene-backend-production.up.railway.app/activity/delete?activityID=${eventID}`, {
         method: 'DELETE',
       })
       .then(response => {
@@ -94,7 +94,7 @@ const supportActCurrent = () => {
 
     if(window.confirm(`Are you sure you want to edit activity: ${updatedEvent.title}?`)){
 
-      fetch(`http://localhost:8080/activity/edit?activityID=${eventID}`, {
+      fetch(`https://ocugene-backend-production.up.railway.app/activity/edit?activityID=${eventID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ const supportActCurrent = () => {
 
   useEffect(() => {
 
-    fetch('http://localhost:8080/activity/get-all', {
+    fetch('https://ocugene-backend-production.up.railway.app/activity/get-all', {
       method: 'GET',
     })
     .then(response => {
@@ -187,4 +187,4 @@ const supportActCurrent = () => {
   );
 };
 
-export default supportActCurrent;
+export default SupportActCurrent;

@@ -10,7 +10,7 @@ const steps = [
     { number: '6', label: 'Clinical Examination', target: 'target6' }
 ];
 
-const registrySideBar = () => {
+const RegistrySideBar = () => {
     const [currentStep, setCurrentStep] = useState(0);
 
     const goToStep = (step) => {
@@ -66,4 +66,4 @@ const registrySideBar = () => {
   )
 }
 
-export default registrySideBar
+export default RegistrySideBar

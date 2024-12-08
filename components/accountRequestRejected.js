@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './accountRequestRejected.css';
 
-const accountRequestRejected = () => {
+const AccountRequestRejected = () => {
   const [requests, setRequests] = useState([]);
   useEffect(()=> {
     fetchRequestsData();
@@ -10,7 +10,7 @@ const accountRequestRejected = () => {
   const fetchRequestsData = async () => {
 
     try {
-      const response = await fetch("http://localhost:8080/request/getAllRequests");
+      const response = await fetch("https://ocugene-backend-production.up.railway.app/request/getAllRequests");
       const responseData = await response.json();
       setRequests(responseData);
     } catch (error) {
@@ -37,4 +37,4 @@ const accountRequestRejected = () => {
   );
 };
 
-export default accountRequestRejected;
+export default AccountRequestRejected;
