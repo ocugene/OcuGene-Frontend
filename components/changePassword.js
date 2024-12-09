@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './changePassword.css';
 
-const ChangePassword = ({ event, onSave, onClose }) => {
+const ChangePassword = ({ event, onSave, onClose, username }) => {
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // const updatedEvent = {
     //   ...event,
@@ -13,7 +17,27 @@ const ChangePassword = ({ event, onSave, onClose }) => {
     //   time: `${formData.start_time} - ${formData.end_time}`,
     //   location: formData.location,
     // };
-    onSave(event.id);
+    const changePassForm = {
+      username : username,
+      userPassword : newPassword
+    }
+    try {
+      const response = await fetch(
+        'https://ocugene-backend-production.up.railway.app/user/change-password',
+        {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT',
+          body: JSON.stringify(changePassForm),
+        }
+      );      const data = await response.text();
+              console.log(data)
+    } catch (error) {
+      console.error('Error fetching user information:', error);
+    }
+    // onSave(event.id);
   };
 
   return (
@@ -28,7 +52,7 @@ const ChangePassword = ({ event, onSave, onClose }) => {
               type="password" 
               name="password" 
             //   value={password}
-              onChange={(e) => setPassword(e.target.value)} 
+              onChange={(e) => setOldPassword(e.target.value)} 
               required
             />
           </div>
@@ -38,7 +62,7 @@ const ChangePassword = ({ event, onSave, onClose }) => {
               type="password" 
               name="password" 
             //   value={password}
-              onChange={(e) => setPassword(e.target.value)} 
+              onChange={(e) => setNewPassword(e.target.value)} 
               required
             />
           </div>
@@ -48,7 +72,7 @@ const ChangePassword = ({ event, onSave, onClose }) => {
               type="password" 
               name="password" 
             //   value={password}
-              onChange={(e) => setPassword(e.target.value)} 
+              onChange={(e) => setConfirmPassword(e.target.value)} 
               required
             />
           </div>
