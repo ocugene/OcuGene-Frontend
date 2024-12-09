@@ -118,6 +118,7 @@ const PatientDashboard = () => {
         </div>
         <div className="p-table">
           <h2>Preview of the Dataset</h2>
+          <div className="p-table-wrapper">
           <table>
             <thead>
               <tr>
@@ -188,6 +189,7 @@ const PatientDashboard = () => {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>

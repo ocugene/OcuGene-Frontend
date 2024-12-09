@@ -1,88 +1,120 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+/* patientDashboard.css */
 
-.p-dashboard{
-    font-family: 'Karla', sans-serif;
-    padding: 20px;
-    max-width: 90%;
-    margin: auto;
-}
-
-.p-info{
-    border-radius: 20px;
-
-}
-
-h2{
-    margin-bottom: -1px;
-}
-
-.dl-link{
-    color: blue;
-}
-
-.dl-link:hover {
-    cursor: pointer;
-}
-
-.title {
-    text-align: left;
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: maroon;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
-
-.p-table{
-    max-width: 100%; /* Set table width to take full space */
-    overflow-x: auto; /* Enables horizontal scrolling if table overflows */
-    /* margin-top: 10px; */
-    margin-bottom: 20px;
-}
-
-  /* Style for the entire table */
-.p-table table {
-    width: auto; 
-    border-collapse: collapse; /* Remove gaps between cell borders */
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-/* Table header styling */
-.p-table th {
-    background-color: maroon; /* Header background color */
-    color: white; /* Header text color */
+  
+  .p-dashboard {
+    padding: 20px;
+  }
+  
+  .p-info {
+    /* background-color: #ffffff; */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80vw;
+  }
+  
+  .title {
+    color: #800000; /* Maroon */
+    font-size: 32px;
     font-weight: bold;
-    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .p-descript {
+    color: #444444;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .p-summary {
+    margin-bottom: 20px;
+    background-color: #fdfdfd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .p-summary h2 {
+    color: #006400; /* Green */
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .p-summary ul {
+    padding-left: 20px;
+    color: #555555;
+    line-height: 1.6;
+  }
+  
+  .p-summary .dl-link {
+    color: #006400;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px;
+  }
+  
+  .p-summary .dl-link:hover {
+    color: #004d00;
+  }
+  
+  .p-table {
+    background-color: #fdfdfd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .p-table h2 {
+    color: #800000; /* Maroon */
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .p-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .p-table thead {
+    background-color: #006400;
+    color: #ffffff;
+  }
+  
+  .p-table th,
+  .p-table td {
     text-align: left;
-    border: 1px solid #ddd; /* Header cell border */
-    width: 20px;
-}
-
-/* Table cell styling */
-.p-table td {
-    padding: 10px; /* Space inside cells */
-    border: 1px solid #ddd; /* Border for table cells */
-    text-align: left; /* Text alignment */
-}
-
-/* Table row styling */
-.p-table tr:nth-child(even) {
-    background-color: #f2f2f2; /* Alternate row color */
-}
-
-.p-table tr:hover {
-    background-color: #ddd; /* Row color on hover */
-}
-
-/* Adjusting specific column widths */
-/* .p-table th:nth-child(1), .p-table td:nth-child(1) {
-    width: 30%; 
-} */
-
-/* .p-table th:nth-child(2), .p-table td:nth-child(2) {
-    width: 40%; 
-} */
-
-/* .p-table th:nth-child(3), .p-table td:nth-child(3) {
-    width: 30%; 
-} */
+    padding: 8px;
+    border: 1px solid #dddddd;
+    font-size: 14px;
+  }
+  
+  .p-table th {
+    font-weight: bold;
+  }
+  
+  .p-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .p-table tbody tr:hover {
+    background-color: #e8f5e9; /* Light green */
+  }
+  
+  .p-table-wrapper {
+    overflow-x: auto; /* Enable horizontal scroll */
+  }
+  
+  /* Add some margin between sections */
+  .p-summary + .p-table {
+    margin-top: 20px;
+  }
+  
