@@ -95,7 +95,7 @@ const Profile = () => {
       {isChangePasswordVisible && (
         <div className="popup-overlay">
           <div className="popup-content">
-            <ChangePassword onClose={closeChangePasswordPopup} />
+            <ChangePassword onClose={closeChangePasswordPopup} username={userData.username}/>
           </div>
         </div>
       )}
