@@ -32,7 +32,7 @@ body {
   padding: 0; /* Remove default padding */
   height: 100vh; /* Set height to viewport height */
   width: 100vw; /* Set width to viewport width */
-  background-image: url('/pictures/opt.jpg'); /* Correct path for image */
+  background-image: url('/pictures/ocugeneBG.png'); /* Correct path for image */
   background-size: cover; /* Ensure the image covers the entire screen */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Prevent image tiling */
@@ -52,6 +52,6 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.5); /* Adjust transparency here */
+  background: rgba(255, 255, 255); /* Adjust transparency here */
   z-index: -1; /* Ensure this stays behind the content but above the background image */
 }

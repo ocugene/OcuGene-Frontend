@@ -99,7 +99,7 @@ const LandingPage = () => {
               <div className="category-header">
                 <label>Basic Information</label>
               </div>
-              <div className="row-container">
+              <div className="row-container-card-holder ">
                 
                 <div className="col-container">
                   <button className="card-button" 
@@ -131,7 +131,7 @@ const LandingPage = () => {
               <div className="category-header">
                 <label>Families</label>
               </div>
-              <div className="row-container">
+              <div className="row-container-card-holder ">
                 <div className="col-container">
                   <button className="card-button" onClick={navigateToFamilies} data-info="Inquire on how to donate to the registry.">
                     <div className="card-btn-title"><span>Donate to Registry</span></div>
