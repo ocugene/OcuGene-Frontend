@@ -75,7 +75,7 @@ const LoginPageComp = () => {
         <form onSubmit={handleSubmit}>
           <div className="field-container">
             <label>
-              <b>Username</b>
+              <b>Email or Username</b>
             </label>
             <input
               type="text"
