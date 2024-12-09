@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import './researcherHub.css';
+import './home.css';
 
 const ResearcherHub = () => {
 
@@ -25,7 +25,7 @@ const ResearcherHub = () => {
               <div className="category-header">
                 <label>Administrative Tasks</label>
               </div>
-              <div className="row-container">
+              <div className="row-container-card-holder">
                 <div className="col-container">
                   <button className="card-button" onClick={navigateToRDatabase} data-info="View Ocular Genetics' Current Analytics">
                     <div className="card-btn-title"><span>Registry Database</span></div>
