@@ -4,11 +4,11 @@
     display: flex; /* Optional, if .land contains other elements */
     flex-direction: column; /* Optional, to stack children vertically */
     align-items: center; /* Center children horizontally */
-    justify-content: center; /* Center children vertically */
+    /* justify-content: center; Center children vertically */
     /* text-align: center; Optional, center text */
 }
 .landing-page {
-    padding: 20px 50px 20px 50px;
+    padding: 20px 20px 20px 20px;
     font-family: 'Karla', sans-serif;
     /* border: 2px solid red; */
 }
@@ -58,11 +58,13 @@ body, html {
 
 .title{
     font-family: 'Karla', sans-serif;
-    color: maroon;
+    color: white;
     font-size: 7vh;
     font-weight: bolder;
-    padding: 0px 0px 0px 5px;
+    padding: 0px 0px 0px 20px;
     margin-bottom: 20px;
+    border-radius: 20px;
+    background-color: #800000;
 }
 
 
@@ -70,9 +72,12 @@ body, html {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 100%;
+    /* width: 80%; */
     align-items: center; /* Centers vertically */
     margin: 0; /* Removes default margins */
+    border-radius: 20px;
+    background-color: white;
+    padding: 20px 20px 20px 20px;
 
 }
 
@@ -81,7 +86,7 @@ body, html {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 0 5px 0 5px;
+    /* padding: 0 5px 0 5px; */
     /* border: 2px solid yellow; */
 }
 
@@ -90,7 +95,7 @@ body, html {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 5px 0px 5px;
     /* border: 2px solid green; */
 }
   
@@ -99,7 +104,7 @@ body, html {
     color: white;
     border-radius: 10px;
     padding: 20px 0px 20px 0px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     width: 100%;
     text-align: center; 
     font-size: 1.5em; 
