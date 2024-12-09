@@ -4,6 +4,7 @@ import {React, useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/navbarLanding'
 import PatientDashboard from '@/components/patientDashboard'
+import Back from '@/components/backbutton'
 
 const PatientDatabasePage = () => {
   const router = useRouter();
@@ -27,6 +28,7 @@ const PatientDatabasePage = () => {
     {isAdminOrResearcher &&
     <div>
     <Navbar></Navbar>
+    <Back></Back>
     <PatientDashboard></PatientDashboard>
     </div>}
     </>

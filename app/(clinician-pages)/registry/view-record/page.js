@@ -6,6 +6,7 @@ import Sidebar from '@/components/registrySideBar'
 import Form from '@/components/registryViewForm'
 import { useRouter } from 'next/navigation';
 import './view-record.css'
+import Back from '@/components/backbutton'
 
 
 const RegistryPage = () => {
@@ -34,6 +35,7 @@ const RegistryPage = () => {
     {isAdminOrClinician &&
     <div>
     <Navbar></Navbar> 
+    <Back></Back>
     <div className="regContent">
       <div className='button-container'>
         <button className='back-button' onClick={handleGoBack}>

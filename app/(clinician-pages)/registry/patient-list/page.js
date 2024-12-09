@@ -4,6 +4,7 @@ import {React, useState, useEffect} from 'react'
 import Navbar from '@/components/navbarLanding'
 import { useRouter } from 'next/navigation';
 import './patient-list.css'
+import Back from '@/components/backbutton'
 
 function Page() {
 
@@ -46,6 +47,7 @@ function Page() {
         {isAdminOrClinician &&
          <div>
          <Navbar></Navbar>
+         <Back></Back>
          <div className='title'> Patient List </div>
          <div className='p-table'>
              <table >
