@@ -1,15 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
 .land {
-    height: 75vh;
-    display: flex; /* Optional, if .land contains other elements */
-    flex-direction: column; /* Optional, to stack children vertically */
-    align-items: center; /* Center children horizontally */
-    justify-content: center; /* Center children vertically */
-    /* text-align: center; Optional, center text */
+    display: flex;
+    align-items: flex-start; /* Aligns content to the top */
+    justify-content: flex-start; /* Keeps content aligned to the left */
+    margin: 0; /* Reset margins */
+    padding: 0; /* Reset paddings */
+    height: 100%; /* Match the height of the sidebar */
 }
+
 .landing-page {
+    border-radius: 20px;
     padding: 20px 50px 20px 50px;
     font-family: 'Karla', sans-serif;
+    background-color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 100%;
     /* border: 2px solid red; */
 }
 

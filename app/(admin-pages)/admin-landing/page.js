@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import  {useRouter}  from 'next/navigation'; 
 import NavbarLanding from '@/components/navbarLanding'
 import AdminPortal from '@/components/portals/adminPortal'
+import SideNav from '@/components/navbarSide';
 
 
 
@@ -27,7 +28,12 @@ const AdminLandingPage = () => {
     {isAdmin && 
     <div>
     <NavbarLanding />
-    <AdminPortal />
+      <div className="row-container">
+        <SideNav />
+        <div className="landing-container">
+          <AdminPortal />
+        </div>
+      </div>
     </div>}
     </>
     

@@ -1,0 +1,73 @@
+.sidebar {
+  margin-left: 20px;
+  width: 250px;
+  background-color: #800000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: calc(100vh - 200px); /* Adjust height to account for top and bottom margins */
+  position: sticky; /* Make sidebar sticky */
+  top: 20px; /* Add top margin */
+  left: 20px; /* Add left margin */
+  border-radius: 20px; /* Add rounded corners */
+  margin-bottom: 20px; /* Add bottom margin */
+  overflow-y: auto; /* Ensure content is scrollable if it overflows */
+}
+
+.sidebar-btn {
+  background-color: #800000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  /* margin-bottom: 10px; */
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  width: 100%;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.sidebar-btn:hover {
+  border: 1px solid white;
+}
+
+.sidebar-btn.active {
+  background-color: white;
+  color: #800000;
+}
+
+.sub-menu {
+  list-style-type: disc;
+  padding-left: 20px;
+  /* margin-bottom: 10px; */
+}
+
+.sub-menu li::marker {
+  color: white; /* Make bullet points white */
+}
+
+.sub-btn {
+  background-color: #800000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  /* padding: 5px 20px; */
+  /* margin-bottom: 5px; */
+  cursor: pointer;
+  font-size: 0.9em;
+  width: 100%;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.sub-btn:hover {
+  border: 1px solid white;
+}
+
+.sub-btn.active {
+  background-color: white;
+  color: #800000;
+}

@@ -3,6 +3,7 @@
 import {React, useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation';
 import NavbarLanding from '@/components/navbarLanding'
+import SideNav from '@/components/navbarSide';
 import RegistryPortal from '@/components/portals/registry'
 
 
@@ -29,8 +30,13 @@ const Registry = () => {
     {isAdminOrClinician &&
      <div>
      <NavbarLanding />
-     <RegistryPortal />
-   </div>
+       <div className="row-container">
+         <SideNav />
+         <div className="landing-container">
+           <RegistryPortal />
+         </div>
+       </div>
+     </div>
  }
     </>
   )

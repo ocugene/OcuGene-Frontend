@@ -4,6 +4,9 @@ import {React, useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation';
 import NavbarLanding from '@/components/navbarLanding'
 import ResearcherHub from '@/components/portals/researcherHub'
+import SideNav from '@/components/navbarSide';
+import './layout.css';
+
 
 
 
@@ -29,7 +32,12 @@ const AdminLandingPage = () => {
     {isAdminOrResearcher &&
     <div>
     <NavbarLanding />
-    <ResearcherHub />
+      <div className="row-container">
+        <SideNav />
+        <div className="landing-container">
+          <ResearcherHub />
+        </div>
+      </div>
     </div>}
     </>
     
