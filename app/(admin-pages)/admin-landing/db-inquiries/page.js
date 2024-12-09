@@ -6,6 +6,7 @@ import NavbarLanding from '@/components/navbarLanding';
 import SidebarDonations from '@/components/inquiriesSidebar';
 import New from '@/components/inquiriesNew';
 import Done from '@/components/inquiriesDone';
+import Back from '@/components/backbutton'
 import './inquiries.css'
 
 
@@ -93,6 +94,7 @@ const DonationsPage = () => {
     {isAdmin &&
     <div>
       <NavbarLanding/>
+      <Back></Back>
       <div className="title-container">
         <div className='title'>Admin Portal / Registry Donations</div>
       </div>

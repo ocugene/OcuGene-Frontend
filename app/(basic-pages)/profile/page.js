@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import  {useRouter}  from 'next/navigation'; 
 import NavbarLanding from '@/components/navbarLanding'
 import Profile from '@/components/profile'
+import Back from '@/components/backbutton'
 
 const AccountProfile = () => {
   const router = useRouter();
@@ -30,6 +31,7 @@ const AccountProfile = () => {
     {isLoggedIn &&
     <div>
     <NavbarLanding></NavbarLanding>
+    <Back></Back>
     <Profile></Profile>
     </div>}
     </>

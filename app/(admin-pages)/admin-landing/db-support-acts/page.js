@@ -6,6 +6,7 @@ import NavbarLanding from '@/components/navbarLanding';
 import SidebarSupportAct from '@/components/supportActSidebar';
 import Current from '@/components/supportActCurrent';
 import AddNew from '@/components/supportActNew';
+import Back from '@/components/backbutton'
 import './supActs.css'
 
 
@@ -35,6 +36,7 @@ const SupportActivitiesPage = () => {
       {isAdmin &&
       <div>
       <NavbarLanding/>
+      <Back></Back>
       <div className="title-container">
         <div className='title'>Admin Portal / Support Activities</div>
       </div>

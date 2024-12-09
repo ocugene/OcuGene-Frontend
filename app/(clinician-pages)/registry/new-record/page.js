@@ -7,6 +7,7 @@ import Sidebar from '@/components/registrySideBar';
 import Form from '@/components/registryNewForm';
 import './new-record.css';
 import ConsentForm from '@/components/consentFormModal';
+import Back from '@/components/backbutton'
 
 
 const RegistryPage = () => {
@@ -123,6 +124,7 @@ const RegistryPage = () => {
     {isAdminOrClinician &&
       <div>
       <Navbar></Navbar>
+      <Back></Back>
       <div className="regContent">
         <div className='title'>New Record</div>
         <div  className="form-container">

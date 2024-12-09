@@ -7,6 +7,7 @@ import SidebarAccounts from '@/components/accountsSidebar';
 import Requests from '@/components/accountRequests'
 import Accepted from '@/components/accountRequestAccepted';
 import ReJected from '@/components/accountRequestRejected';
+import Back from '@/components/backbutton'
 import './accounts.css'
 
 
@@ -36,6 +37,7 @@ const AccountRequests = () => {
     {isAdmin && 
     <div>
       <NavbarLanding/>
+      <Back></Back>
       <div className="title-container">
         <div className='title'>Admin Portal / Account Requests</div>
       </div>
