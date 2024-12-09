@@ -45,7 +45,7 @@
 
 
 body, html {
-    overflow: hidden; /* Disables scrolling */
+    /* overflow: hidden; Disables scrolling */
     height: 100%; /* Ensures content doesn't expand beyond the viewport */
     margin: 0; /* Prevents unexpected margins */
     background-image: url('/pictures/ocugeneBG.png'); /* Path to your JPEG */

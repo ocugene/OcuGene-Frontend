@@ -7,7 +7,7 @@ body {
 
 .navbar{
     /* background-color: #800000; */
-    background-color: white;
+    background-color: #FDFCFC;
     border-radius: 20px;
     display: flex;
     padding: 10px;
@@ -46,7 +46,7 @@ body {
 }
 
 .navbar-btn {
-    background-color: white;
+    background-color: #FDFCFC;
     color: #800000;
     border: 2px solid transparent; /* Initial border color */
     text-align: center;
