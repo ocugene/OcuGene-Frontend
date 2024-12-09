@@ -48,7 +48,7 @@ body, html {
     overflow: hidden; /* Disables scrolling */
     height: 100%; /* Ensures content doesn't expand beyond the viewport */
     margin: 0; /* Prevents unexpected margins */
-    background-image: url('/pictures/opt.jpg'); /* Path to your JPEG */
+    background-image: url('/pictures/ocugeneBG.png'); /* Path to your JPEG */
     background-size: cover; /* Makes sure the image covers the entire background */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -76,9 +76,19 @@ body, html {
     align-items: center; /* Centers vertically */
     margin: 0; /* Removes default margins */
     border-radius: 20px;
-    background-color: white;
+    background-color: rgb(255,255,255,0.5);
     padding: 20px 20px 20px 20px;
-
+}
+.row-container-card-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* width: 80%; */
+    align-items: center; /* Centers vertically */
+    margin: 0; /* Removes default margins */
+    border-radius: 20px;
+    /* background-color: rgb(255,255,255,0.5); */
+    padding: 20px 0px 20px 0px;
 }
 
 .category-col-container {
