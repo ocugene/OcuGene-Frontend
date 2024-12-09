@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import NavbarLanding from '@/components/navbarLanding'
 import SideNav from '@/components/navbarSide';
 import RegistryPortal from '@/components/portals/registry'
+// import './layout.css';
 
 
 
@@ -30,7 +31,7 @@ const Registry = () => {
     {isAdminOrClinician &&
      <div>
      <NavbarLanding />
-       <div className="row-container">
+     <div className="row-container">
          <SideNav />
          <div className="landing-container">
            <RegistryPortal />

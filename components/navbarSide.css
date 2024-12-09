@@ -34,10 +34,10 @@
   border: 1px solid white;
 }
 
-.sidebar-btn.active {
+/* .sidebar-btn.active {
   background-color: white;
   color: #800000;
-}
+} */
 
 .sub-menu {
   list-style-type: disc;
@@ -63,11 +63,11 @@
   transition: all 0.3s ease;
 }
 
-.sub-btn:hover {
+/* .sub-btn:hover {
   border: 1px solid white;
 }
 
 .sub-btn.active {
   background-color: white;
   color: #800000;
-}
+} */

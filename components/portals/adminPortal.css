@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
 
 .landing-page {
+    border-radius: 20px;
+    background-color: white;
     padding: 20px 50px 20px 50px;
     margin-top:75px;
     font-family: 'Karla', sans-serif;

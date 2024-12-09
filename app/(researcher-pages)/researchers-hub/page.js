@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import NavbarLanding from '@/components/navbarLanding'
 import ResearcherHub from '@/components/portals/researcherHub'
 import SideNav from '@/components/navbarSide';
-import './layout.css';
+// import '@components/portals/layoutMain.css'
+// import './layout.css';
 
 
 
@@ -32,7 +33,7 @@ const AdminLandingPage = () => {
     {isAdminOrResearcher &&
     <div>
     <NavbarLanding />
-      <div className="row-container">
+    <div className="row-container">
         <SideNav />
         <div className="landing-container">
           <ResearcherHub />

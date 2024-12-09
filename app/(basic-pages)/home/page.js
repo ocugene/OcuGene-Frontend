@@ -2,7 +2,8 @@ import React from 'react'
 import NavbarLanding from '@/components/navbarLanding'
 import LandingComp from '@/components/portals/home'
 import SideNav from '@/components/navbarSide'
-import './layout.css'
+// import '@components/portals/layoutMain.css'
+// import './layout.css'
 // import Image from 'next/image'
 
 export default function LandingPageComp() {
@@ -10,10 +11,10 @@ export default function LandingPageComp() {
     <div>
       <NavbarLanding />
       <div className="row-container">
-        <div className='field-container'>
+        <div className='side-container'>
           <SideNav />
         </div>
-        <div className='field-container'>
+        <div className='component-container'>
           <LandingComp />
         </div>
       </div>
