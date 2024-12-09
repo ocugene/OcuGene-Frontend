@@ -16,7 +16,7 @@ const RegistryForm = ({formData, setFormData, handleSubmit}) => {
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
   const [barangays, setBarangays] = useState([]);
-
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
   // const [formData, setFormData] = useState({
   //   first_name: '',
   //   middle_name: '',
@@ -51,6 +51,17 @@ const RegistryForm = ({formData, setFormData, handleSubmit}) => {
 
   const [variantOptions, setVariantOptions] = useState([]);
   
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      await handleSubmit(e); // Assume this submits the form data properly
+      setSubmissionSuccess(true); // Show success message
+      setTimeout(() => setSubmissionSuccess(false), 3000); // Hide after 3 seconds
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+    }
+  };
+
   useEffect(() => {
     if (formData.birthday) {
       const age = calculateAge(formData.birthday);
@@ -142,8 +153,14 @@ const RegistryForm = ({formData, setFormData, handleSubmit}) => {
 
   return (
     <div>
+       {/* Success Message */}
+       {submissionSuccess && (
+        <div className="submission-success">
+          Submission Successful!
+        </div>
+      )}
       <div className='form-step'>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmitForm}>
           {/* Target 1: Demographics */}
           <div id="target1" className='target'>
             <label className="regSectionName">Demographics</label>
@@ -570,7 +587,7 @@ const RegistryForm = ({formData, setFormData, handleSubmit}) => {
             </div>
           </div>
           
-          <button type='submit' className="registry-submit-button">Submit</button>
+          <button type="submit" className="registry-submit-button">Submit</button>
         </form>
       </div>
     </div>
