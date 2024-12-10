@@ -60,6 +60,7 @@ const AccountRequests = () => {
         <div key={request.requestId} className="request-card">
           <div className="request-content">
             <p><strong>Name:</strong> {request.firstName} {request.lastName}</p>
+            <p><strong>Username:</strong> {request.username}</p>
             <p><strong>Email:</strong> {request.email}</p>
             <p><strong>Account Type:</strong> {request.userType}</p>
             <p><strong>Institution:</strong> {request.institution}</p>

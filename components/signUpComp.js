@@ -4,7 +4,7 @@ import './signUpComp.css';
 
 const SignUpComp = () => {
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
     reEnterPassword: '',
     firstName: '',
@@ -13,11 +13,12 @@ const SignUpComp = () => {
     userType: '',
     supportingDocuments: '',
     institution: '',
-    message: ''
+    message: '',
+    email: ''
   });
 
   const [passwordsDoNotMatch, setPasswordsDoNotMatch] = useState(false);
-const [shakeEffect, setShakeEffect] = useState(false);  
+  const [shakeEffect, setShakeEffect] = useState(false);  
 
   const router = useRouter();
 
@@ -82,20 +83,24 @@ const [shakeEffect, setShakeEffect] = useState(false);
   return (
     <div className="signup-container">
       <div className="signup-form">
+        
         <h2>Sign Up</h2>
+
         <form onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="left-column">
+
               <div className="field-container">
-                <label><b>Email</b></label>
+                <label><b>Username</b></label>
                 <input 
-                  type="email" 
-                  name="email" 
-                  value={formData.email}
+                  type="text" 
+                  name="username" 
+                  value={formData.username}
                   onChange={handleChange} 
                   required
                 />
               </div>
+
               <div className="field-container">
                 <label><b>Password</b></label>
                 <input 
@@ -140,6 +145,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
                   required
                 />
               </div>
+
               <div className="field-container">
                 <label><b>Last Name</b></label>
                 <input 
@@ -150,10 +156,24 @@ const [shakeEffect, setShakeEffect] = useState(false);
                   required
                 />
               </div>
+
+              <div className="field-container">
+                <label><b>Contact Number</b></label>
+                <input 
+                  type="text" 
+                  name="contactNumber" 
+                  value={formData.contactNumber}
+                  onChange={handleChange} 
+                  required
+                />
+              </div>    
+
             </div>
+
             <div className="vertical-line"></div>
+
             <div className="right-column">
-            <div className="user-type-container">
+              <div className="user-type-container">
                 <label><b>User Type: </b></label>
                 <label>
                   <input 
@@ -178,16 +198,18 @@ const [shakeEffect, setShakeEffect] = useState(false);
                   Researcher
                 </label>
               </div>
+
               <div className="field-container">
-                <label><b>Contact Number</b></label>
+                <label><b>Email</b></label>
                 <input 
-                  type="text" 
-                  name="contactNumber" 
-                  value={formData.contactNumber}
+                  type="email" 
+                  name="email" 
+                  value={formData.email}
                   onChange={handleChange} 
                   required
                 />
               </div>
+
               <div className="field-container">
                 <label><b>Institution</b></label>
                 <input 
@@ -198,6 +220,7 @@ const [shakeEffect, setShakeEffect] = useState(false);
                   required
                 />
               </div>
+
               <div className="field-container">
                 <label><b>Supporting Documents</b></label>
                 <input 
