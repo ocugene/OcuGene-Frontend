@@ -58,6 +58,10 @@ const ResearcherDashboard = () => {
   const [leftCornealOpacityStats, setLeftCornealOpacityStats] = useState(null);
   const [rightCornealOpacityStats, setRightCornealOpacityStats] = useState(null);
 
+  const [leftRetinalConditionStats, setLeftRetinalConditionStats] = useState(null);
+  const [rightRetinalConditionStats, setRightRetinalConditionStats] = useState(null);
+
+
   // Custom order of regions
   const regionsOrder = [
     "CAR", "NCR", "Region I", "Region II", "Region III", "Region IV-A", "Region IV-B", 
@@ -202,6 +206,67 @@ const ResearcherDashboard = () => {
     fetchStats();
   }, []);
 
+  // Fetch retinal condition stats
+  useEffect(() => {
+    const fetchRetinalStats = async () => {
+      try {
+        // Fetch left retinal stats
+        const leftResponse = await fetch(
+          'https://ocugene-backend-production.up.railway.app/patient/get-left-retinal-condition-stats'
+        );
+        if (!leftResponse.ok) {
+          throw new Error('Failed to fetch left retinal stats');
+        }
+        const leftData = await leftResponse.json();
+        setLeftRetinalConditionStats(leftData);
+
+        // Fetch right retinal stats
+        const rightResponse = await fetch(
+          'https://ocugene-backend-production.up.railway.app/patient/get-right-retinal-condition-stats'
+        );
+        if (!rightResponse.ok) {
+          throw new Error('Failed to fetch right retinal stats');
+        }
+        const rightData = await rightResponse.json();
+        setRightRetinalConditionStats(rightData);
+      } catch (error) {
+        console.error('Error fetching retinal condition stats:', error);
+      }
+    };
+
+    fetchRetinalStats();
+  }, []);
+
+  // Create pie data for retinal condition stats
+  const createRetinalPieData = (stats, baseColor) => {
+    const shades = {
+      blue: ['#BBDEFB', '#64B5F6', '#42A5F5', '#2196F3', '#1565C0'],
+      orange: ['#FFE0B2', '#FFB74D', '#FFA726', '#FF9800', '#E65100'],
+    };
+
+    return {
+      labels: [`Normal (${stats.normalCount})`, `Abnormal (${stats.abnormalCount})`],
+      datasets: [
+        {
+          label: 'Retinal Condition Distribution',
+          data: [stats.normalCount, stats.abnormalCount],
+          backgroundColor: shades[baseColor],
+          hoverOffset: 4,
+        },
+      ],
+    };
+  };
+
+  const leftRetinalChartData = leftRetinalConditionStats
+    ? createRetinalPieData(leftRetinalConditionStats, 'blue')
+    : null;
+
+  const rightRetinalChartData = rightRetinalConditionStats
+    ? createRetinalPieData(rightRetinalConditionStats, 'orange')
+    : null;
+
+
+
   // Create pie data for corneal opacity stats
   const createCornealPieData = (stats, baseColor) => {
     const shades = {
@@ -223,12 +288,12 @@ const ResearcherDashboard = () => {
   };
 
   const leftChartData = leftCornealOpacityStats
-  ? createCornealPieData(leftCornealOpacityStats, 'green')
-  : null;
+    ? createCornealPieData(leftCornealOpacityStats, 'green')
+    : null;
 
-const rightChartData = rightCornealOpacityStats
-  ? createCornealPieData(rightCornealOpacityStats, 'red')
-  : null;
+  const rightChartData = rightCornealOpacityStats
+    ? createCornealPieData(rightCornealOpacityStats, 'red')
+    : null;
 
   //create pie data for bcva stats
   const createPieData = (stats, baseColor) => {
@@ -381,9 +446,9 @@ const rightChartData = rightCornealOpacityStats
         <div key={index} className="variant">
           <h3>{variant.variant}</h3>
 
-          <p>
+          {/* <p>
             Vision: <b>{variant.vision}</b>
-          </p>
+          </p> */}
 
           {leftBcvaStats && rightBcvaStats ? (
             <div>
@@ -412,9 +477,9 @@ const rightChartData = rightCornealOpacityStats
             <p>Loading BCVA stats...</p>
           )}
 
-          <p>
-            Opacity: <b>{variant.duration}</b>
-          </p>
+          {/* <p>
+            Corneal Opacity
+          </p> */}
 
           <div>
             <h4>Corneal Opacity Statistics: </h4>
@@ -471,9 +536,64 @@ const rightChartData = rightCornealOpacityStats
           </div>
 
 
-          <p>
+          {/* <p>
             Retina: <b>{variant.age}</b>
-          </p>
+          </p> */}
+
+          <div>
+            <h4>Retinal Condition Statistics: </h4>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '20px', // Adds spacing between the charts
+              }}
+            >
+              <div style={{ width: '300px', height: '300px' }}>
+                <h5>Left Retina</h5>
+                {leftRetinalChartData ? (
+                  <Doughnut
+                    data={leftRetinalChartData}
+                    options={{
+                      ...chartOptions,
+                      plugins: {
+                        ...chartOptions.plugins,
+                        legend: {
+                          ...chartOptions.plugins.legend,
+                          position: 'right', // Position labels to the right
+                        },
+                      },
+                    }}
+                  />
+                ) : (
+                  <p>Loading left retinal data...</p>
+                )}
+              </div>
+              <div style={{ width: '300px', height: '300px' }}>
+                <h5>Right Retina</h5>
+                {rightRetinalChartData ? (
+                  <Doughnut
+                    data={rightRetinalChartData}
+                    options={{
+                      ...chartOptions,
+                      plugins: {
+                        ...chartOptions.plugins,
+                        legend: {
+                          ...chartOptions.plugins.legend,
+                          position: 'right', // Position labels to the right
+                        },
+                      },
+                    }}
+                  />
+                ) : (
+                  <p>Loading right retinal data...</p>
+                )}
+              </div>
+            </div>
+          </div>
+
           
         </div>
       ))}
@@ -483,7 +603,7 @@ const rightChartData = rightCornealOpacityStats
 
 
           {/* Doughnut Chart for Summary */}
-          <div className="chartContainer">
+          {/* <div className="chartContainer">
             <h2>Summary of Findings</h2>
             <Doughnut
               data={{
@@ -505,7 +625,8 @@ const rightChartData = rightCornealOpacityStats
                 maintainAspectRatio: false,
               }}
             />
-          </div>
+          </div> */}
+
         </div>
       )}
     </div>
