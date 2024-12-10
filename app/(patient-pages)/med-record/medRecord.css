@@ -4,16 +4,19 @@ body{
     /* overflow: hidden; */
 }
 
-.title{
+.title-reg{
     font-family: 'Karla', sans-serif;
     color: white;
     font-size: 7vh;
     font-weight: bolder;
     padding: 0px 0px 0px 60px;
+    margin-bottom: 20px;
+    border-radius: 20px;
     margin-top: 0;
+    /* background-color: #800000; */
 }
 
-.form-container {
+.form-container-reg {
     display: flex;
     flex-direction: row;
     /* justify-content: space-between; */
@@ -22,19 +25,21 @@ body{
     padding-right: 60px;
 }
 
-.regContent{
+.regContent-reg{
     margin-top: 15px;
+    font-family: 'Karla', sans-serif;
     /* margin-bottom: 40px; */
 }
   
-.sidebar {
+.sidebar-reg {
     width: 250px;
     /* margin-right: 20px; */
     display: flex;
     flex-direction: column;
+    font-family: 'Karla', sans-serif;
 }
   
-.form {
+.form-reg {
     flex-grow: 1;
     background-color: #ffffff;
     padding: 20px;
@@ -42,4 +47,6 @@ body{
     /* margin-right: 20px; */
     border-radius: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    height: 500px;
+    overflow-y: scroll;
 }
