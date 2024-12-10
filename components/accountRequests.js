@@ -68,8 +68,8 @@ const AccountRequests = () => {
             <p><strong>Message/Query:</strong> {request.message}</p>
           </div>
           <div className="event-card-buttons">
-            <button className="accept-button" onClick={() => handleAccept(request)}>Accept</button>
-            <button className="reject-button" onClick={() => handleReject(request)}>Reject</button>
+            <button className="accept-button" onClick={() => handleAccept(request)}><b>ACCEPT</b></button>
+            <button className="reject-button" onClick={() => handleReject(request)}><b>REJECT</b></button>
           </div>
         </div>
       ))}

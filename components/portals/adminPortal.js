@@ -27,7 +27,7 @@ const AdminPortal = () => {
           <div className="col-container">
             <div className="category-col-container">
               <div className="category-header">
-                <label>ADMINISTRATIVE TASKS</label>
+                <label>Administrative Tasks</label>
               </div>
               <div className="row-container-card-holder">
                 <div className="col-container">

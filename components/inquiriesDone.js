@@ -44,7 +44,7 @@ const DonationsDone = ({inquiries}) => {
             <p><strong>Subject:</strong> {inquiry.type}</p>
             <p><strong>Message:</strong> {inquiry.message}</p>
           </div>
-          <button className="responded-button" onClick={() => handleMarkAsUnread(inquiry.queryID, inquiry.email)}>Mark as Unread</button>
+          <button className="responded-button" onClick={() => handleMarkAsUnread(inquiry.queryID, inquiry.email)}><b>Mark as Unread</b></button>
         </div>
       ))}
     </div>

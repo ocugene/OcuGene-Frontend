@@ -127,7 +127,7 @@ const SupportActEdit = ({ event, onSave, onClose }) => {
               />
             </div>
           </div>
-          <button type="submit" className="save-button">Save</button>
+          <button type="submit" className="save-button"><b>SAVE</b></button>
         </form>
       </div>
     </div>
