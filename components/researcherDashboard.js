@@ -175,70 +175,6 @@ const ResearcherDashboard = () => {
     fetchBcvaStats();
   }, []);
 
-  // Aggregate BCVA data for pie charts
-  const aggregateBcvaData = (stats, selectedDiseaseName) => {
-    const labels = [];
-    const data = [];
-    const backgroundColors = [];
-  
-    const colors = ['#FFCDD2', '#E57373', '#64B5F6', '#4CAF50', '#FF9800'];
-  
-    // Check if "All Diseases" is selected
-    if (selectedDiseaseName === 'All Diseases') {
-      // Aggregate counts for all diseases
-      const aggregated = stats.reduce(
-        (acc, item) => {
-          acc['20/20'] += item.count2020;
-          acc['20/40'] += item.count2040;
-          acc['20/60'] += item.count2060;
-          acc['20/80'] += item.count2080;
-          acc['20/100'] += item.count20100;
-          return acc;
-        },
-        { '20/20': 0, '20/40': 0, '20/60': 0, '20/80': 0, '20/100': 0 }
-      );
-  
-      labels.push('20/20', '20/40', '20/60', '20/80', '20/100');
-      data.push(
-        aggregated['20/20'],
-        aggregated['20/40'],
-        aggregated['20/60'],
-        aggregated['20/80'],
-        aggregated['20/100']
-      );
-      backgroundColors.push(...colors);
-    } else {
-      // Filter stats for the selected disease
-      const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
-  
-      filteredStats.forEach((item) => {
-        ['count2020', 'count2040', 'count2060', 'count2080', 'count20100'].forEach(
-          (key, categoryIndex) => {
-            const count = item[key];
-            if (count > 0) {
-              const formattedLabel = key.replace('count', '').replace(/(\d{2})(\d{2})/, '$1/$2');
-              labels.push(`${item.variant} - ${formattedLabel}`);
-              data.push(count);
-              backgroundColors.push(colors[categoryIndex % colors.length]);
-            }
-          }
-        );
-      });
-    }
-  
-    return {
-      labels,
-      datasets: [
-        {
-          label: 'BCVA Distribution',
-          data,
-          backgroundColor: backgroundColors,
-        },
-      ],
-    };
-  };
-  
-
   // Fetch corneal opacity stats
   useEffect(() => {
     const fetchCornealOpacityStats = async () => {
@@ -261,56 +197,6 @@ const ResearcherDashboard = () => {
 
     fetchCornealOpacityStats();
   }, []);
-
-  // Aggregate corneal opacity data for pie charts
-  const aggregateCornealOpacityData = (stats, selectedDiseaseName) => {
-    const labels = [];
-    const data = [];
-    const backgroundColors = [];
-  
-    const colors = ['#C8E6C9', '#FFCDD2']; // Green for normal, Red for abnormal
-  
-    // Check if "All Diseases" is selected
-    if (selectedDiseaseName === 'All Diseases') {
-      // Aggregate counts for all diseases
-      const aggregated = stats.reduce(
-        (acc, item) => {
-          acc.normal += item.normalCount;
-          acc.abnormal += item.abnormalCount;
-          return acc;
-        },
-        { normal: 0, abnormal: 0 }
-      );
-  
-      labels.push('Normal', 'Abnormal');
-      data.push(aggregated.normal, aggregated.abnormal);
-      backgroundColors.push(colors[0], colors[1]);
-    } else {
-      // Filter stats for the selected disease
-      const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
-  
-      filteredStats.forEach((item) => {
-        const normalLabel = `${item.variant} - Normal`;
-        const abnormalLabel = `${item.variant} - Abnormal`;
-  
-        labels.push(normalLabel, abnormalLabel);
-        data.push(item.normalCount, item.abnormalCount);
-        backgroundColors.push(colors[0], colors[1]);
-      });
-    }
-  
-    return {
-      labels,
-      datasets: [
-        {
-          label: 'Corneal Opacity Distribution',
-          data,
-          backgroundColor: backgroundColors,
-        },
-      ],
-    };
-  };
-  
 
   // Fetch retinal condition stats
   useEffect(() => {
@@ -335,15 +221,104 @@ const ResearcherDashboard = () => {
     fetchRetinalConditionStats();
   }, []);
 
-  // Aggregate retinal condition data for pie charts
-  const aggregateRetinalConditionData = (stats, selectedDiseaseName) => {
+  // Aggregate BCVA data for pie charts 
+  const aggregateBcvaData = (stats, selectedDiseaseName) => {
     const labels = [];
     const data = [];
     const backgroundColors = [];
+    
+    const baseColors = ['#FFCDD2', '#E57373', '#64B5F6', '#4CAF50', '#FF9800']; // Solid colors for BCVA categories
+    const shadeFactor = 0.2; // Factor to darken the base color for each BCVA category
+    
+    // Utility to generate shades of a base color
+    const shadeColor = (color, factor) => {
+      const [r, g, b] = color.match(/\w\w/g).map((c) => parseInt(c, 16));
+      const newColor = [
+        Math.round(r * (1 - factor)),
+        Math.round(g * (1 - factor)),
+        Math.round(b * (1 - factor)),
+      ]
+        .map((c) => c.toString(16).padStart(2, '0'))
+        .join('');
+      return `#${newColor}`;
+    };
   
-    const colors = ['#BBDEFB', '#64B5F6', '#FFCDD2', '#E57373']; // Blue for normal, Red for abnormal
+    if (selectedDiseaseName === 'All Diseases') {
+      // Aggregate data for all BCVA categories across all diseases and variants
+      const aggregated = stats.reduce(
+        (acc, item) => {
+          acc['20/20'] += item.count2020;
+          acc['20/40'] += item.count2040;
+          acc['20/60'] += item.count2060;
+          acc['20/80'] += item.count2080;
+          acc['20/100'] += item.count20100;
+          return acc;
+        },
+        { '20/20': 0, '20/40': 0, '20/60': 0, '20/80': 0, '20/100': 0 }
+      );
   
-    // Check if "All Diseases" is selected
+      // Add aggregated values to labels, data, and colors
+      const bcvaKeys = ['20/20', '20/40', '20/60', '20/80', '20/100'];
+      bcvaKeys.forEach((key, index) => {
+        labels.push(key);
+        data.push(aggregated[key]);
+        backgroundColors.push(shadeColor(baseColors[index % baseColors.length], 0));
+      });
+    } else {
+      // Filter data for the selected disease
+      const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
+  
+      filteredStats.forEach((item, index) => {
+        const baseColor = baseColors[index % baseColors.length];
+        ['count2020', 'count2040', 'count2060', 'count2080', 'count20100'].forEach(
+          (key, categoryIndex) => {
+            const count = item[key];
+            if (count > 0) {
+              const formattedLabel = key.replace('count', '').replace(/(\d{2})(\d{2})/, '$1/$2');
+              labels.push(`${item.variant} - ${formattedLabel}`);
+              data.push(count);
+              backgroundColors.push(shadeColor(baseColor, categoryIndex * shadeFactor));
+            }
+          }
+        );
+      });
+    }
+  
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'BCVA Distribution by Variant',
+          data,
+          backgroundColor: backgroundColors,
+        },
+      ],
+    };
+  };
+  
+  
+  // Aggregate corneal opacity data for pie charts
+  const aggregateCornealOpacityData = (stats, selectedDiseaseName) => {
+    const labels = [];
+    const data = [];
+    const backgroundColors = [];
+    
+    const baseColors = ['#C8E6C9', '#FFCDD2', '#64B5F6', '#FF9800', '#4CAF50']; // Base colors for each variant
+    const shadeFactor = 0.2; // Factor to darken the base color for "Abnormal"
+    
+    // Utility to generate shades of a base color
+    const shadeColor = (color, factor) => {
+      const [r, g, b] = color.match(/\w\w/g).map((c) => parseInt(c, 16));
+      const newColor = [
+        Math.round(r * (1 - factor)),
+        Math.round(g * (1 - factor)),
+        Math.round(b * (1 - factor)),
+      ]
+        .map((c) => c.toString(16).padStart(2, '0'))
+        .join('');
+      return `#${newColor}`;
+    };
+  
     if (selectedDiseaseName === 'All Diseases') {
       // Aggregate counts for all diseases
       const aggregated = stats.reduce(
@@ -357,18 +332,21 @@ const ResearcherDashboard = () => {
   
       labels.push('Normal', 'Abnormal');
       data.push(aggregated.normal, aggregated.abnormal);
-      backgroundColors.push(colors[0], colors[2]);
+      backgroundColors.push(baseColors[0], shadeColor(baseColors[1], shadeFactor));
     } else {
       // Filter stats for the selected disease
       const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
   
-      filteredStats.forEach((item) => {
+      filteredStats.forEach((item, index) => {
+        const baseColor = baseColors[index % baseColors.length];
+  
         const normalLabel = `${item.variant} - Normal`;
         const abnormalLabel = `${item.variant} - Abnormal`;
   
         labels.push(normalLabel, abnormalLabel);
         data.push(item.normalCount, item.abnormalCount);
-        backgroundColors.push(colors[0], colors[2]);
+  
+        backgroundColors.push(baseColor, shadeColor(baseColor, shadeFactor));
       });
     }
   
@@ -376,7 +354,7 @@ const ResearcherDashboard = () => {
       labels,
       datasets: [
         {
-          label: 'Retinal Condition Distribution',
+          label: 'Corneal Opacity Distribution by Variant',
           data,
           backgroundColor: backgroundColors,
         },
@@ -384,9 +362,71 @@ const ResearcherDashboard = () => {
     };
   };
   
+  // Aggregate retinal condition data for pie charts
+  const aggregateRetinalConditionData = (stats, selectedDiseaseName) => {
+    const labels = [];
+    const data = [];
+    const backgroundColors = [];
+    
+    const baseColors = ['#BBDEFB', '#FFCDD2', '#64B5F6', '#FF9800', '#4CAF50']; // Base colors for variants
+    const shadeFactor = 0.2; // Factor to darken the base color for "Abnormal"
+    
+    // Utility to generate shades of a base color
+    const shadeColor = (color, factor) => {
+      const [r, g, b] = color.match(/\w\w/g).map((c) => parseInt(c, 16));
+      const newColor = [
+        Math.round(r * (1 - factor)),
+        Math.round(g * (1 - factor)),
+        Math.round(b * (1 - factor)),
+      ]
+        .map((c) => c.toString(16).padStart(2, '0'))
+        .join('');
+      return `#${newColor}`;
+    };
   
-
-
+    if (selectedDiseaseName === 'All Diseases') {
+      // Aggregate counts for all diseases
+      const aggregated = stats.reduce(
+        (acc, item) => {
+          acc.normal += item.normalCount;
+          acc.abnormal += item.abnormalCount;
+          return acc;
+        },
+        { normal: 0, abnormal: 0 }
+      );
+  
+      labels.push('Normal', 'Abnormal');
+      data.push(aggregated.normal, aggregated.abnormal);
+      backgroundColors.push(baseColors[0], shadeColor(baseColors[1], shadeFactor));
+    } else {
+      // Filter stats for the selected disease
+      const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
+  
+      filteredStats.forEach((item, index) => {
+        const baseColor = baseColors[index % baseColors.length];
+  
+        const normalLabel = `${item.variant} - Normal`;
+        const abnormalLabel = `${item.variant} - Abnormal`;
+  
+        labels.push(normalLabel, abnormalLabel);
+        data.push(item.normalCount, item.abnormalCount);
+  
+        backgroundColors.push(baseColor, shadeColor(baseColor, shadeFactor));
+      });
+    }
+  
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Retinal Condition Distribution by Variant',
+          data,
+          backgroundColor: backgroundColors,
+        },
+      ],
+    };
+  };
+  
   const leftBcvaChartData = aggregateBcvaData(leftBcvaStats, selectedDisease.name);
   const rightBcvaChartData = aggregateBcvaData(rightBcvaStats, selectedDisease.name);
   
