@@ -103,7 +103,7 @@ const RegistryViewForm = () => {
 
   return (
     <div>
-      <div className="form-step">
+      <div className="form-step-vp">
       <form>
         {/* Target 1: Demographics */}
         <div id="target1" className="target">
