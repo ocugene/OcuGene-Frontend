@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import './researcherHub.css';
+import './home.css';
 
 const Registry = () => {
 
@@ -25,7 +25,7 @@ const Registry = () => {
               <div className="category-header">
                 <label>Navigate</label>
               </div>
-              <div className="row-container">
+              <div className="row-container-card-holder">
                 <div className="col-container">
                   <button className="card-button" onClick={navigateToNew} data-info="Add New Record to the registry">
                     <div className="card-btn-title"><span>Add New Record</span></div>
