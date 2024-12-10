@@ -52,8 +52,8 @@ import './researcherDashboard.css';
 
 const ResearcherDashboard = () => {
 
-  const [leftBcvaStats, setLeftBcvaStats] = useState(null);
-  const [rightBcvaStats, setRightBcvaStats] = useState(null);
+  const [leftBcvaStats, setLeftBcvaStats] = useState([]);
+  const [rightBcvaStats, setRightBcvaStats] = useState([]);
 
   const [leftCornealOpacityStats, setLeftCornealOpacityStats] = useState(null);
   const [rightCornealOpacityStats, setRightCornealOpacityStats] = useState(null);
@@ -152,7 +152,7 @@ const ResearcherDashboard = () => {
       });
   }, []);
 
-  //fetch bcva stats
+  // Fetch BCVA stats
   useEffect(() => {
     const fetchBcvaStats = async () => {
       try {
@@ -174,6 +174,63 @@ const ResearcherDashboard = () => {
 
     fetchBcvaStats();
   }, []);
+
+  // Aggregate BCVA data for pie charts
+  const aggregateBcvaData = (stats, selectedDiseaseName) => {
+    const labels = [];
+    const data = [];
+    const backgroundColors = [];
+  
+    const colors = ['#FFCDD2', '#E57373', '#64B5F6', '#4CAF50', '#FF9800'];
+  
+    // Filter stats for the selected disease
+    const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
+  
+    filteredStats.forEach((item) => {
+      ['count2020', 'count2040', 'count2060', 'count2080', 'count20100'].forEach(
+        (key, categoryIndex) => {
+          const count = item[key];
+          if (count > 0) {
+            // Fix label to include `/`
+            const formattedLabel = key.replace('count', '').replace(/(\d{2})(\d{2})/, '$1/$2');
+            labels.push(`${item.variant} - ${formattedLabel}`);
+            data.push(count);
+            backgroundColors.push(colors[categoryIndex % colors.length]);
+          }
+        }
+      );
+    });
+  
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'BCVA Distribution',
+          data,
+          backgroundColor: backgroundColors,
+        },
+      ],
+    };
+  };
+  
+  
+
+  const leftBcvaChartData = aggregateBcvaData(leftBcvaStats, selectedDisease.name);
+  const rightBcvaChartData = aggregateBcvaData(rightBcvaStats, selectedDisease.name);
+  
+
+  const chartOptions = {
+    plugins: {
+      legend: {
+        position: 'right',
+        align: 'center',
+        labels: {
+          boxWidth: 20,
+        },
+      },
+    },
+    maintainAspectRatio: false,
+  };
 
   // Fetch corneal opacity stats
   useEffect(() => {
@@ -330,28 +387,28 @@ const ResearcherDashboard = () => {
     };
   };
   
-  const chartOptions = {
-    plugins: {
-      legend: {
-        position: 'right', // Keep legend to the right of each chart
-        align: 'center', // Center-align the legend
-        labels: {
-          boxWidth: 20, // Adjust box size for legend icons
-          padding: 10, // Add padding between labels
-          generateLabels: (chart) => {
-            const data = chart.data;
-            return data.labels.map((label, index) => ({
-              text: label,
-              fillStyle: data.datasets[0].backgroundColor[index],
-              hidden: false,
-              index,
-            }));
-          },
-        },
-      },
-    },
-    maintainAspectRatio: false, // Allow responsive resizing
-  };
+  // const chartOptions = {
+  //   plugins: {
+  //     legend: {
+  //       position: 'right', // Keep legend to the right of each chart
+  //       align: 'center', // Center-align the legend
+  //       labels: {
+  //         boxWidth: 20, // Adjust box size for legend icons
+  //         padding: 10, // Add padding between labels
+  //         generateLabels: (chart) => {
+  //           const data = chart.data;
+  //           return data.labels.map((label, index) => ({
+  //             text: label,
+  //             fillStyle: data.datasets[0].backgroundColor[index],
+  //             hidden: false,
+  //             index,
+  //           }));
+  //         },
+  //       },
+  //     },
+  //   },
+  //   maintainAspectRatio: false, // Allow responsive resizing
+  // };
   
   
 
@@ -367,270 +424,292 @@ const ResearcherDashboard = () => {
     <div>
       <h1 className="title">Registry Database</h1>
       <div className="dashboard">
-      {/* Radio buttons for disease selection */}
-      <div className="radioButtons">
-        {diseasesData.map((disease) => (
-          <label key={disease.name} className="radioLabel">
-            <input
-              type="radio"
-              name="disease"
-              value={disease.name}
-              onChange={handleDiseaseChange}
-              className="radioInput"
-              checked={disease.name === selectedDisease.name}
-            />
-            {disease.name}
-          </label>
-        ))}
-      </div>
-
-      {selectedDisease && (
-        <div className="diseaseDetails">
-          <div className = "diseaseHeader">
-            <p className="diseaseName">{selectedDisease.name}</p>
-          </div>
-          
-          <div className="diseaseSpecContainer">
-            <p className="left-column">{selectedDisease.totalPatients}</p>
-            <p className="right-top">Patients with</p>
-            <p className="right-bottom">{selectedDisease.name}</p>
-          </div>
-
-
-          <div className='variantsContainer'>
-          {selectedDisease.variants.map((variant, index) => (
-            <div key={index} className="variant">
-              <h3>{variant.variant}</h3>
-              <p>Patients: <b>{variant.patients}</b></p>
-              <p>Duration: <b>{variant.duration}</b></p>
-              <p>Age: <b>{variant.age}</b></p>
-            </div>
+        {/* Radio buttons for disease selection */}
+        <div className="radioButtons">
+          {diseasesData.map((disease) => (
+            <label key={disease.name} className="radioLabel">
+              <input
+                type="radio"
+                name="disease"
+                value={disease.name}
+                onChange={handleDiseaseChange}
+                className="radioInput"
+                checked={disease.name === selectedDisease.name}
+              />
+              {disease.name}
+            </label>
           ))}
-          </div>
-          
+        </div>
 
-          {/* Horizontal Bar Chart for regions */}
-          <div className="chartContainer">
-            <h2>Regions in the Philippines</h2>
-            <Bar
-              data={{
-                labels: Object.keys(selectedDisease.regions)
-                  .sort((a, b) => regionsOrder.indexOf(a) - regionsOrder.indexOf(b)), // Sort according to custom order
-                datasets: [
-                  {
-                    label: 'Number of Patients',
-                    data: Object.keys(selectedDisease.regions)
-                      .sort((a, b) => regionsOrder.indexOf(a) - regionsOrder.indexOf(b)) // Same sorting order for data
-                      .map(region => selectedDisease.regions[region]),
-                    backgroundColor: 'rgba(75,192,192,0.4)',
+        {selectedDisease && (
+          <div className="diseaseDetails">
+
+            <div className = "diseaseHeader">
+              <p className="diseaseName">{selectedDisease.name}</p>
+            </div>
+            
+            <div className="diseaseSpecContainer">
+              <p className="left-column">{selectedDisease.totalPatients}</p>
+              <p className="right-top">Patients with</p>
+              <p className="right-bottom">{selectedDisease.name}</p>
+            </div>
+
+
+            <div className='variantsContainer'>
+              {selectedDisease.variants.map((variant, index) => (
+                <div key={index} className="variant">
+                  <h3>{variant.variant}</h3>
+                  <p>Number of Patients: <b>{variant.patients}</b></p>
+                  <p>Blur Duration (Mode): <b>{variant.duration}</b></p>
+                  <p>Mean Patient Age: <b>{variant.age}</b></p>
+                </div>
+              ))}
+            </div>
+            
+
+            {/* Horizontal Bar Chart for regions */}
+            <div className="chartContainer">
+              <h2>Regions in the Philippines</h2>
+              <Bar
+                data={{
+                  labels: Object.keys(selectedDisease.regions)
+                    .sort((a, b) => regionsOrder.indexOf(a) - regionsOrder.indexOf(b)), // Sort according to custom order
+                  datasets: [
+                    {
+                      label: 'Number of Patients',
+                      data: Object.keys(selectedDisease.regions)
+                        .sort((a, b) => regionsOrder.indexOf(a) - regionsOrder.indexOf(b)) // Same sorting order for data
+                        .map(region => selectedDisease.regions[region]),
+                      backgroundColor: 'rgba(75,192,192,0.4)',
+                    },
+                  ],
+                }}
+                options={{
+                  indexAxis: 'y',
+                  scales: {
+                    x: {
+                      beginAtZero: true,
+                    },
                   },
-                ],
-              }}
-              options={{
-                indexAxis: 'y',
-                scales: {
-                  x: {
-                    beginAtZero: true,
-                  },
-                },
-              }}
-            />
-          </div>
+                }}
+              />
+            </div>
 
 
-  <div clsasName="clinicOutcomes">
-    <h2>Clinical Outcomes</h2>
-
-    <div className="clinicalContainer">
-      {selectedDisease.variants.map((variant, index) => (
-        <div key={index} className="variant">
-          <h3>{variant.variant}</h3>
-
-          {/* <p>
-            Vision: <b>{variant.vision}</b>
-          </p> */}
-
-          {leftBcvaStats && rightBcvaStats ? (
-            <div>
-              <h4>Best Corrected Visual Acuity (BCVA) Statistics:</h4>
+            <div className="clinicOutcomes">
+              <h2>Clinical Outcomes</h2>
 
               <div
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
-                  justifyContent: 'center', // Center the charts horizontally
-                  alignItems: 'center', // Align the charts vertically
-                  gap: '20px', // Add space between the charts
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '20px',
                 }}
               >
-                <div style={{ width: '300px', height: '300px' }}>
+                <div style={{ width: '400px', height: '400px' }}>
                   <h5>Left BCVA</h5>
-                  <Doughnut data={createPieData(leftBcvaStats, 'blue')} options={chartOptions} />
+                  {leftBcvaChartData.labels.length > 0 ? (
+                    <Doughnut data={leftBcvaChartData} options={chartOptions} />
+                  ) : (
+                    <p>Loading left BCVA data...</p>
+                  )}
                 </div>
-                <div style={{ width: '300px', height: '300px' }}>
+                <div style={{ width: '400px', height: '400px' }}>
                   <h5>Right BCVA</h5>
-                  <Doughnut data={createPieData(rightBcvaStats, 'green')} options={chartOptions} />
+                  {rightBcvaChartData.labels.length > 0 ? (
+                    <Doughnut data={rightBcvaChartData} options={chartOptions} />
+                  ) : (
+                    <p>Loading right BCVA data...</p>
+                  )}
                 </div>
               </div>
-            </div>
-          ) : (
-            <p>Loading BCVA stats...</p>
-          )}
 
-          {/* <p>
-            Corneal Opacity
-          </p> */}
+              <>
+              {/* <div className="clinicalContainer">
+                {selectedDisease.variants.map((variant, index) => (
 
-          <div>
-            <h4>Corneal Opacity Statistics: </h4>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '20px', // Adds spacing between the charts
-              }}
-            >
-              <div style={{ width: '300px', height: '300px' }}>
-                <h5>Left Cornea</h5>
-                {leftChartData ? (
-                  <Doughnut
-                    data={leftChartData}
-                    options={{
-                      ...chartOptions,
-                      plugins: {
-                        ...chartOptions.plugins,
-                        legend: {
-                          ...chartOptions.plugins.legend,
-                          position: 'right', // Position labels to the right
-                        },
-                      },
-                    }}
-                  />
-                ) : (
-                  <p>Loading left corneal data...</p>
-                )}
-              </div>
-              <div style={{ width: '300px', height: '300px' }}>
-                <h5>Right Cornea</h5>
-                {rightChartData ? (
-                  <Doughnut
-                    data={rightChartData}
-                    options={{
-                      ...chartOptions,
-                      plugins: {
-                        ...chartOptions.plugins,
-                        legend: {
-                          ...chartOptions.plugins.legend,
-                          position: 'right', // Position labels to the right
-                        },
-                      },
-                    }}
-                  />
-                ) : (
-                  <p>Loading right corneal data...</p>
-                )}
-              </div>
+                  <div key={index} className="variant">
+
+                    <h3>{variant.variant}</h3>
+
+                    {leftBcvaStats && rightBcvaStats ? (
+                      <div>
+                        <h4>Best Corrected Visual Acuity (BCVA) Statistics:</h4>
+
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center', // Center the charts horizontally
+                            alignItems: 'center', // Align the charts vertically
+                            gap: '20px', // Add space between the charts
+                          }}
+                        >
+                          <div style={{ width: '300px', height: '300px' }}>
+                            <h5>Left BCVA</h5>
+                            <Doughnut data={createPieData(leftBcvaStats, 'blue')} options={chartOptions} />
+                          </div>
+                          <div style={{ width: '300px', height: '300px' }}>
+                            <h5>Right BCVA</h5>
+                            <Doughnut data={createPieData(rightBcvaStats, 'green')} options={chartOptions} />
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <p>Loading BCVA stats...</p>
+                    )}
+
+
+                    <div>
+                      <h4>Corneal Opacity Statistics: </h4>
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          gap: '20px', // Adds spacing between the charts
+                        }}
+                      >
+                        <div style={{ width: '300px', height: '300px' }}>
+                          <h5>Left Cornea</h5>
+                          {leftChartData ? (
+                            <Doughnut
+                              data={leftChartData}
+                              options={{
+                                ...chartOptions,
+                                plugins: {
+                                  ...chartOptions.plugins,
+                                  legend: {
+                                    ...chartOptions.plugins.legend,
+                                    position: 'right', // Position labels to the right
+                                  },
+                                },
+                              }}
+                            />
+                          ) : (
+                            <p>Loading left corneal data...</p>
+                          )}
+                        </div>
+                        <div style={{ width: '300px', height: '300px' }}>
+                          <h5>Right Cornea</h5>
+                          {rightChartData ? (
+                            <Doughnut
+                              data={rightChartData}
+                              options={{
+                                ...chartOptions,
+                                plugins: {
+                                  ...chartOptions.plugins,
+                                  legend: {
+                                    ...chartOptions.plugins.legend,
+                                    position: 'right', // Position labels to the right
+                                  },
+                                },
+                              }}
+                            />
+                          ) : (
+                            <p>Loading right corneal data...</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4>Retinal Condition Statistics: </h4>
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          gap: '20px', // Adds spacing between the charts
+                        }}
+                      >
+                        <div style={{ width: '300px', height: '300px' }}>
+                          <h5>Left Retina</h5>
+                          {leftRetinalChartData ? (
+                            <Doughnut
+                              data={leftRetinalChartData}
+                              options={{
+                                ...chartOptions,
+                                plugins: {
+                                  ...chartOptions.plugins,
+                                  legend: {
+                                    ...chartOptions.plugins.legend,
+                                    position: 'right', // Position labels to the right
+                                  },
+                                },
+                              }}
+                            />
+                          ) : (
+                            <p>Loading left retinal data...</p>
+                          )}
+                        </div>
+                        <div style={{ width: '300px', height: '300px' }}>
+                          <h5>Right Retina</h5>
+                          {rightRetinalChartData ? (
+                            <Doughnut
+                              data={rightRetinalChartData}
+                              options={{
+                                ...chartOptions,
+                                plugins: {
+                                  ...chartOptions.plugins,
+                                  legend: {
+                                    ...chartOptions.plugins.legend,
+                                    position: 'right', // Position labels to the right
+                                  },
+                                },
+                              }}
+                            />
+                          ) : (
+                            <p>Loading right retinal data...</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                  </div>
+                ))}
+              </div> */}
+              </>
+
+
+
             </div>
+
+
+            {/* Doughnut Chart for Summary */}
+            {/* <div className="chartContainer">
+              <h2>Summary of Findings</h2>
+              <Doughnut
+                data={{
+                  labels: ['Vision', 'Opacity', 'Retina'],
+                  datasets: [
+                    {
+                      label: 'Clinical Outcomes',
+                      data: [30, 20, 50],
+                      backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                      ],
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                }}
+              />
+            </div> */}
+
           </div>
-
-
-          {/* <p>
-            Retina: <b>{variant.age}</b>
-          </p> */}
-
-          <div>
-            <h4>Retinal Condition Statistics: </h4>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '20px', // Adds spacing between the charts
-              }}
-            >
-              <div style={{ width: '300px', height: '300px' }}>
-                <h5>Left Retina</h5>
-                {leftRetinalChartData ? (
-                  <Doughnut
-                    data={leftRetinalChartData}
-                    options={{
-                      ...chartOptions,
-                      plugins: {
-                        ...chartOptions.plugins,
-                        legend: {
-                          ...chartOptions.plugins.legend,
-                          position: 'right', // Position labels to the right
-                        },
-                      },
-                    }}
-                  />
-                ) : (
-                  <p>Loading left retinal data...</p>
-                )}
-              </div>
-              <div style={{ width: '300px', height: '300px' }}>
-                <h5>Right Retina</h5>
-                {rightRetinalChartData ? (
-                  <Doughnut
-                    data={rightRetinalChartData}
-                    options={{
-                      ...chartOptions,
-                      plugins: {
-                        ...chartOptions.plugins,
-                        legend: {
-                          ...chartOptions.plugins.legend,
-                          position: 'right', // Position labels to the right
-                        },
-                      },
-                    }}
-                  />
-                ) : (
-                  <p>Loading right retinal data...</p>
-                )}
-              </div>
-            </div>
-          </div>
-
-          
-        </div>
-      ))}
-    </div>
-
-  </div>
-
-
-          {/* Doughnut Chart for Summary */}
-          {/* <div className="chartContainer">
-            <h2>Summary of Findings</h2>
-            <Doughnut
-              data={{
-                labels: ['Vision', 'Opacity', 'Retina'],
-                datasets: [
-                  {
-                    label: 'Clinical Outcomes',
-                    data: [30, 20, 50],
-                    backgroundColor: [
-                      'rgba(255, 99, 132, 0.6)',
-                      'rgba(54, 162, 235, 0.6)',
-                      'rgba(255, 206, 86, 0.6)',
-                    ],
-                  },
-                ],
-              }}
-              options={{
-                responsive: true,
-                maintainAspectRatio: false,
-              }}
-            />
-          </div> */}
-
-        </div>
-      )}
-    </div>
-  </div> 
+        )}
+      </div>
+    </div> 
   );
 };
 
