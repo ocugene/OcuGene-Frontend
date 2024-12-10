@@ -42,8 +42,12 @@ const NavbarLanding = () => {
   };
 
   const handleHomeClick = () => {
-    router.push('/');
-  }
+    if (isLoggedIn) {
+      router.push('/home');
+    } else {
+      router.push('/');
+    }
+  };
 
   const handleProfileClick = () => {
     router.push('/profile');

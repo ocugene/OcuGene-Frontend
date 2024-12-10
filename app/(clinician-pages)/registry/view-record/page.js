@@ -45,7 +45,7 @@ const RegistryPage = () => {
       
       <div className='title-addnew'>View Record</div>
       <div  className="view-record-form-container">
-        <div className='sidebar'> <Sidebar></Sidebar> </div>
+        <div className='sidebar-view'> <Sidebar></Sidebar> </div>
         <div className='view-record-form'> <Form></Form> </div>
       </div>
     </div>

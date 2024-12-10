@@ -47,7 +47,7 @@ const LoginPageComp = () => {
         localStorage.setItem('role', data.user.userType.toLowerCase());
         localStorage.setItem('is_logged_in', 'true');
         localStorage.setItem('username', data.user.username);
-        router.push('/');
+        router.push('/home');
       } else {
         console.log('Login failed:', data.message || 'Invalid credentials.');
       }
