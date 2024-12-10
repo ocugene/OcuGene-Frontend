@@ -27,12 +27,15 @@ body{
     color: white;
 }
 
-.title{
+.title-addnew{
     font-family: 'Karla', sans-serif;
-    color: maroon;
+    color: white;
     font-size: 7vh;
     font-weight: bolder;
     padding: 0px 0px 0px 60px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    /* background-color: #800000; */
 }
 
 .view-record-form-container {

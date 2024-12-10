@@ -1,24 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 
-.title{
+.title-plist{
     font-family: 'Karla', sans-serif;
-    color: maroon;
+    color: white;
     font-size: 7vh;
     font-weight: bolder;
-    padding: 30px 0px 0px 60px;
+    padding: 0px 0px 0px 60px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    /* background-color: #800000; */
 }
 
-.p-table{
+.p-table-plist{
+    margin-left: 60px;
     font-family: 'Karla', sans-serif;
-    max-width: 100%; /* Set table width to take full space */
+    max-width: 60vw; /* Set table width to take full space */
     overflow-x: auto; /* Enables horizontal scrolling if table overflows */
     /* margin-top: 10px; */
     margin-bottom: 20px;
-    padding: 10px 0px 0px 60px;
+    padding: 10px 10px 10px 60px;
+    background-color: #FDFCFC;
+    border-radius: 20px;
 }
 
   /* Style for the entire table */
-.p-table table {
+.p-table-plist table {
     width: auto; 
     border-collapse: collapse; /* Remove gaps between cell borders */
     margin-top: 10px;
@@ -26,7 +32,7 @@
 }
 
 /* Table header styling */
-.p-table th {
+.p-table-plist th {
     background-color: maroon; /* Header background color */
     color: white; /* Header text color */
     font-weight: bold;
@@ -36,17 +42,22 @@
 }
 
 /* Table cell styling */
-.p-table td {
+.p-table-plist td {
     padding: 10px; /* Space inside cells */
     border: 1px solid #ddd; /* Border for table cells */
     text-align: left; /* Text alignment */
 }
 
 /* Table row styling */
-.p-table tr:nth-child(even) {
+.p-table-plist tr:nth-child(even) {
     background-color: #f2f2f2; /* Alternate row color */
 }
 
-.p-table tr:hover {
+.p-table-plist tr:hover {
     background-color: #ddd; /* Row color on hover */
+}
+
+.viewlist{
+    color: white;
+    background-color: #800000;
 }
