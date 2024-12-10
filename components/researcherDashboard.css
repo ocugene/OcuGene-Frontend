@@ -7,14 +7,20 @@
   max-width: 800px;
   margin: auto;
   font-family: 'Karla', sans-serif;
+  background-color: #FDFCFC;
+  border-radius: 20px;
+  padding-bottom: 50px;
 }
 
-.title {
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
+.title{
+  font-family: 'Karla', sans-serif;
+  color: white;
+  font-size: 7vh;
+  font-weight: bolder;
+  padding: 0px 0px 0px 20px;
   margin-bottom: 20px;
-  color: maroon;
+  border-radius: 20px;
+  /* background-color: #800000; */
 }
 
 .radioButtons {
