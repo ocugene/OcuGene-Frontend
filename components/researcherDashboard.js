@@ -155,9 +155,9 @@ const ResearcherDashboard = () => {
   
 
   return (
-    <div className="dashboard">
+    <div>
       <h1 className="title">Registry Database</h1>
-
+      <div className="dashboard">
       {/* Radio buttons for disease selection */}
       <div className="radioButtons">
         {diseasesData.map((disease) => (
@@ -270,6 +270,7 @@ const ResearcherDashboard = () => {
         </div>
       )}
     </div>
+  </div> 
   );
 };
 
