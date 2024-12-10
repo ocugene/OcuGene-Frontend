@@ -4,12 +4,15 @@
 
 .dashboard {
   padding: 20px;
-  max-width: 800px;
+  max-width: 100%;
   margin: auto;
   font-family: 'Karla', sans-serif;
   background-color: #FDFCFC;
   border-radius: 20px;
   padding-bottom: 50px;
+  margin-left: 50px;
+  margin-right:50px;
+  margin-bottom: 50px;
 }
 
 .title{
@@ -21,6 +24,7 @@
   margin-bottom: 20px;
   border-radius: 20px;
   margin-top: 0;
+  margin-left: 30px;
   /* background-color: #800000; */
 }
 
@@ -72,6 +76,11 @@
   margin-top: 5px;
 }
 
+.diseaseSpecContainer, .variantsContainer{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 .diseaseSpecContainer .left-column {
   grid-row: span 2; /* Make the left column span both rows */
   font-size: 4em;
@@ -110,6 +119,7 @@
   gap: 10px; /* Spacing between items */
   width: 100%;
   margin-top: 5px;
+  font-size: 1.25em;
 }
 
 
@@ -128,11 +138,14 @@ h3{
   margin-bottom:2px;
 }
 
-h2{
+.rdb-subhead{
   font-size: 2em;
   font-weight:bold;
-  margin-bottom:2px;
+  margin-bottom:10px;
   margin-top: 50px;
+  background-color: rgb(228, 185, 185);
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .chartContainer {

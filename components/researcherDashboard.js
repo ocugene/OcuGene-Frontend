@@ -496,8 +496,8 @@ const ResearcherDashboard = () => {
             </div>
 
 
-            <div className="clinicOutcomes">
-              <h2>Clinical Outcomes</h2>
+  <div clsasName="clinicOutcomes">
+    <h2 className="rdb-subhead">Clinical Outcomes</h2>
 
               <div
                 style={{

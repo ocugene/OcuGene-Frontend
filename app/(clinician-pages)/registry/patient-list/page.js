@@ -45,7 +45,7 @@ function Page() {
     return (
         <>
         {isAdminOrClinician &&
-         <div>
+         <div className="patient-list-container">
          <Navbar></Navbar>
          <Back></Back>
          <div className='title-plist'> Patient List </div>

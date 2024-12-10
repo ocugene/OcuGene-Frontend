@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
-
 .title-plist{
     font-family: 'Karla', sans-serif;
     color: white;
@@ -61,4 +60,10 @@
 .viewlist{
     color: white;
     background-color: #800000;
+    font-family: 'Karla', sans-serif;
+}
+
+.viewlist:hover{
+    cursor: pointer;
+    background-color:#ae3e3e;
 }
