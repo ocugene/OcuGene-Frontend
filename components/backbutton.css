@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+
 .back-button {
     margin: 5px 15px 0px 15px;
     background-color: #800000;
@@ -8,6 +10,7 @@
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Karla', sans-serif;
   }
   
   .back-button:hover {

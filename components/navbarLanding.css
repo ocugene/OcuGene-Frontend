@@ -62,5 +62,6 @@ body {
   
   .navbar-btn:hover {
     border-color: #800000; /* Change border color on hover */
+    cursor: pointer;
   }
 

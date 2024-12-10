@@ -570,7 +570,7 @@ const RegistryForm = ({formData, setFormData, handleSubmit}) => {
             </div>
           </div>
           
-          <button type='submit' className="registry-submit-button">Submit</button>
+          <button type='submit' className="registry-submit-button">SUBMIT</button>
         </form>
       </div>
     </div>

@@ -411,7 +411,7 @@ const ResearcherDashboard = () => {
 
           {/* Horizontal Bar Chart for regions */}
           <div className="chartContainer">
-            <h2>Regions in the Philippines</h2>
+            <h2 className="rdb-subhead">Regions in the Philippines</h2>
             <Bar
               data={{
                 labels: Object.keys(selectedDisease.regions)
@@ -439,7 +439,7 @@ const ResearcherDashboard = () => {
 
 
   <div clsasName="clinicOutcomes">
-    <h2>Clinical Outcomes</h2>
+    <h2 className="rdb-subhead">Clinical Outcomes</h2>
 
     <div className="clinicalContainer">
       {selectedDisease.variants.map((variant, index) => (

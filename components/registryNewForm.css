@@ -82,8 +82,9 @@ h2{
   font-weight:bolder;
 }
 
-.submit-button {
-  background-color: #BBD8BB;
+.registry-submit-button {
+  font-family: 'Karla', sans-serif;
+  background-color: white;
   color: black;
   border: none;
   border-radius: 10px;
@@ -111,9 +112,9 @@ h2{
 }
 
 
-.submit-button:hover {
-  background-color: darkgreen;
-  color: white;
+.registry-submit-button:hover {
+  border-color: darkgreen;
+  cursor: pointer;
 }
 
 .clinical-exam-table {
@@ -126,6 +127,7 @@ h2{
   border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
+  font-family: 'Karla', sans-serif;
 }
 
 .clinical-exam-table th {
@@ -140,6 +142,7 @@ h2{
   border-radius: 10px;
   box-sizing: border-box;
   font-size: 1em;
+  font-family: 'Karla', sans-serif;
 }
 
 .registry-submit-button {
