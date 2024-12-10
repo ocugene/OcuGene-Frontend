@@ -94,6 +94,7 @@ h2{
 
 textarea {
   resize: none;
+  height: 80px;
 }
 
 .login-link {
