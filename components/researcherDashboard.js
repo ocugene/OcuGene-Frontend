@@ -55,11 +55,11 @@ const ResearcherDashboard = () => {
   const [leftBcvaStats, setLeftBcvaStats] = useState([]);
   const [rightBcvaStats, setRightBcvaStats] = useState([]);
 
-  const [leftCornealOpacityStats, setLeftCornealOpacityStats] = useState(null);
-  const [rightCornealOpacityStats, setRightCornealOpacityStats] = useState(null);
+  const [leftCornealOpacityStats, setLeftCornealOpacityStats] = useState([]);
+  const [rightCornealOpacityStats, setRightCornealOpacityStats] = useState([]);
 
-  const [leftRetinalConditionStats, setLeftRetinalConditionStats] = useState(null);
-  const [rightRetinalConditionStats, setRightRetinalConditionStats] = useState(null);
+  const [leftRetinalConditionStats, setLeftRetinalConditionStats] = useState([]);
+  const [rightRetinalConditionStats, setRightRetinalConditionStats] = useState([]);
 
 
   // Custom order of regions
@@ -183,23 +183,48 @@ const ResearcherDashboard = () => {
   
     const colors = ['#FFCDD2', '#E57373', '#64B5F6', '#4CAF50', '#FF9800'];
   
-    // Filter stats for the selected disease
-    const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
-  
-    filteredStats.forEach((item) => {
-      ['count2020', 'count2040', 'count2060', 'count2080', 'count20100'].forEach(
-        (key, categoryIndex) => {
-          const count = item[key];
-          if (count > 0) {
-            // Fix label to include `/`
-            const formattedLabel = key.replace('count', '').replace(/(\d{2})(\d{2})/, '$1/$2');
-            labels.push(`${item.variant} - ${formattedLabel}`);
-            data.push(count);
-            backgroundColors.push(colors[categoryIndex % colors.length]);
-          }
-        }
+    // Check if "All Diseases" is selected
+    if (selectedDiseaseName === 'All Diseases') {
+      // Aggregate counts for all diseases
+      const aggregated = stats.reduce(
+        (acc, item) => {
+          acc['20/20'] += item.count2020;
+          acc['20/40'] += item.count2040;
+          acc['20/60'] += item.count2060;
+          acc['20/80'] += item.count2080;
+          acc['20/100'] += item.count20100;
+          return acc;
+        },
+        { '20/20': 0, '20/40': 0, '20/60': 0, '20/80': 0, '20/100': 0 }
       );
-    });
+  
+      labels.push('20/20', '20/40', '20/60', '20/80', '20/100');
+      data.push(
+        aggregated['20/20'],
+        aggregated['20/40'],
+        aggregated['20/60'],
+        aggregated['20/80'],
+        aggregated['20/100']
+      );
+      backgroundColors.push(...colors);
+    } else {
+      // Filter stats for the selected disease
+      const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
+  
+      filteredStats.forEach((item) => {
+        ['count2020', 'count2040', 'count2060', 'count2080', 'count20100'].forEach(
+          (key, categoryIndex) => {
+            const count = item[key];
+            if (count > 0) {
+              const formattedLabel = key.replace('count', '').replace(/(\d{2})(\d{2})/, '$1/$2');
+              labels.push(`${item.variant} - ${formattedLabel}`);
+              data.push(count);
+              backgroundColors.push(colors[categoryIndex % colors.length]);
+            }
+          }
+        );
+      });
+    }
   
     return {
       labels,
@@ -213,46 +238,20 @@ const ResearcherDashboard = () => {
     };
   };
   
-  
-
-  const leftBcvaChartData = aggregateBcvaData(leftBcvaStats, selectedDisease.name);
-  const rightBcvaChartData = aggregateBcvaData(rightBcvaStats, selectedDisease.name);
-  
-
-  const chartOptions = {
-    plugins: {
-      legend: {
-        position: 'right',
-        align: 'center',
-        labels: {
-          boxWidth: 20,
-        },
-      },
-    },
-    maintainAspectRatio: false,
-  };
 
   // Fetch corneal opacity stats
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchCornealOpacityStats = async () => {
       try {
-        // Fetch left corneal stats
         const leftResponse = await fetch(
           'https://ocugene-backend-production.up.railway.app/patient/get-left-corneal-opacity-stats'
         );
-        if (!leftResponse.ok) {
-          throw new Error('Failed to fetch left corneal stats');
-        }
         const leftData = await leftResponse.json();
         setLeftCornealOpacityStats(leftData);
 
-        // Fetch right corneal stats
         const rightResponse = await fetch(
           'https://ocugene-backend-production.up.railway.app/patient/get-right-corneal-opacity-stats'
         );
-        if (!rightResponse.ok) {
-          throw new Error('Failed to fetch right corneal stats');
-        }
         const rightData = await rightResponse.json();
         setRightCornealOpacityStats(rightData);
       } catch (error) {
@@ -260,30 +259,72 @@ const ResearcherDashboard = () => {
       }
     };
 
-    fetchStats();
+    fetchCornealOpacityStats();
   }, []);
+
+  // Aggregate corneal opacity data for pie charts
+  const aggregateCornealOpacityData = (stats, selectedDiseaseName) => {
+    const labels = [];
+    const data = [];
+    const backgroundColors = [];
+  
+    const colors = ['#C8E6C9', '#FFCDD2']; // Green for normal, Red for abnormal
+  
+    // Check if "All Diseases" is selected
+    if (selectedDiseaseName === 'All Diseases') {
+      // Aggregate counts for all diseases
+      const aggregated = stats.reduce(
+        (acc, item) => {
+          acc.normal += item.normalCount;
+          acc.abnormal += item.abnormalCount;
+          return acc;
+        },
+        { normal: 0, abnormal: 0 }
+      );
+  
+      labels.push('Normal', 'Abnormal');
+      data.push(aggregated.normal, aggregated.abnormal);
+      backgroundColors.push(colors[0], colors[1]);
+    } else {
+      // Filter stats for the selected disease
+      const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
+  
+      filteredStats.forEach((item) => {
+        const normalLabel = `${item.variant} - Normal`;
+        const abnormalLabel = `${item.variant} - Abnormal`;
+  
+        labels.push(normalLabel, abnormalLabel);
+        data.push(item.normalCount, item.abnormalCount);
+        backgroundColors.push(colors[0], colors[1]);
+      });
+    }
+  
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Corneal Opacity Distribution',
+          data,
+          backgroundColor: backgroundColors,
+        },
+      ],
+    };
+  };
+  
 
   // Fetch retinal condition stats
   useEffect(() => {
-    const fetchRetinalStats = async () => {
+    const fetchRetinalConditionStats = async () => {
       try {
-        // Fetch left retinal stats
         const leftResponse = await fetch(
           'https://ocugene-backend-production.up.railway.app/patient/get-left-retinal-condition-stats'
         );
-        if (!leftResponse.ok) {
-          throw new Error('Failed to fetch left retinal stats');
-        }
         const leftData = await leftResponse.json();
         setLeftRetinalConditionStats(leftData);
 
-        // Fetch right retinal stats
         const rightResponse = await fetch(
           'https://ocugene-backend-production.up.railway.app/patient/get-right-retinal-condition-stats'
         );
-        if (!rightResponse.ok) {
-          throw new Error('Failed to fetch right retinal stats');
-        }
         const rightData = await rightResponse.json();
         setRightRetinalConditionStats(rightData);
       } catch (error) {
@@ -291,8 +332,72 @@ const ResearcherDashboard = () => {
       }
     };
 
-    fetchRetinalStats();
+    fetchRetinalConditionStats();
   }, []);
+
+  // Aggregate retinal condition data for pie charts
+  const aggregateRetinalConditionData = (stats, selectedDiseaseName) => {
+    const labels = [];
+    const data = [];
+    const backgroundColors = [];
+  
+    const colors = ['#BBDEFB', '#64B5F6', '#FFCDD2', '#E57373']; // Blue for normal, Red for abnormal
+  
+    // Check if "All Diseases" is selected
+    if (selectedDiseaseName === 'All Diseases') {
+      // Aggregate counts for all diseases
+      const aggregated = stats.reduce(
+        (acc, item) => {
+          acc.normal += item.normalCount;
+          acc.abnormal += item.abnormalCount;
+          return acc;
+        },
+        { normal: 0, abnormal: 0 }
+      );
+  
+      labels.push('Normal', 'Abnormal');
+      data.push(aggregated.normal, aggregated.abnormal);
+      backgroundColors.push(colors[0], colors[2]);
+    } else {
+      // Filter stats for the selected disease
+      const filteredStats = stats.filter((item) => item.diagnosis === selectedDiseaseName);
+  
+      filteredStats.forEach((item) => {
+        const normalLabel = `${item.variant} - Normal`;
+        const abnormalLabel = `${item.variant} - Abnormal`;
+  
+        labels.push(normalLabel, abnormalLabel);
+        data.push(item.normalCount, item.abnormalCount);
+        backgroundColors.push(colors[0], colors[2]);
+      });
+    }
+  
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Retinal Condition Distribution',
+          data,
+          backgroundColor: backgroundColors,
+        },
+      ],
+    };
+  };
+  
+  
+
+
+  const leftBcvaChartData = aggregateBcvaData(leftBcvaStats, selectedDisease.name);
+  const rightBcvaChartData = aggregateBcvaData(rightBcvaStats, selectedDisease.name);
+  
+  const leftCornealChartData = aggregateCornealOpacityData(leftCornealOpacityStats, selectedDisease.name);
+  const rightCornealChartData = aggregateCornealOpacityData(rightCornealOpacityStats, selectedDisease.name);
+  
+
+  const leftRetinalChartData = aggregateRetinalConditionData(leftRetinalConditionStats, selectedDisease.name);
+  const rightRetinalChartData = aggregateRetinalConditionData(rightRetinalConditionStats, selectedDisease.name);
+  
+
 
   // Create pie data for retinal condition stats
   const createRetinalPieData = (stats, baseColor) => {
@@ -314,14 +419,18 @@ const ResearcherDashboard = () => {
     };
   };
 
-  const leftRetinalChartData = leftRetinalConditionStats
-    ? createRetinalPieData(leftRetinalConditionStats, 'blue')
-    : null;
-
-  const rightRetinalChartData = rightRetinalConditionStats
-    ? createRetinalPieData(rightRetinalConditionStats, 'orange')
-    : null;
-
+  const chartOptions = {
+    plugins: {
+      legend: {
+        position: 'right',
+        align: 'center',
+        labels: {
+          boxWidth: 20,
+        },
+      },
+    },
+    maintainAspectRatio: false,
+  };
 
 
   // Create pie data for corneal opacity stats
@@ -523,6 +632,78 @@ const ResearcherDashboard = () => {
                   ) : (
                     <p>Loading right BCVA data...</p>
                   )}
+                </div>
+              </div>
+
+              <div className="diseaseDetails">
+                <h2>Corneal Opacity Statistics</h2>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '20px',
+                  }}
+                >
+                  <div style={{ width: '400px', height: '400px' }}>
+                    <h5>Left Cornea</h5>
+                    {leftCornealChartData.labels.length > 0 ? (
+                      <Doughnut
+                        data={leftCornealChartData}
+                        options={chartOptions}
+                      />
+                    ) : (
+                      <p>Loading left corneal opacity data...</p>
+                    )}
+                  </div>
+                  <div style={{ width: '400px', height: '400px' }}>
+                    <h5>Right Cornea</h5>
+                    {rightCornealChartData.labels.length > 0 ? (
+                      <Doughnut
+                        data={rightCornealChartData}
+                        options={chartOptions}
+                      />
+                    ) : (
+                      <p>Loading right corneal opacity data...</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="diseaseDetails">
+                <h2>Retinal Condition Statistics</h2>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '20px',
+                  }}
+                >
+                  <div style={{ width: '400px', height: '400px' }}>
+                    <h5>Left Retina</h5>
+                    {leftRetinalChartData.labels.length > 0 ? (
+                      <Doughnut
+                        data={leftRetinalChartData}
+                        options={chartOptions}
+                      />
+                    ) : (
+                      <p>Loading left retinal condition data...</p>
+                    )}
+                  </div>
+                  <div style={{ width: '400px', height: '400px' }}>
+                    <h5>Right Retina</h5>
+                    {rightRetinalChartData.labels.length > 0 ? (
+                      <Doughnut
+                        data={rightRetinalChartData}
+                        options={chartOptions}
+                      />
+                    ) : (
+                      <p>Loading right retinal condition data...</p>
+                    )}
+                  </div>
                 </div>
               </div>
 
