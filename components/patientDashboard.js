@@ -72,15 +72,17 @@ const PatientDashboard = () => {
   return (
     <div className="p-dashboard">
       <div className="p-info">
-        <h1 className="title">Patient Database</h1>
-        <div className="p-descript">
-          The information about the patients can be found in this page. This database can be
-          used for future researches, and can be downloaded.
+        <div className="p-head-info">
+          <h1 className="title">Patient Database</h1>
+          <div className="p-descript">
+            The information about the patients can be found in this page. This database can be
+            used for future researches, and can be downloaded.
+          </div>
         </div>
         <div className="p-summary">
           <h2>About the Dataset</h2>
           {/* Add necessary details if applicable */}
-          <p>A dataframe with {patientsData.length} observations on the following 25 variables: </p>
+          <p>A dataframe with <b>{patientsData.length} observations</b>  on the following <b>25 variables</b>: </p>
           <ul>
             <li>Patient Code</li>
             <li>Sex</li>
@@ -96,7 +98,7 @@ const PatientDashboard = () => {
             <li>Chief Complaint</li>
             <li>Laterality</li>
             <li>Blur Duration</li>
-            <li>Family Member, </li>
+            <li>Family Member</li>
             <li>Sibling Count</li>
 
             <li>ERG Date</li>
