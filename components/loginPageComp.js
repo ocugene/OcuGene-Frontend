@@ -49,7 +49,9 @@ const LoginPageComp = () => {
         localStorage.setItem('username', data.user.username);
         router.push('/home');
       } else {
-        console.log('Login failed:', data.message || 'Invalid credentials.');
+        // console.log('Login failed:', data.message || 'Invalid credentials.');
+        alert(`Login failed: ${data.message || 'Invalid credentials.'}`);
+
       }
     } catch (error) {
       console.log('Error logging in: ', error);
