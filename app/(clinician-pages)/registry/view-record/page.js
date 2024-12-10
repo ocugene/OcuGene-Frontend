@@ -38,12 +38,12 @@ const RegistryPage = () => {
     <Back></Back>
     <div className="regContent">
       <div className='button-container'>
-        <button className='back-button' onClick={handleGoBack}>
+        {/* <button className='back-button' onClick={handleGoBack}>
           ← Go Back
-        </button>
+        </button> */}
       </div>
       
-      <div className='title'>View Record</div>
+      <div className='title-addnew'>View Record</div>
       <div  className="view-record-form-container">
         <div className='sidebar'> <Sidebar></Sidebar> </div>
         <div className='view-record-form'> <Form></Form> </div>

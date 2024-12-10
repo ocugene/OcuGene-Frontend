@@ -93,7 +93,7 @@ const LandingPage = () => {
         <div className='title'>
           {isLoggedIn ? `Welcome, ${firstName} ${lastName}!` : 'Welcome!'}
         </div>
-        <div className="row-container">
+        <div className="row-container-portal">
           <div className="col-container">
             <div className="category-col-container">
               <div className="category-header">
