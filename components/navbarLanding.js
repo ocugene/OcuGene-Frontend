@@ -61,7 +61,7 @@ const NavbarLanding = () => {
     <div className="navbar">
       <div className="navbar-title">
         <img src="/pictures/eye-scanner1.png" alt="Navbar Icon" />
-        <div className="navbar-title-txt">Ocular Registry of the Philippines</div>
+        <div className="navbar-title-txt">Ocular Genetics Registry of the Philippines</div>
       </div>
 
       <div className="navbar-btn-container">
