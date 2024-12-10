@@ -55,6 +55,9 @@ const ResearcherDashboard = () => {
   const [leftBcvaStats, setLeftBcvaStats] = useState(null);
   const [rightBcvaStats, setRightBcvaStats] = useState(null);
 
+  const [leftCornealOpacityStats, setLeftCornealOpacityStats] = useState(null);
+  const [rightCornealOpacityStats, setRightCornealOpacityStats] = useState(null);
+
   // Custom order of regions
   const regionsOrder = [
     "CAR", "NCR", "Region I", "Region II", "Region III", "Region IV-A", "Region IV-B", 
@@ -168,6 +171,66 @@ const ResearcherDashboard = () => {
     fetchBcvaStats();
   }, []);
 
+  // Fetch corneal opacity stats
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        // Fetch left corneal stats
+        const leftResponse = await fetch(
+          'https://ocugene-backend-production.up.railway.app/patient/get-left-corneal-opacity-stats'
+        );
+        if (!leftResponse.ok) {
+          throw new Error('Failed to fetch left corneal stats');
+        }
+        const leftData = await leftResponse.json();
+        setLeftCornealOpacityStats(leftData);
+
+        // Fetch right corneal stats
+        const rightResponse = await fetch(
+          'https://ocugene-backend-production.up.railway.app/patient/get-right-corneal-opacity-stats'
+        );
+        if (!rightResponse.ok) {
+          throw new Error('Failed to fetch right corneal stats');
+        }
+        const rightData = await rightResponse.json();
+        setRightCornealOpacityStats(rightData);
+      } catch (error) {
+        console.error('Error fetching corneal opacity stats:', error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  // Create pie data for corneal opacity stats
+  const createCornealPieData = (stats, baseColor) => {
+    const shades = {
+      green: ['#C8E6C9', '#81C784', '#66BB6A', '#4CAF50', '#2E7D32'],
+      red: ['#FFCDD2', '#E57373', '#EF5350', '#F44336', '#D32F2F'],
+    };
+
+    return {
+      labels: [`Normal (${stats.normalCount})`, `Abnormal (${stats.abnormalCount})`],
+      datasets: [
+        {
+          label: 'Corneal Opacity Distribution',
+          data: [stats.normalCount, stats.abnormalCount],
+          backgroundColor: shades[baseColor],
+          hoverOffset: 4,
+        },
+      ],
+    };
+  };
+
+  const leftChartData = leftCornealOpacityStats
+  ? createCornealPieData(leftCornealOpacityStats, 'green')
+  : null;
+
+const rightChartData = rightCornealOpacityStats
+  ? createCornealPieData(rightCornealOpacityStats, 'red')
+  : null;
+
+  //create pie data for bcva stats
   const createPieData = (stats, baseColor) => {
     const shades = {
       red: ['#FFCDD2', '#E57373', '#EF5350', '#F44336', '#D32F2F'],
@@ -352,6 +415,61 @@ const ResearcherDashboard = () => {
           <p>
             Opacity: <b>{variant.duration}</b>
           </p>
+
+          <div>
+            <h4>Corneal Opacity Statistics: </h4>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '20px', // Adds spacing between the charts
+              }}
+            >
+              <div style={{ width: '300px', height: '300px' }}>
+                <h5>Left Cornea</h5>
+                {leftChartData ? (
+                  <Doughnut
+                    data={leftChartData}
+                    options={{
+                      ...chartOptions,
+                      plugins: {
+                        ...chartOptions.plugins,
+                        legend: {
+                          ...chartOptions.plugins.legend,
+                          position: 'right', // Position labels to the right
+                        },
+                      },
+                    }}
+                  />
+                ) : (
+                  <p>Loading left corneal data...</p>
+                )}
+              </div>
+              <div style={{ width: '300px', height: '300px' }}>
+                <h5>Right Cornea</h5>
+                {rightChartData ? (
+                  <Doughnut
+                    data={rightChartData}
+                    options={{
+                      ...chartOptions,
+                      plugins: {
+                        ...chartOptions.plugins,
+                        legend: {
+                          ...chartOptions.plugins.legend,
+                          position: 'right', // Position labels to the right
+                        },
+                      },
+                    }}
+                  />
+                ) : (
+                  <p>Loading right corneal data...</p>
+                )}
+              </div>
+            </div>
+          </div>
+
 
           <p>
             Retina: <b>{variant.age}</b>
