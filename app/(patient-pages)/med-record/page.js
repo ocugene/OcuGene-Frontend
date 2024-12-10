@@ -28,13 +28,13 @@ const MedicalRecord = () => {
     {isAdminOrPatient &&
      <div>
      <Navbar></Navbar>
-     <div className="regContent">
-       <div className='title'>Medical Record</div>
-       <div  className="form-container">
-         <div className='sidebar'>
+     <div className="regContent-reg">
+       <div className='title-reg'>Medical Record</div>
+       <div  className="form-container-reg">
+         <div className='sidebar-reg'>
            <Sidebar></Sidebar>
          </div>
-         <div className='form'>
+         <div className='form-reg'>
            <MedRecord></MedRecord>
          </div>
        </div>
