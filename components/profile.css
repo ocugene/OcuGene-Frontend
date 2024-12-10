@@ -1,6 +1,6 @@
-.title{
+.title-profile{
     font-family: 'Karla', sans-serif;
-    color: maroon;
+    color: white;
     font-size: 7vh;
     font-weight: bolder;
     padding: 0px 0px 0px 0px;
@@ -28,7 +28,7 @@ h2{
     font-size: 2em;
     font-weight:bold;
     margin-bottom:2px;
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 .namesColumn {

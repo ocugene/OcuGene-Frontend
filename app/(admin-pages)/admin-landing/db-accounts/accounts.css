@@ -25,11 +25,13 @@
 
 .title{
     font-family: 'Karla', sans-serif;
-    color: maroon;
+    color: white;
     font-size: 7vh;
     font-weight: bolder;
-    padding: 0px 0px 0px 5px;
+    padding: 0px 0px 0px 20px;
     margin-bottom: 20px;
+    border-radius: 20px;
+    /* background-color: #800000; */
 }
 
 /* .row-container {
