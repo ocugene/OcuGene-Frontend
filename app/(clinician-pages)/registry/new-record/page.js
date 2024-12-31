@@ -56,7 +56,7 @@ const RegistryPage = () => {
      }
 
     // Make a GET request to the server
-    fetch('https://ocugene-backend-production.up.railway.app/patient/getLatestID', {
+    fetch('https://ocugene-backend-1-production.up.railway.app/patient/getLatestID', {
       method: 'GET',
     })
     .then(response => {
@@ -93,7 +93,7 @@ const RegistryPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://ocugene-backend-production.up.railway.app/patient/register', {
+      const response = await fetch('https://ocugene-backend-1-production.up.railway.app/patient/register', {
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(formData)

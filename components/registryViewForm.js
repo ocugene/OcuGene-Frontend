@@ -86,7 +86,7 @@ const RegistryViewForm = () => {
     const fetchPatientData = async () => {
     
       try {
-        const response = await fetch(`https://ocugene-backend-production.up.railway.app/patient/get-by-patient-code?patientCode=${viewPatientCode}`);
+        const response = await fetch(`https://ocugene-backend-1-production.up.railway.app/patient/get-by-patient-code?patientCode=${viewPatientCode}`);
         const data = await response.json();
         setFormData(data);
       } catch (error) {

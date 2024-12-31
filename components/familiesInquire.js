@@ -16,7 +16,7 @@ const FamiliesDonate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (window.confirm('Are you sure you want to submit this form?')) {
-      fetch('https://ocugene-backend-production.up.railway.app/query/submit', {
+      fetch('https://ocugene-backend-1-production.up.railway.app/query/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

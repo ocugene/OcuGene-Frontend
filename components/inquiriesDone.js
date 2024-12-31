@@ -13,7 +13,7 @@ const DonationsDone = ({inquiries}) => {
     // You can add logic to mark the donation as responded
     if(window.confirm(`Are you sure you want to mark this inquiry by ${email} as unread?`)){
 
-      fetch(`https://ocugene-backend-production.up.railway.app/query/mark-as-unread?queryID=${id}`, {
+      fetch(`https://ocugene-backend-1-production.up.railway.app/query/mark-as-unread?queryID=${id}`, {
         method: 'PUT',
       })
       .then(response => {

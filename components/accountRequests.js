@@ -12,7 +12,7 @@ const AccountRequests = () => {
 
     try {
 
-      const response = await fetch("https://ocugene-backend-production.up.railway.app/request/getAllRequests");
+      const response = await fetch("https://ocugene-backend-1-production.up.railway.app/request/getAllRequests");
       const responseData = await response.json();
       setRequests(responseData);
 
@@ -23,7 +23,7 @@ const AccountRequests = () => {
   };
   const updateRequestStatus = async (requestId, newStatus) => {
     try {
-      const response = await fetch(`https://ocugene-backend-production.up.railway.app/request/updateStatus/${requestId}/${newStatus}`, {
+      const response = await fetch(`https://ocugene-backend-1-production.up.railway.app/request/updateStatus/${requestId}/${newStatus}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

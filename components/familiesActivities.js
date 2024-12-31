@@ -60,7 +60,7 @@ const FamiliesSupGrp = () => {
 
   useEffect(() => {
 
-    fetch('https://ocugene-backend-production.up.railway.app/activity/get-all', {
+    fetch('https://ocugene-backend-1-production.up.railway.app/activity/get-all', {
       method: 'GET',
     })
     .then(response => {

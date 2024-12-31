@@ -24,7 +24,7 @@ function Page() {
         const fetchPatientsData = async () => {
     
           try {
-            const response = await fetch("https://ocugene-backend-production.up.railway.app/patient/get-all");
+            const response = await fetch("https://ocugene-backend-1-production.up.railway.app/patient/get-all");
             const responseData = await response.json();
             setPatientsData(responseData);
           } catch (error) {
