@@ -47,7 +47,7 @@ const LandingPage = () => {
             try {
               // Fetch user details using the username
               const response = await fetch(
-                `https://ocugene-backend-production.up.railway.app/user/getByUsername?username=${username}`,
+                `https://ocugene-backend-1-production.up.railway.app/user/getByUsername?username=${username}`,
                 {
                   headers: {
                     Accept: 'application/json',

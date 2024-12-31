@@ -41,7 +41,7 @@ const ForgotPassword = ({ onClose }) => {
 
     // call send code to email api endpoint
     try {
-      const response = await fetch(`https://ocugene-backend-production.up.railway.app/user/forgot-password?email=${userEmail}`);
+      const response = await fetch(`https://ocugene-backend-1-production.up.railway.app/user/forgot-password?email=${userEmail}`);
 
       const data = await response.text();
       console.log(data);
@@ -60,7 +60,7 @@ const ForgotPassword = ({ onClose }) => {
     //now, determine to which user does the verfication code correspond
     //call api endpoint to determine which user is asking for password reset
     try {
-      const response = await fetch(`https://ocugene-backend-production.up.railway.app/user/verify-user-using-code?code=${verificationCode}`, {
+      const response = await fetch(`https://ocugene-backend-1-production.up.railway.app/user/verify-user-using-code?code=${verificationCode}`, {
         method: 'POST', // Use POST instead of GET
         headers: {
           'Content-Type': 'application/json', // Optional: set header if your backend expects it
@@ -103,7 +103,7 @@ const ForgotPassword = ({ onClose }) => {
   
     try {
       const response = await fetch(
-        'https://ocugene-backend-production.up.railway.app/user/change-password',
+        'https://ocugene-backend-1-production.up.railway.app/user/change-password',
         {
           headers: {
             Accept: 'application/json',
