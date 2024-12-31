@@ -157,13 +157,13 @@ const ResearcherDashboard = () => {
     const fetchBcvaStats = async () => {
       try {
         const leftResponse = await fetch(
-          'https://ocugene-backend-production.up.railway.app/patient/get-left-bcva-stats'
+          'https://ocugene-backend-1-production.up.railway.app/patient/get-left-bcva-stats'
         );
         const leftData = await leftResponse.json();
         setLeftBcvaStats(leftData);
 
         const rightResponse = await fetch(
-          'https://ocugene-backend-production.up.railway.app/patient/get-right-bcva-stats'
+          'https://ocugene-backend-1-production.up.railway.app/patient/get-right-bcva-stats'
         );
         const rightData = await rightResponse.json();
         setRightBcvaStats(rightData);
@@ -180,13 +180,13 @@ const ResearcherDashboard = () => {
     const fetchCornealOpacityStats = async () => {
       try {
         const leftResponse = await fetch(
-          'https://ocugene-backend-production.up.railway.app/patient/get-left-corneal-opacity-stats'
+          'https://ocugene-backend-1-production.up.railway.app/patient/get-left-corneal-opacity-stats'
         );
         const leftData = await leftResponse.json();
         setLeftCornealOpacityStats(leftData);
 
         const rightResponse = await fetch(
-          'https://ocugene-backend-production.up.railway.app/patient/get-right-corneal-opacity-stats'
+          'https://ocugene-backend-1-production.up.railway.app/patient/get-right-corneal-opacity-stats'
         );
         const rightData = await rightResponse.json();
         setRightCornealOpacityStats(rightData);
@@ -203,13 +203,13 @@ const ResearcherDashboard = () => {
     const fetchRetinalConditionStats = async () => {
       try {
         const leftResponse = await fetch(
-          'https://ocugene-backend-production.up.railway.app/patient/get-left-retinal-condition-stats'
+          'https://ocugene-backend-1-production.up.railway.app/patient/get-left-retinal-condition-stats'
         );
         const leftData = await leftResponse.json();
         setLeftRetinalConditionStats(leftData);
 
         const rightResponse = await fetch(
-          'https://ocugene-backend-production.up.railway.app/patient/get-right-retinal-condition-stats'
+          'https://ocugene-backend-1-production.up.railway.app/patient/get-right-retinal-condition-stats'
         );
         const rightData = await rightResponse.json();
         setRightRetinalConditionStats(rightData);
