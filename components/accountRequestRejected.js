@@ -10,7 +10,7 @@ const AccountRequestRejected = () => {
   const fetchRequestsData = async () => {
 
     try {
-      const response = await fetch("https://ocugene-backend-production.up.railway.app/request/getAllRequests");
+      const response = await fetch("https://ocugene-backend-1-production.up.railway.app/request/getAllRequests");
       const responseData = await response.json();
       setRequests(responseData);
     } catch (error) {

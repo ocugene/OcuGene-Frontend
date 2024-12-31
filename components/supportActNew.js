@@ -19,7 +19,7 @@ const SupportActNew = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('https://ocugene-backend-production.up.railway.app/activity/add', {
+    fetch('https://ocugene-backend-1-production.up.railway.app/activity/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

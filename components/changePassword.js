@@ -23,7 +23,7 @@ const ChangePassword = ({ event, onSave, onClose, username }) => {
     }
     try {
       const response = await fetch(
-        'https://ocugene-backend-production.up.railway.app/user/change-password',
+        'https://ocugene-backend-1-production.up.railway.app/user/change-password',
         {
           headers: {
             Accept: 'application/json',

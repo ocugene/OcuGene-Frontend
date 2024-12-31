@@ -26,7 +26,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`https://ocugene-backend-production.up.railway.app/user/getByUsername?username=${username}`);
+        const response = await fetch(`https://ocugene-backend-1-production.up.railway.app/user/getByUsername?username=${username}`);
         const data = await response.json();
         setUserData(data);
       } catch (error) {

@@ -61,7 +61,7 @@ const DonationsPage = () => {
       router.push('/login');
     }
 
-    fetch(`https://ocugene-backend-production.up.railway.app/query/get-all`, {
+    fetch(`https://ocugene-backend-1-production.up.railway.app/query/get-all`, {
       method: 'GET',
     })
     .then(response => {

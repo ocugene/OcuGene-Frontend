@@ -29,7 +29,7 @@ const LoginPageComp = () => {
 
     try {
       const response = await fetch(
-        'https://ocugene-backend-production.up.railway.app/user/getUser',
+        'https://ocugene-backend-1-production.up.railway.app/user/getUser',
         {
           headers: {
             Accept: 'application/json',
