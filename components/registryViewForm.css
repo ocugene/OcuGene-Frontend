@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
 
-.form-step {
+.form-step-vp {
   margin: 10px 10px 10px 10px;
   display: flex;
   flex-direction: column;
@@ -92,6 +92,7 @@ h2{
   font-size: 1em;
   width: 100%;
   margin-top: 20px;
+  font-family: 'Karla', sans-serif;
 }
 
 .submit-button:hover {

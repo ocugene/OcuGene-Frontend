@@ -71,44 +71,37 @@ const RegistryViewForm = () => {
   const [patientCode, setPatientCode] = useState('');
   const [formData, setFormData] = useState(
     {
-      patientID: 1,
-      first_name: 'John',
-      middle_name: 'A.',
-      last_name: 'Doe',
-      age: 30,
-      sex: 'Male',
-      region: 'NCR',
-      province: 'Metro Manila',
-      city: 'Manila',
-      barangay: 'Barangay 1',
-      diagnosis: 'Retinitis Pigmentosa',
-      variant: 'RHO',
-      birthday: '1993-05-10',
-      marital_status: 'Single',
-      address: '123 Street Name, Subdivision',
-      chief_complaint: 'Blurred vision',
-      laterality: 'Both',
-      blur_duration: '6-12 months',
-      family_member: 'Father',
-      sibling_count: 1,
-      erg_date: '2023-08-15',
-      erg_result: 'Decreased b wave',
-      gen_test_date: '2023-09-12',
-      right_bcva: '20/40',
-      left_bcva: '20/60',
-      right_cornea: 'Normal',
-      left_cornea: 'Normal',
-      right_retina: 'Abnormal',
-      left_retina: 'Abnormal',
+      patientID: 0,
+      first_name: '',
+      middle_name: '',
+      last_name: '',
+      age: 0,
+      sex: '',
+      region: '',
+      province: '',
+      city: '',
+      barangay: '',
+      diagnosis: '',
+      variant: '',
+      birthday: '',
+      marital_status: '',
+      address: '',
+      chief_complaint: '',
+      laterality: '',
+      blur_duration: '',
+      family_member: '',
+      sibling_count: 0,
+      erg_date: '',
+      erg_result: '',
+      gen_test_date: '2',
+      right_bcva: '',
+      left_bcva: '',
+      right_cornea: '',
+      left_cornea: '',
+      right_retina: '',
+      left_retina: '',
     }
   );
-
-  // useEffect(() => {
-  //   if (selectedPatientID) {
-  //     const patientData = mockData.find(patient => patient.patientID === parseInt(selectedPatientID));
-  //     setFormData(patientData || {});
-  //   }
-  // }, [selectedPatientID]);
 
   useEffect(()=>{
     if (typeof window !== 'undefined') {
@@ -149,8 +142,8 @@ const RegistryViewForm = () => {
             erg_result: data.ergResult,
             gen_test_date: data.genTestDate.split('T')[0], // Extract date part only
             patient_code: data.patientCode,
-            right_bcva: data.rightBCVA,
-            left_bcva: data.leftBCVA,
+            right_bcva: data.rightBcva,
+            left_bcva: data.leftBcva,
             right_cornea: data.rightCornea,
             left_cornea: data.leftCornea,
             right_retina: data.rightRetina,

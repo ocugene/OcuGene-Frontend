@@ -49,8 +49,8 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
+    <div className="title-profile">Profile</div>
       <div className="profile-container">
-        <div className="title">Profile</div>
         <div className="personalContainer">
           <h2>Personal Information</h2>
           <div className="personal-info">

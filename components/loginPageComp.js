@@ -47,9 +47,11 @@ const LoginPageComp = () => {
         localStorage.setItem('role', data.user.userType.toLowerCase());
         localStorage.setItem('is_logged_in', 'true');
         localStorage.setItem('username', data.user.username);
-        router.push('/');
+        router.push('/home');
       } else {
-        console.log('Login failed:', data.message || 'Invalid credentials.');
+        // console.log('Login failed:', data.message || 'Invalid credentials.');
+        alert(`Login failed: ${data.message || 'Invalid credentials.'}`);
+
       }
     } catch (error) {
       console.log('Error logging in: ', error);
@@ -75,7 +77,7 @@ const LoginPageComp = () => {
         <form onSubmit={handleSubmit}>
           <div className="field-container">
             <label>
-              <b>Username</b>
+              <b>Email or Username</b>
             </label>
             <input
               type="text"

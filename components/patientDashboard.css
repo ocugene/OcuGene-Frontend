@@ -1,7 +1,7 @@
 /* patientDashboard.css */
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Karla', sans-serif;
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
@@ -17,18 +17,27 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 80vw;
+    /* width: 80vw; */
   }
   
-  .title {
-    color: #800000; /* Maroon */
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+  .title{
+    font-family: 'Karla', sans-serif;
+    color: white;
+    font-size: 7vh;
+    font-weight: bolder;
+    padding: 0px 0px 0px 0px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    margin-top: 0;
+    /* background-color: #800000; */
+}
+
+.p-head-info{
+  margin-left: 30px;
+}
   
   .p-descript {
-    color: #444444;
+    color: lightgreen;
     font-size: 16px;
     margin-bottom: 20px;
   }
@@ -39,11 +48,14 @@ body {
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    max-width: 3000px; /* Optional: Limit width */
+    margin: 30px;
+    text-align: left; /* Optional: Center text */
   }
   
   .p-summary h2 {
     color: #006400; /* Green */
-    font-size: 20px;
+    font-size: 30px;
     margin-bottom: 10px;
   }
   
@@ -52,6 +64,19 @@ body {
     color: #555555;
     line-height: 1.6;
   }
+
+  ul {
+    column-count: 5; /* Number of columns */
+    column-gap: 20px; /* Space between columns */
+    list-style-type: disc; /* Optional: Keep bullet points */
+    margin: 0;
+    padding: 0;
+  }
+  
+  ul li {
+    margin-bottom: 10px; /* Add spacing between list items */
+  }
+  
   
   .p-summary .dl-link {
     color: #006400;
@@ -74,7 +99,7 @@ body {
   
   .p-table h2 {
     color: #800000; /* Maroon */
-    font-size: 20px;
+    font-size: 30px;
     margin-bottom: 10px;
   }
   

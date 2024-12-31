@@ -101,8 +101,8 @@ const DonationsPage = () => {
       <div className="donations-container">
         <SidebarDonations onButtonClick={handleButtonClick} />
         <div className="content">
-          <div>
-            Filter inquiries by type: 
+          <div className='filter'>
+            Filter inquiries by type:
             <select 
               id='type'
               name='type'

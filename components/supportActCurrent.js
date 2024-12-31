@@ -168,8 +168,8 @@ const SupportActCurrent = () => {
           <div className="event-card-header">
             <h2 className="event-title">{event.title}</h2>
             <div className="event-card-buttons">
-              <button className="edit-button" onClick={() => handleEdit(event.id)}>Edit</button>
-              <button className="delete-button" onClick={() => handleDelete(event.id, event.title)}>Delete</button>
+              <button className="edit-button" onClick={() => handleEdit(event.id)}><b>EDIT</b></button>
+              <button className="delete-button" onClick={() => handleDelete(event.id, event.title)}><b>DELETE</b></button>
             </div>
           </div>
           <ul className="event-details">

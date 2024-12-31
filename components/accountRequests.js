@@ -60,6 +60,7 @@ const AccountRequests = () => {
         <div key={request.requestId} className="request-card">
           <div className="request-content">
             <p><strong>Name:</strong> {request.firstName} {request.lastName}</p>
+            <p><strong>Username:</strong> {request.username}</p>
             <p><strong>Email:</strong> {request.email}</p>
             <p><strong>Account Type:</strong> {request.userType}</p>
             <p><strong>Institution:</strong> {request.institution}</p>
@@ -67,8 +68,8 @@ const AccountRequests = () => {
             <p><strong>Message/Query:</strong> {request.message}</p>
           </div>
           <div className="event-card-buttons">
-            <button className="accept-button" onClick={() => handleAccept(request)}>Accept</button>
-            <button className="reject-button" onClick={() => handleReject(request)}>Reject</button>
+            <button className="accept-button" onClick={() => handleAccept(request)}><b>ACCEPT</b></button>
+            <button className="reject-button" onClick={() => handleReject(request)}><b>REJECT</b></button>
           </div>
         </div>
       ))}

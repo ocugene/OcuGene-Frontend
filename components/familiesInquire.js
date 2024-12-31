@@ -85,7 +85,7 @@ const FamiliesDonate = () => {
           />
         </div>
         <button type="submit" className="submit-button">
-          Submit
+          <b>SUBMIT</b>
         </button>
       </form>
     </div>

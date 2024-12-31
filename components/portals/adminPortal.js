@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import './adminPortal.css';
+import './home.css';
 
 const AdminPortal = () => {
 
@@ -23,13 +23,13 @@ const AdminPortal = () => {
   return (
     <div className="landing-page">
         <div className='title'>Admin Portal</div>
-        <div className="row-container">
+        <div className="row-container-portal">
           <div className="col-container">
             <div className="category-col-container">
               <div className="category-header">
-                <label>ADMINISTRATIVE TASKS</label>
+                <label>Administrative Tasks</label>
               </div>
-              <div className="row-container">
+              <div className="row-container-card-holder">
                 <div className="col-container">
                   <button className="card-button" onClick={navigateToDonation} data-info="Manage Inquiries">
                     <div className="card-btn-title"><span>Manage Inquiries</span></div>

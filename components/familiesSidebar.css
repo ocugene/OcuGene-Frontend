@@ -5,29 +5,25 @@
   padding: 20px;
   border-radius: 10px;
   font-family: 'Karla', sans-serif;
-  font-size: 10px;
-
 }
 
 .sidebar-button {
-  background-color: white;
   font-family: 'Karla', sans-serif;
-  font-size: 1.3em;
+  background-color: white;
   color: black;
   border: none;
   border-radius: 10px;
   padding: 10px 20px;
   cursor: pointer;
+  font-size: 1.3em;
   margin: 10px 0;
   width: 100%;
   text-align: left;
   transition: background-color 0.3s, color 0.3s;
-  font-weight: bold;
 }
 
 .sidebar-button:hover {
   background-color: #BBD8BB;
-  cursor: pointer;
 }
 
 .sidebar-button.active {

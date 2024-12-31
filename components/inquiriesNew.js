@@ -45,7 +45,7 @@ const DonationsNew = ({inquiries}) => {
             <p><strong>Subject:</strong> {inquiry.type}</p>
             <p><strong>Message:</strong> {inquiry.message}</p>
           </div>
-          <button className="responded-button" onClick={() => handleResponded(inquiry.queryID, inquiry.email)}>Mark as Done</button>
+          <button className="responded-button" onClick={() => handleResponded(inquiry.queryID, inquiry.email)}><b>Mark as Done</b></button>
         </div>
       ))}
     </div>

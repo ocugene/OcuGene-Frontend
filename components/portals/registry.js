@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import './researcherHub.css';
+import './home.css';
 
 const Registry = () => {
 
@@ -19,13 +19,13 @@ const Registry = () => {
   return (
     <div className="landing-page">
         <div className='title'>Registry</div>
-        <div className="row-container">
+        <div className="row-container-portal">
           <div className="col-container">
             <div className="category-col-container">
               <div className="category-header">
                 <label>Navigate</label>
               </div>
-              <div className="row-container">
+              <div className="row-container-card-holder">
                 <div className="col-container">
                   <button className="card-button" onClick={navigateToNew} data-info="Add New Record to the registry">
                     <div className="card-btn-title"><span>Add New Record</span></div>

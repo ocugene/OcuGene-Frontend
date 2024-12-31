@@ -6,13 +6,16 @@ body {
 }
 
 .navbar{
-    background-color: #800000;
+    /* background-color: #800000; */
+    background-color: #FDFCFC;
+    border-radius: 20px;
     display: flex;
     padding: 10px;
     justify-content: space-between;
     align-items: center;
     font-family: 'Karla', sans-serif;
-    height: 80px;
+    height: 60px;
+    margin: 20px 20px 0px 20px
 }
 
 .navbar-title {
@@ -32,7 +35,7 @@ body {
 .navbar-title-txt{
     font-size:30px;
     font-weight: 500;
-    color: white;
+    color: #800000;
 }
 
 .navbar-btn-container{
@@ -42,23 +45,23 @@ body {
     margin-right: 30px;
 }
 
-.navbar-btn{
-    /* padding: 5px; */
-    background-color: #800000;
-    border: none;
-    color: white;
+.navbar-btn {
+    background-color: #FDFCFC;
+    color: #800000;
+    border: 2px solid transparent; /* Initial border color */
     text-align: center;
     flex: 1;
     margin-right: 1vh;
     font-size: 18px;
-    margin-left: 4vh;
+    margin-left: 2vh;
     font-family: 'Karla', sans-serif;
     font-weight: bold;
-    /* background-color: aqua; */
-}
-
-.navbar-btn:hover{
-    color: #FFB9B9;
+    border-radius: 3px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .navbar-btn:hover {
+    border-color: #800000; /* Change border color on hover */
     cursor: pointer;
-}
+  }
 

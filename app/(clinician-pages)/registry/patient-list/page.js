@@ -45,11 +45,11 @@ function Page() {
     return (
         <>
         {isAdminOrClinician &&
-         <div>
+         <div className="patient-list-container">
          <Navbar></Navbar>
          <Back></Back>
-         <div className='title'> Patient List </div>
-         <div className='p-table'>
+         <div className='title-plist'> Patient List </div>
+         <div className='p-table-plist'>
              <table >
              <thead>
                  <tr>
@@ -72,7 +72,7 @@ function Page() {
                          <td>{patient.diagnosis}</td>
                          <td>{patient.variant}</td>
                          <td>
-                         <button onClick={()=>handleViewPatientRecord(patient.patientCode)}>
+                         <button className="viewlist" onClick={()=>handleViewPatientRecord(patient.patientCode)}>
                              View Patient Data
                          </button>
                          </td>
